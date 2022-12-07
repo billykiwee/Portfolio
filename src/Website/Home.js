@@ -111,66 +111,6 @@ export default function Netflix() {
         },
     }
 
-    /* return (
-        <>
-            <div style={{
-                    backgroundImage: 'url(https://assets.nflxext.com/ffe/siteui/vlv3/79fe83d4-7ef6-4181-9439-46db72599559/b731d0ca-9886-4932-9bc0-61bebd780b90/FR-fr-20221017-popsignuptwoweeks-perspective_alpha_website_large.jpg)',
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    width: '100%',
-                    height: '100vh',
-                    position: 'absolute',
-                    top: 0,
-                    zIndex: 0,
-                }}
-            >
-            </div>
-            <div style={{height: '100vh', top: 0,backdropFilter: 'brightness(0.3)'}}>
-                <header className='display p-2'>
-                    <div className='display'>
-                        <span className='display'>
-                            <svg viewBox="0 0 111 30" width={166} ><g id="netflix-logo"><path d="M105.06233,14.2806261 L110.999156,30 C109.249227,29.7497422 107.500234,29.4366857 105.718437,29.1554972 L102.374168,20.4686475 L98.9371075,28.4375293 C97.2499766,28.1563408 95.5928391,28.061674 93.9057081,27.8432843 L99.9372012,14.0931671 L94.4680851,-5.68434189e-14 L99.5313525,-5.68434189e-14 L102.593495,7.87421502 L105.874965,-5.68434189e-14 L110.999156,-5.68434189e-14 L105.06233,14.2806261 Z M90.4686475,-5.68434189e-14 L85.8749649,-5.68434189e-14 L85.8749649,27.2499766 C87.3746368,27.3437061 88.9371075,27.4055675 90.4686475,27.5930265 L90.4686475,-5.68434189e-14 Z M81.9055207,26.93692 C77.7186241,26.6557316 73.5307901,26.4064111 69.250164,26.3117443 L69.250164,-5.68434189e-14 L73.9366389,-5.68434189e-14 L73.9366389,21.8745899 C76.6248008,21.9373887 79.3120255,22.1557784 81.9055207,22.2804387 L81.9055207,26.93692 Z M64.2496954,10.6561065 L64.2496954,15.3435186 L57.8442216,15.3435186 L57.8442216,25.9996251 L53.2186709,25.9996251 L53.2186709,-5.68434189e-14 L66.3436123,-5.68434189e-14 L66.3436123,4.68741213 L57.8442216,4.68741213 L57.8442216,10.6561065 L64.2496954,10.6561065 Z M45.3435186,4.68741213 L45.3435186,26.2498828 C43.7810479,26.2498828 42.1876465,26.2498828 40.6561065,26.3117443 L40.6561065,4.68741213 L35.8121661,4.68741213 L35.8121661,-5.68434189e-14 L50.2183897,-5.68434189e-14 L50.2183897,4.68741213 L45.3435186,4.68741213 Z M30.749836,15.5928391 C28.687787,15.5928391 26.2498828,15.5928391 24.4999531,15.6875059 L24.4999531,22.6562939 C27.2499766,22.4678976 30,22.2495079 32.7809542,22.1557784 L32.7809542,26.6557316 L19.812541,27.6876933 L19.812541,-5.68434189e-14 L32.7809542,-5.68434189e-14 L32.7809542,4.68741213 L24.4999531,4.68741213 L24.4999531,10.9991564 C26.3126816,10.9991564 29.0936358,10.9054269 30.749836,10.9054269 L30.749836,15.5928391 Z M4.78114163,12.9684132 L4.78114163,29.3429562 C3.09401069,29.5313525 1.59340144,29.7497422 0,30 L0,-5.68434189e-14 L4.4690224,-5.68434189e-14 L10.562377,17.0315868 L10.562377,-5.68434189e-14 L15.2497891,-5.68434189e-14 L15.2497891,28.061674 C13.5935889,28.3437998 11.906458,28.4375293 10.1246602,28.6868498 L4.78114163,12.9684132 Z" fill='red'></path></g></svg>
-                        </span>
-                    </div>
-                </header>
-
-                <div className='display justify-c c-white m-t-4'>
-                    <div className='w-50 p-2 border-r-04' style={{background: '#00000091'}}>
-                        <div className='grid gap m-b-2'>
-                            <h2>S'identifier</h2>
-                            <input className='border-0 p-1' placeholder='Email ou numéro de téléphone'style={{background: '#333', color: 'white'}} />
-                            <input className='border-0 p-1' placeholder='Mot de passe' style={{background: '#333', color: 'white'}}/>
-
-                            <div className='grid m-t-2'>
-                                <button className='border-r-04 h-3' style={{background: 'red'}}>
-                                    <span className='c-white f-s-18'>S'identifier</span>
-                                </button>
-
-                                <div className='display justify-s-b f-w-200 f-s-14'>
-                                    <div className='display gap'>
-                                        <input type='checkbox' checked />
-                                        <span>Se souvenir de moi</span>
-                                    </div>
-                                    <div className='display'>
-                                        <span>Besoin d'aide ?</span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className='grid f-s-14 f-w-200'>
-                            <span>Première visite sur Netflix ? <a href='#' className='link'>Inscrivez-vous.</a></span>
-                            <small>Cette page est protégée par Google reCAPTCHA pour nous assurer que vous n'êtes pas un robot.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    ) */
-
-
-
-
     var date1 = new Date()
     var date2 = new Date('03/02/1998')
 
@@ -216,49 +156,6 @@ export default function Netflix() {
         }
     ]
 
-
-    async function validForm(e) {
-        e.preventDefault()
-
-        for (const v in data) {
-
-            let divError = document.querySelector('#error-' + e.target[v].id)
-
-            const minLengthName = 4
-            const maxLengthName = 16
-            const minLengthPassword = 6
-            const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-            const regexPWD = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)&é"'(§è!çà)-^$`ù=:;,]/
-            const regexPWDNumber = /.[1234567890]/
-            const minPrice = formatCurrency(0.1)
-
-            function setError(error) {
-                return divError.innerText = error
-            }
-
-            if (e.target[v].id === 'name') {
-                if (e.target[v].value.length < minLengthName) setError(`Le nom doit faire ${minLengthName} lettre au minimum`)
-                else if (e.target[v].value.length > maxLengthName) setError(`Le nom doit faire ${maxLengthName} lettre au maximum`)
-                else setError('')
-            }
-            if (e.target[v].id === 'email') {
-                if (!e.target[v].value.match(regexEmail)) setError("L'email n'est pas valide")
-                else setError('')
-            }
-            if (e.target[v].id === 'price') {
-                if (e.target[v].value <= 0) setError(`Il faut enter un prix d'au moins ${minPrice}`)
-                else setError('')
-            }
-            if (e.target[v].id === 'password') {
-                if (e.target[v].value.length < minLengthPassword) setError(`Le mot de passe doit avoir ${minLengthPassword} charactères au minimum`)
-                else if (!e.target[v].value.match(regexPWD)) setError("Le mot de passe doit contenir un caractère spécial")
-                else if (!e.target[v].value.match(regexPWDNumber)) setError("Le mot de passe doit contenir un nombre")
-                else setError('')
-            }
-        }
-    }
-    
-
     function Level({level}) {
 
         let solid = <span className='h-04 w-2 black border-r-04'></span>
@@ -281,6 +178,45 @@ export default function Netflix() {
     let newArr = Array.from(new Set([...arr]))
 
 
+
+    function hoverImage(id) {
+        document.querySelector('#project-' + id).style.background= '#00000066'
+        document.querySelector('#info-' + id).style.display= 'flex'
+
+        document.querySelector('#project-' + id).onmousemove = w => {
+
+            let imgHeight =  document.querySelector('#' + id).clientHeight
+            let imgWidth =  document.querySelector('#' + id).clientWidth
+            let lay = 1000
+            let x = (w.clientX+lay) /imgWidth
+            let y = (w.clientY+lay) /imgHeight
+
+            document.querySelector('#' + id).style = `transform : translate(${(x)}%, ${(y)}%)`
+            document.querySelector('#' + id).parentElement.style.transform= 'scale(1.1)'
+        }
+    }
+    function unFocusImage(id) {
+        document.querySelector('#project-' + id).style.background= 'unset'
+        document.querySelector('#info-' + id).style.display= 'none'
+
+        document.querySelector('#' + id).style = `transform : translate(0)`
+        document.querySelector('#' + id).parentElement.style.transform= 'scale(1)'
+    }
+
+    useEffect(e=> {
+        window.onscroll = (e) => {
+            var h = document.documentElement, 
+            b = document.body,
+            st = 'scrollTop',
+            sh = 'scrollHeight';
+        
+            var percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+
+            document.querySelector('video').currentTime = percent
+
+        }
+        document.querySelector('video').playbackRate = 0.9
+    })
 
     return (
         <Container>
@@ -339,7 +275,7 @@ export default function Netflix() {
                                         </div>
                                     </div>
 
-                                    <div className='gap-1rem' id='social-bar'>
+                                    <div className='gap' id='social-bar'>
                                         <div>
                                             <a href='mailto:billyturpin642@gmail.com'>
                                                 <button className='black hover-black border-r-100 p-lr-2 h-3' >
@@ -380,9 +316,11 @@ export default function Netflix() {
                         </div>
 
                         <div className='display align-top border-r-2 w-100' style={{flex: '1 0 22%', height: '500px'}}>
-                            <img className='w-100 border-r-2 h-100' src={ProfilImg} />
+                            <img className='w-100 border-r-2' src={ProfilImg} style={{height: '500px'}} />
                         </div>
                     </section>
+
+                    <video className='w-100 h-100 border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4"/>
                     
                     <section className='gap-1rem' id='Works' >
                         <div className='gap-1rem align-top' id='works'>
@@ -394,16 +332,8 @@ export default function Netflix() {
                                             <div 
                                                 className='h-100 zi-2 absolute border-r-2 w-100 h-100 transition' 
                                                 id={'project-' + project.id}
-                                                onMouseMove={e=> {
-                                                    document.querySelector('#project-' + project.id).style.background= '#00000066'
-                                                    document.querySelector('#' + project.id).style.transform= 'scale(1.06)'
-                                                    document.querySelector('#info-' + project.id).style.display= 'flex'
-                                                }}
-                                                onMouseLeave={e=> {
-                                                    document.querySelector('#project-' + project.id).style.background= 'unset'
-                                                    document.querySelector('#' + project.id).style.transform= 'scale(1)'
-                                                    document.querySelector('#info-' + project.id).style.display= 'none'
-                                                }}
+                                                onMouseMove={e=> hoverImage(project.id)}
+                                                onMouseLeave={e=> unFocusImage(project.id)}
                                             >
                                                 <div className='display h-100 align-end disable w-100' id={'info-' + project.id}>
                                                     <div className='grid align-top w-100 h-100'>
@@ -434,7 +364,7 @@ export default function Netflix() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span className='display h-100'>
+                                            <span className='display h-100 transition'>
                                                 <img className='w-100 h-100 border-r-2 transition' src={project.img} id={project.id} />
                                             </span> 
                                         </div> 

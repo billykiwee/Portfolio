@@ -7,6 +7,7 @@ import Home from '../Website/Home'
 import { getAuth } from "firebase/auth"
 
 import { db } from './database/firebase'
+import Game from '../Website/Game'
 
 
 
@@ -41,6 +42,7 @@ export default function App() {
             <main>
                 <Routes>
                     <Route path="/" exact element={<Home />} />
+                    <Route path="/game" exact element={<Game />} />
                 </Routes>
             </main>
         </BrowserRouter>

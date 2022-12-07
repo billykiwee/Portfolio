@@ -6,6 +6,9 @@
     #social-bar {
         display: flex;
     }
+    .f-s-2rem {
+        font-size: 2.5rem;
+    }
 }
 
 
@@ -44,4 +47,9 @@
     .block  {
         height: unset;
     }
+}
+
+
+button:hover {
+    margin-top: -0.4rem;
 }
