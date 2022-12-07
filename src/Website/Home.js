@@ -29,6 +29,13 @@ export default function Netflix() {
             name : 'LinkedIn',
             color: '#0A66C2',
             link: 'https://github.com/billykiwee'
+        },
+        Twitter : {
+            logo1 : '/images/twitter.svg',
+            logo2: '/images/twitter-white.svg',
+            name : 'Twitter',
+            color: '#47ACDF',
+            link: 'https://twitter.com/billy_kiwee'
         }
     }
 
@@ -168,15 +175,6 @@ export default function Netflix() {
         if (level === 5) return <>{solid}{solid}{solid}{solid}{solid}</>
     
     }
-    
-
-    const arr = [1,1,1,3,2,2,3]
-
-    let min = Math.min(...arr)
-    let max = arr.reduce((x,y)=> x > y ? x : y)
-    let sum = arr.reduce((x,y)=> x + y)
-    let newArr = Array.from(new Set([...arr]))
-
 
 
     function hoverImage(id) {
@@ -210,12 +208,14 @@ export default function Netflix() {
             st = 'scrollTop',
             sh = 'scrollHeight';
         
-            var percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+            var percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 10;
 
             document.querySelector('video').currentTime = percent
 
         }
         document.querySelector('video').playbackRate = 0.9
+
+        document.querySelector('video').controls = false
     })
 
     return (
