@@ -136,33 +136,6 @@ export default function Netflix() {
 
 
 
-    const [Task, setTask] = useState('')
-    const [tasks, setTasks] = useState([])
-
-
-    const data = [
-        {
-            label      : 'name',
-            placeholder: 'John',
-            type       : 'text',
-        },
-        {
-            label      : 'email',
-            placeholder: 'john@gmail.com',
-            type       : 'email',
-        },
-        {
-            label      : 'price',
-            placeholder: formatCurrency(10),
-            type       : 'number',
-        },
-        {
-            label      : 'password',
-            placeholder: '******',
-            type       : 'password',
-        }
-    ]
-
     function Level({level}) {
 
         let solid = <span className='h-04 w-2 black border-r-04'></span>
@@ -185,14 +158,14 @@ export default function Netflix() {
 
             let imgHeight =  document.querySelector('#' + id).clientHeight
             let imgWidth =  document.querySelector('#' + id).clientWidth
-            let lay = 1000
-            let x = (w.clientX+lay) /imgWidth
-            let y = (w.clientY+lay) /imgHeight
+            let x = w.clientX / imgWidth
+            let y = w.clientY / imgHeight
 
             document.querySelector('#' + id).style = `transform : translate(${(x)}%, ${(y)}%)`
-            document.querySelector('#' + id).parentElement.style.transform= 'scale(1.1)'
+            document.querySelector('#' + id).parentElement.style.transform= 'scale(1.06)'
         }
     }
+
     function unFocusImage(id) {
         document.querySelector('#project-' + id).style.background= 'unset'
         document.querySelector('#info-' + id).style.display= 'none'
@@ -200,6 +173,7 @@ export default function Netflix() {
         document.querySelector('#' + id).style = `transform : translate(0)`
         document.querySelector('#' + id).parentElement.style.transform= 'scale(1)'
     }
+    
 
     useEffect(e=> {
         window.onscroll = (e) => {

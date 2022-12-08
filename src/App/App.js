@@ -37,6 +37,32 @@ export default function App() {
     }, [dispatch, auth])
 
 
+/*     const properties = [
+        {name: 'w-'  , style : 'width'},
+        {name: 'h-'  , style : 'height'},
+        {name: 'm-t-', style : 'margin-top'},
+        {name: 'm-b-', style : 'margin-bottom'},
+        {name: 'm-l-', style : 'margin-left'},
+        {name: 'm-r-', style : 'margin-right'},
+        {name: 'p-t-', style : 'padding-top'},
+        {name: 'p-b-', style : 'padding-bottom'},
+        {name: 'p-l-', style : 'padding-left'},
+        {name: 'p-r-', style : 'padding-right'},
+    ]          
+    
+    
+    useEffect(e=> {
+        for (let i = 0; i < 1000; i++) {
+            for (const v in properties) {
+
+                if (document.querySelector('.' + properties[v].name + i))
+                document.querySelector('.' + properties[v].name + i).style = `${properties[v].style}:${i}px;`
+            }
+        }
+    }, []) */
+    
+
+
     return (
         <BrowserRouter>
             <main>

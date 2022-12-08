@@ -6,7 +6,7 @@ export default function Game() {
 
 
     const bubbles = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-    const colors = ['black', 'red', 'yellow', 'blue', 'green']
+    const colors = ['black', 'red', 'yellow', 'blue', 'green', 'pink', 'blow']
 
     function getRandomColor() {
         let randomColor = Math.floor(Math.random() * colors.length)
@@ -20,23 +20,16 @@ export default function Game() {
     }
     let randomBubble = getRandomBubble()
 
+    useEffect(e=> {
+        document.querySelector('#bubble-' + randomBubble).style.opacity = 0.4
+    }, [])
 
-
-    const [popupText, setpopupText] = useState('')
-
-
-    function nextStep() {
-        getRandomColor()
-        getRandomBubble()
-    }
 
   return (
     <Container>
         <div>
             <span>BubbleGame</span>
         </div>
-
-        <Popup text={popupText} step={nextStep} />
 
         <div className='display shadow border-r-2 p-2' style={{width: '333px', height: '333px'}}>
             <div className='display wrap gap-1rem'>
@@ -49,23 +42,4 @@ export default function Game() {
         </div>
     </Container>
   )
-}
-
-
-function Popup({text, step}) {
-    if (text) 
-    return (
-        <div className='display'>
-            <div className='border border-r-1 p-1'>
-                <div className='grid gap-1rem'>
-                    <div className='display justify-c'>
-                        <span className='f-s-2rem'>{text}</span>
-                    </div>
-                    <button className='blue h-3 p-lr-2' onClick={step}>
-                        <span className='f-s-16'>Continuer</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    )
 }
