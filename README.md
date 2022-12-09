@@ -6,8 +6,8 @@ Bienvenu sur le code source de mon portfolio. Je m'appelle Billy et je suis dév
 ## Sur ce site vous retrouverez
 
 - Mon profil
-- Les projets que j'ai crées et sur lequels j'ai travailé
-- Mes différent réseaux sociaux et mon mail
+- Les projets que j'ai crées et sur lequels j'ai eu l'ocasion de travailer
+- Mes différents réseaux sociaux et mon mail
 
 
 
