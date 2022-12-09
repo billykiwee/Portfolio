@@ -38,7 +38,7 @@ export default function App() {
     }, [dispatch, auth])
 
 
- /*    const properties = [
+   /*  const properties = [
         {name: 'w-'  , style : 'width'},
         {name: 'h-'  , style : 'height'},
         {name: 'm-t-', style : 'margin-top'},
@@ -60,8 +60,8 @@ export default function App() {
                 document.querySelectorAll('.' + properties[v].name + i).forEach(e=> e.style = `${properties[v].style}:${i}px;`)
             }
         }
-    }, []) */
-    
+    }, [])
+     */
 
 
     return (
@@ -69,6 +69,7 @@ export default function App() {
             <main>
                 <Routes>
                     <Route path="/" exact element={<Home />} />
+                    <Route path="/Game" exact element={<Game />} />
                     <Route path="/ProjectView" exact element={<ProjectView />} />
                     
                 </Routes>

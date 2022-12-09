@@ -22,7 +22,7 @@ export default function Netflix() {
             logo1 : '/images/instagram.svg',
             logo2: '/images/instagram-white.svg',
             name : 'Instagram',
-            color: 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)',
+            color: 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 58%,#285AEB 90%)',
             link: 'https://www.instagram.com/kiwee.site/'
         },
         LinkedIn : {
@@ -125,23 +125,23 @@ export default function Netflix() {
 
     var difference = date1.getTime() - date2.getTime()
 
-    var days = Math.ceil(difference / (1000 * 3600 * 24))
+    var days = Math.ceil(difference / (1000 * 3580 * 24))
 
     /* console.log({
         an      : days / 365,
         mois    : days / 30,
         jours   : days,
         heures  : days * 24,
-        minutes : days * 24 * 60,
-        secondes: days * 24 * 60 * 60,
+        minutes : days * 24 * 58,
+        secondes: days * 24 * 58 * 58,
     }) */
 
 
 
     function Level({level}) {
 
-        let solid = <span className='h-04 w-2 black border-r-04'></span>
-        let clear = <span className='h-04 w-2 grey-200 border-r-04'></span>
+        let solid = <span className='h-04 w-30 black border-r-04'></span>
+        let clear = <span className='h-04 w-30 grey-200 border-r-04'></span>
 
         if (level === 1) return <>{solid}{clear}{clear}{clear}{clear}</>
         if (level === 2) return <>{solid}{solid}{clear}{clear}{clear}</>
@@ -194,13 +194,91 @@ export default function Netflix() {
         document.querySelector('video').controls = false
     })
 
+    
 
+    useEffect(e=> {
+   
+
+        function GenerateCSS() {
+
+            const properties = [
+                {name: 'w-'  , propertie : 'width'},
+                {name: 'h-'  , propertie : 'height'},
+                {name: 'm-t-', propertie : 'margin-top'},
+                {name: 'm-b-', propertie : 'margin-bottom'},
+                {name: 'm-l-', propertie : 'margin-left'},
+                {name: 'm-r-', propertie : 'margin-right'},
+                {name: 'm-', propertie : 'margin'},
+                {name: 'p-t-', propertie : 'padding-top'},
+                {name: 'p-b-', propertie : 'padding-bottom'},
+                {name: 'p-l-', propertie : 'padding-left'},
+                {name: 'p-r-', propertie : 'padding-right'},
+                {name: 'p-', propertie : 'padding'},
+                
+                {name: 'border-r-', propertie : 'border'},
+                {name: 'gap-', propertie : 'gap'},
+                {name: 'zi-', propertie : 'z-index'},
+    
+                {name: 'f-s-', propertie : 'font-size'},
+                {name: 'f-w-', propertie : 'font-weight'},
+            ]  
+    
+            let getAllClass = []
+            const all = document.getElementsByTagName("*")
+            var style = document.createElement('style')
+            style.type = 'text/css'
+            style.id = 'v____________COPY YOUR CSS_GEN HERE____________v'
+            
+            Object.values(all).map(e=> {
+    
+                let allArray = e.className.split(' ')
+    
+                getAllClass.push(...allArray)
+            })
+    
+            let allClass = Array.from(new Set([...getAllClass])).sort().filter(element => element !== '')
+    
+            let createCSS = []
+    
+            for (const v in properties) {
+                for (let i = 0; i < 1000; i++) {
+                    if (allClass.includes(`${properties[v].name}${i}`)) {
+    
+                        createCSS.push(`
+    .${properties[v].name}${i} { 
+    ${properties[v].propertie} : ${i}px; 
+    }
+                        `)
+                    }
+                    
+                }
+            }
+    
+            let CSS = Array.from(new Set([...createCSS])).sort().toString()
+    
+            let CSSF = CSS.split(',').join(' ')
+            style.innerHTML = '/* created with css gen */' + CSSF
+            document.getElementsByTagName('html')[0].appendChild(style)
+
+            console.log(style);
+
+        }
+
+
+        document.onkeyup = event => {
+            if (event.key === "Enter") {
+                GenerateCSS()
+            }
+        }
+
+    })
 
 
     return (
 
         <Container>
             <div classpassword='grid gap-1rem '>
+
 
                 {/* <header className='display justify-c p-lr-2 h-3 zi-2 white border-r-100'>
                     <div className='display gap'>
@@ -238,27 +316,27 @@ export default function Netflix() {
                             }}
                         >
                             <div 
-                                className='grid border-r-2 gap-2rem h-100'  
+                                className='grid border-r-2 gap-2rem h-100p'  
                                 style={{
                                     backdropFilter: 'blur(44px)',
                                     background: '#ffffff94',
                                 }}
                             >
-                                <div className='grid p-2 justify-s-b h-100 gap-2rem'>
+                                <div className='grid p-36 justify-s-b h-100p gap-2rem'>
                                     <div className='grid gap'>   
                                         <div className='grid'>   
-                                            <span className='f-s-2rem f-w-500'>Bonjour World,</span>
-                                            <span className='f-s-2rem f-w-500'>Je suis Billy, votre futur développeur !</span>
+                                            <span className='f-s-40 f-w-600'>Bonjour World,</span>
+                                            <span className='f-s-40 f-w-600'>Je suis Billy, votre futur développeur !</span>
                                         </div>
-                                        <div className='display m-t-1'>
-                                            <span className='f-w-300 f-s-16'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
+                                        <div className='display m-t-18'>
+                                            <span className='f-w-300 f-s-18'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
                                         </div>
                                     </div>
 
                                     <div className='gap' id='social-bar'>
                                         <div>
                                             <a href='mailto:billyturpin642@gmail.com'>
-                                                <button className='black hover-black border-r-100 p-lr-2 h-3' >
+                                                <button className='black hover-black border-r-100 p-lr-2 h-58' >
                                                     <span className='f-s-16'>Me contacter</span>
                                                 </button>
                                             </a>
@@ -269,7 +347,7 @@ export default function Netflix() {
                                                     return (
                                                         <a href={social.link}>
                                                             <button 
-                                                                className='white border-r-100 h-3 w-3 p-1 transition' 
+                                                                className='white border-r-100 h-58 w-58 p-20 transition' 
                                                                 id={social.name} 
                                                                 onMouseEnter={e=> {
                                                                     document.querySelector('#' + social.name).style.background = social.color
@@ -281,7 +359,7 @@ export default function Netflix() {
                                                                 }}
                                                             >
                                                                 <span className='display justify-c'>
-                                                                    <img src={social.logo1} className={'w-3 h-3 ' + social.name} />
+                                                                    <img src={social.logo1} className={'w-56 h-56 ' + social.name} />
                                                                 </span>
                                                             </button>
                                                         </a>
@@ -295,13 +373,13 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display align-top border-r-2 w-100' style={{flex: '1 0 22%'}}>
-                            <img className='w-100 border-r-2' src={ProfilImg}  id='profil_img'/>
+                        <div className='display align-top border-r-2 w-100p' style={{flex: '1 0 22%'}}>
+                            <img className='w-100p border-r-2' src={ProfilImg}  id='profil_img'/>
                         </div>
                     </section>
 
 
-                    <video className='w-100 h-100 border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/>
+                    <video className='w-100p h-100p border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/>
                     
                     <section className='gap-1rem' id='Works' >
                         <div className='gap-1rem align-top' id='works'>
@@ -311,19 +389,19 @@ export default function Netflix() {
                                     return (
                                         <div className='border-r-2 click overflow-hidden relative' style={{flex: '1 0 38%', height: '500px'}} >
                                             <div 
-                                                className='h-100 zi-2 absolute border-r-2 w-100 h-100 transition' 
+                                                className='zi-2 absolute border-r-2 w-100p h-100p transition' 
                                                 id={'project-' + project.id}
                                                 onMouseMove={e=> hoverImage(project.id)}
                                                 onMouseLeave={e=> unFocusImage(project.id)}
                                             >
-                                                <div className='display h-100 align-end disable w-100' id={'info-' + project.id}>
-                                                    <div className='grid align-top w-100 h-100'>
-                                                        <div className='grid h-100 w-100'>
-                                                            <div className='grid p-2 justify-s-b h-100'>
+                                                <div className='display h-100p align-end disable w-100p' id={'info-' + project.id}>
+                                                    <div className='grid align-top w-100p h-100p'>
+                                                        <div className='grid h-100p w-100p'>
+                                                            <div className='grid p-36 justify-s-b h-100p'>
                                                                 <div className='display'>
-                                                                    <div className='display justify-e  w-100'>
+                                                                    <div className='display justify-e  w-100p'>
                                                                         <a href={project.link}>
-                                                                            <button className='display justify-c w-3 h-3 white hover-white border-r-100'>
+                                                                            <button className='display justify-c w-58 h-58 white hover-white border-r-100'>
                                                                                 <span className='display'>
                                                                                     <img src='/images/link.svg' />
                                                                                 </span>
@@ -333,7 +411,7 @@ export default function Netflix() {
                                                                 </div>
                                                                 <div className='display gap-1rem'>
                                                                     <span className='display justify-c'>
-                                                                        <img src={project.logo} className='border-r-1 w-3 h-3' />
+                                                                        <img src={project.logo} className='border-r-1 w-58 h-58' />
                                                                     </span>
                                                                     <div className='grid' style={{background: 'unset!important'}}>
                                                                         <span className='c-white f-w-500 f-s-18'>{project.name}</span>
@@ -345,8 +423,8 @@ export default function Netflix() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span className='display h-100 transition'>
-                                                <img className='w-100 h-100 border-r-2 transition' src={project.img} id={project.id} />
+                                            <span className='display h-100p transition'>
+                                                <img className='w-100p h-100p border-r-2 transition' src={project.img} id={project.id} />
                                             </span> 
                                         </div> 
                                     )
@@ -359,7 +437,7 @@ export default function Netflix() {
 
                     <section className='gap-1rem' id='Profil'>
                         <div className='display wrap gap-1rem align-top'>
-                            <div className='grid gap-1rem border-r-2 p-2 white' style={{flex: '1 0 38%'}}>
+                            <div className='grid gap-1rem border-r-2 p-36 white' style={{flex: '1 0 38%'}}>
 
                                 <div>
                                     <span className='f-s-25'>Mon profil</span>
@@ -376,10 +454,10 @@ export default function Netflix() {
                                         Object.values(skills)
                                         .map(skill=> {
                                             return (
-                                                <div className='grid gap-1rem shadow border-r-1 p-1'>
+                                                <div className='grid gap-1rem shadow border-r-1 p-20'>
                                                     <div>
                                                         <span className='display gap'>
-                                                            <img src={skill.logo} className='display h-2 w-2' />
+                                                            <img src={skill.logo} className='display h-40' />
                                                             <span>{skill.name}</span>
                                                         </span>
                                                     </div>
@@ -398,7 +476,7 @@ export default function Netflix() {
                     </section>
 
                     <section className='gap-1rem' id='Contact' >
-                        <div className='grid border-r-2 gap-2rem p-2 white' style={{flex: '1 0 20%'}} >
+                        <div className='grid border-r-2 gap-2rem p-36 white' style={{flex: '1 0 20%'}} >
                             <div className='grid gap'>
                                 <span className='f-s-25'>Contact</span>
                                 <span>Et si on se faisait un petit café ?</span>
@@ -419,7 +497,7 @@ export default function Netflix() {
                                     </div>
                                 </div>
                                 <div>
-                                    <button className='black p-1 border-r-100'>
+                                    <button className='black p-20 border-r-100'>
                                         <span className='f-s-16'>Envoyer</span>
                                     </button>
                                 </div>
