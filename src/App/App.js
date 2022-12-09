@@ -8,6 +8,7 @@ import { getAuth } from "firebase/auth"
 
 import { db } from './database/firebase'
 import Game from '../Website/Game'
+import ProjectView from '../Website/views/ProjectView'
 
 
 
@@ -37,7 +38,7 @@ export default function App() {
     }, [dispatch, auth])
 
 
-/*     const properties = [
+ /*    const properties = [
         {name: 'w-'  , style : 'width'},
         {name: 'h-'  , style : 'height'},
         {name: 'm-t-', style : 'margin-top'},
@@ -55,8 +56,8 @@ export default function App() {
         for (let i = 0; i < 1000; i++) {
             for (const v in properties) {
 
-                if (document.querySelector('.' + properties[v].name + i))
-                document.querySelector('.' + properties[v].name + i).style = `${properties[v].style}:${i}px;`
+                if (document.querySelectorAll('.' + properties[v].name + i))
+                document.querySelectorAll('.' + properties[v].name + i).forEach(e=> e.style = `${properties[v].style}:${i}px;`)
             }
         }
     }, []) */
@@ -68,7 +69,8 @@ export default function App() {
             <main>
                 <Routes>
                     <Route path="/" exact element={<Home />} />
-                    <Route path="/game" exact element={<Game />} />
+                    <Route path="/ProjectView" exact element={<ProjectView />} />
+                    
                 </Routes>
             </main>
         </BrowserRouter>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Container from '../App/components/Container'
 import formatCurrency from '../App/utils/formatCurrency'
 import '../Website/portfolio.css'
+import ProjectView from './views/ProjectView'
 
 export default function Netflix() {
 
@@ -192,7 +194,11 @@ export default function Netflix() {
         document.querySelector('video').controls = false
     })
 
+
+
+
     return (
+
         <Container>
             <div classpassword='grid gap-1rem '>
 
@@ -289,12 +295,13 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display align-top border-r-2 w-100' style={{flex: '1 0 22%', height: '500px'}}>
-                            <img className='w-100 border-r-2' src={ProfilImg} style={{height: '500px'}} />
+                        <div className='display align-top border-r-2 w-100' style={{flex: '1 0 22%'}}>
+                            <img className='w-100 border-r-2' src={ProfilImg}  id='profil_img'/>
                         </div>
                     </section>
 
-                    <video className='w-100 h-100 border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4"/>
+
+                    <video className='w-100 h-100 border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/>
                     
                     <section className='gap-1rem' id='Works' >
                         <div className='gap-1rem align-top' id='works'>
@@ -315,7 +322,7 @@ export default function Netflix() {
                                                             <div className='grid p-2 justify-s-b h-100'>
                                                                 <div className='display'>
                                                                     <div className='display justify-e  w-100'>
-                                                                        <a href={project.link} >
+                                                                        <a href={project.link}>
                                                                             <button className='display justify-c w-3 h-3 white hover-white border-r-100'>
                                                                                 <span className='display'>
                                                                                     <img src='/images/link.svg' />
@@ -324,9 +331,9 @@ export default function Netflix() {
                                                                         </a>
                                                                     </div>
                                                                 </div>
-                                                                <div className='display gap'>
+                                                                <div className='display gap-1rem'>
                                                                     <span className='display justify-c'>
-                                                                        <img src={project.logo} className='border-r-100 w-3 h-3' />
+                                                                        <img src={project.logo} className='border-r-1 w-3 h-3' />
                                                                     </span>
                                                                     <div className='grid' style={{background: 'unset!important'}}>
                                                                         <span className='c-white f-w-500 f-s-18'>{project.name}</span>
@@ -343,7 +350,7 @@ export default function Netflix() {
                                             </span> 
                                         </div> 
                                     )
-                                })/* .slice(0,2) */
+                                })
                             }
                         </div>
                     
@@ -423,6 +430,5 @@ export default function Netflix() {
             </div>
 
         </Container>
-
-    )
+)
 }
