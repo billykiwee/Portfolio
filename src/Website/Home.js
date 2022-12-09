@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Container from '../App/components/Container'
+import { useStateValue } from '../App/components/StateProvider'
 import formatCurrency from '../App/utils/formatCurrency'
 import '../Website/portfolio.css'
 import ProjectView from './views/ProjectView'
 
 export default function Netflix() {
+
+
+    const [{user}] = useStateValue()
 
 
     const ProfilImg = 'https://aboghanbari.com/static/me-e1cc23f413b201636eecefd46a8abdc8.jpg'
@@ -192,93 +196,16 @@ export default function Netflix() {
         document.querySelector('video').playbackRate = 0.9
 
         document.querySelector('video').controls = false
-    })
-
-    
-
-    useEffect(e=> {
-   
-
-        function GenerateCSS() {
-
-            const properties = [
-                {name: 'w-'  , propertie : 'width'},
-                {name: 'h-'  , propertie : 'height'},
-                {name: 'm-t-', propertie : 'margin-top'},
-                {name: 'm-b-', propertie : 'margin-bottom'},
-                {name: 'm-l-', propertie : 'margin-left'},
-                {name: 'm-r-', propertie : 'margin-right'},
-                {name: 'm-', propertie : 'margin'},
-                {name: 'p-t-', propertie : 'padding-top'},
-                {name: 'p-b-', propertie : 'padding-bottom'},
-                {name: 'p-l-', propertie : 'padding-left'},
-                {name: 'p-r-', propertie : 'padding-right'},
-                {name: 'p-', propertie : 'padding'},
-                
-                {name: 'border-r-', propertie : 'border'},
-                {name: 'gap-', propertie : 'gap'},
-                {name: 'zi-', propertie : 'z-index'},
-    
-                {name: 'f-s-', propertie : 'font-size'},
-                {name: 'f-w-', propertie : 'font-weight'},
-            ]  
-    
-            let getAllClass = []
-            const all = document.getElementsByTagName("*")
-            var style = document.createElement('style')
-            style.type = 'text/css'
-            style.id = 'v____________COPY YOUR CSS_GEN HERE____________v'
-            
-            Object.values(all).map(e=> {
-    
-                let allArray = e.className.split(' ')
-    
-                getAllClass.push(...allArray)
-            })
-    
-            let allClass = Array.from(new Set([...getAllClass])).sort().filter(element => element !== '')
-    
-            let createCSS = []
-    
-            for (const v in properties) {
-                for (let i = 0; i < 1000; i++) {
-                    if (allClass.includes(`${properties[v].name}${i}`)) {
-    
-                        createCSS.push(`
-    .${properties[v].name}${i} { 
-    ${properties[v].propertie} : ${i}px; 
-    }
-                        `)
-                    }
-                    
-                }
-            }
-    
-            let CSS = Array.from(new Set([...createCSS])).sort().toString()
-    
-            let CSSF = CSS.split(',').join(' ')
-            style.innerHTML = '/* created with css gen */' + CSSF
-            document.getElementsByTagName('html')[0].appendChild(style)
-
-            console.log(style);
-
-        }
-
-
-        document.onkeyup = event => {
-            if (event.key === "Enter") {
-                GenerateCSS()
-            }
-        }
 
     })
+ 
+
 
 
     return (
 
         <Container>
             <div classpassword='grid gap-1rem '>
-
 
                 {/* <header className='display justify-c p-lr-2 h-3 zi-2 white border-r-100'>
                     <div className='display gap'>
