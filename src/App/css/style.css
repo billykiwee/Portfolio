@@ -1128,3 +1128,80 @@ input[type=number] {
     bottom: 6rem;
     transition: 0.3s ease-in-out;
 }
+
+
+
+   
+/* _____New CSS change_____ 
+    Sat Dec 10 2022 at 03:19:33
+    user : user?.email
+*/ 
+    
+.border-r-1 { 
+    border : 1px; 
+}
+                 
+.border-r-2 { 
+    border : 2px; 
+}
+                 
+.f-s-14 { 
+    font-size : 14px; 
+}
+                 
+.f-s-16 { 
+    font-size : 16px; 
+}
+                 
+.f-s-18 { 
+    font-size : 18px; 
+}
+                 
+.f-s-25 { 
+    font-size : 25px; 
+}
+                 
+.f-s-40 { 
+    font-size : 40px; 
+}
+                 
+.h-40 { 
+    height : 40px; 
+}
+                 
+.h-56 { 
+    height : 56px; 
+}
+                 
+.h-58 { 
+    height : 58px; 
+}
+                 
+.m-t-18 { 
+    margin-top : 18px; 
+}
+                 
+.p-20 { 
+    padding : 20px; 
+}
+                 
+.p-36 { 
+    padding : 36px; 
+}
+                 
+.w-30 { 
+    width : 30px; 
+}
+                 
+.w-56 { 
+    width : 56px; 
+}
+                 
+.w-58 { 
+    width : 58px; 
+}
+                 
+.zi-2 { 
+    z-index : 2px; 
+}
+                

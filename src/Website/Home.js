@@ -234,7 +234,7 @@ export default function Netflix() {
 
                 <div className='grid gap-1rem'>
                     <section className=' gap-1rem align-top' id='Home' >
-                        <div className='block grid border-r-2 gap-2rem white' 
+                        <div className='block grid border-r-40 gap-2rem white' 
                             style={{
                                 flex: '1 0 55%', 
                                 backgroundSize: 'cover',
@@ -243,7 +243,7 @@ export default function Netflix() {
                             }}
                         >
                             <div 
-                                className='grid border-r-2 gap-2rem h-100p'  
+                                className='grid border-r-40 gap-2rem h-100p'  
                                 style={{
                                     backdropFilter: 'blur(44px)',
                                     background: '#ffffff94',
@@ -274,7 +274,7 @@ export default function Netflix() {
                                                     return (
                                                         <a href={social.link}>
                                                             <button 
-                                                                className='white border-r-100 h-58 w-58 p-20 transition' 
+                                                                className='white border-r-100 h-58 w-58 transition' 
                                                                 id={social.name} 
                                                                 onMouseEnter={e=> {
                                                                     document.querySelector('#' + social.name).style.background = social.color
@@ -300,13 +300,13 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display align-top border-r-2 w-100p' style={{flex: '1 0 22%'}}>
-                            <img className='w-100p border-r-2' src={ProfilImg}  id='profil_img'/>
+                        <div className='display align-top border-r-40 w-100p' style={{flex: '1 0 22%'}}>
+                            <img className='w-100p border-r-40 CSS_GEN-img' src={ProfilImg}  id='profil_img'/>
                         </div>
                     </section>
 
 
-                    <video className='w-100p h-100p border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/>
+                    <video className='w-100p h-100p border-r-40' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/>
                     
                     <section className='gap-1rem' id='Works' >
                         <div className='gap-1rem align-top' id='works'>
@@ -314,9 +314,9 @@ export default function Netflix() {
                                 Object.values(projects)
                                 .map(project=> {
                                     return (
-                                        <div className='border-r-2 click overflow-hidden relative' style={{flex: '1 0 38%', height: '500px'}} >
+                                        <div className='border-r-40 click overflow-hidden relative' style={{flex: '1 0 38%', height: '500px'}} >
                                             <div 
-                                                className='zi-2 absolute border-r-2 w-100p h-100p transition' 
+                                                className='zi-2 absolute border-r-40 w-100p h-100p transition' 
                                                 id={'project-' + project.id}
                                                 onMouseMove={e=> hoverImage(project.id)}
                                                 onMouseLeave={e=> unFocusImage(project.id)}
@@ -351,7 +351,7 @@ export default function Netflix() {
                                                 </div>
                                             </div>
                                             <span className='display h-100p transition'>
-                                                <img className='w-100p h-100p border-r-2 transition' src={project.img} id={project.id} />
+                                                <img className='w-100p h-100p border-r-40 transition' src={project.img} id={project.id} />
                                             </span> 
                                         </div> 
                                     )
@@ -364,7 +364,7 @@ export default function Netflix() {
 
                     <section className='gap-1rem' id='Profil'>
                         <div className='display wrap gap-1rem align-top'>
-                            <div className='grid gap-1rem border-r-2 p-36 white' style={{flex: '1 0 38%'}}>
+                            <div className='grid gap-1rem border-r-40 p-36 white' style={{flex: '1 0 38%'}}>
 
                                 <div>
                                     <span className='f-s-25'>Mon profil</span>
@@ -403,7 +403,7 @@ export default function Netflix() {
                     </section>
 
                     <section className='gap-1rem' id='Contact' >
-                        <div className='grid border-r-2 gap-2rem p-36 white' style={{flex: '1 0 20%'}} >
+                        <div className='grid border-r-40 gap-2rem p-36 white' style={{flex: '1 0 20%'}} >
                             <div className='grid gap'>
                                 <span className='f-s-25'>Contact</span>
                                 <span>Et si on se faisait un petit café ?</span>
