@@ -4,9 +4,6 @@ document.getElementsByTagName('html')[0].appendChild(style)
 
 
 
-const getCSS = []
-
-
 export default function GenerateCSS() {
 
     const properties = [
@@ -31,7 +28,8 @@ export default function GenerateCSS() {
         {name: 'f-w-', propertie : 'font-weight'},
     ]  
 
- /*    let getAllClass = []
+
+    let getAllClass = []
     let all = document.getElementsByTagName("*")
     style.type = 'text/css'
     style.id = 'v____________COPY YOUR CSS_GEN HERE____________v'
@@ -60,21 +58,23 @@ export default function GenerateCSS() {
             }
             
         }
-    } */
+    }
 
 
-    let CSS = '' /* Array.from(new Set([...createCSS])).sort().toString() */
-    
+    let CSS = Array.from(new Set([...createCSS])).sort().toString()
     let CSSF = CSS.split(',').join(' ')
+    style.innerHTML = 
+`   
+/*_____ New CSS change : ${new Date().toDateString()} at ${new Date().toLocaleTimeString()} | user : ${'user?.email'} _____ */ 
+    ${CSSF}
+`
 
 
     // User doit entrer id avec cssgen pour que le programme détecte l'id et puisse accoller le cssText
 
     let elements = document.getElementsByTagName('*')
 
-    let results = ''
     const allCSS = []
-
 
     Object.values(elements).map(element=> {
 
@@ -94,17 +94,6 @@ export default function GenerateCSS() {
                             }
                         `
                     )
-
-                    style.innerHTML = 
-`   
-/* _____New CSS change_____ 
-    ${new Date().toDateString()} at ${new Date().toLocaleTimeString()}
-    user : ${'user?.email'}
-*/ 
-    .${cssElement} {
-        ${element.style.cssText}
-    }
-`
                 }
             } 
         })
@@ -116,8 +105,7 @@ export default function GenerateCSS() {
 
 
 
-var newDiv = document.createElement("button");
-
+var newDiv = document.createElement("button")
 newDiv.id = 'css_gen_reload'
 newDiv.style= `
 position: fixed;
@@ -140,27 +128,28 @@ newDiv.innerHTML = 'Copy CSS'
 document.body.appendChild(newDiv);
 
 
-
 window.onload = () => GenerateCSS()
 let btn = document.querySelector('#css_gen_reload')
 
-btn.onmousedown = () => {
-    newDiv.style.borderBottom = 'unset'
-}
-btn.onmouseup = () => {
-    newDiv.style.borderBottom = '6px solid #00000017'
-}
+btn.onmousedown = () => newDiv.style.borderBottom = 'unset'
+btn.onmouseup = () => newDiv.style.borderBottom = '6px solid #00000017'
+
+
+const getCSS = []
+
 
 if (btn) btn.onclick = () => {
     GenerateCSS()
-
 
     getCSS.push(...GenerateCSS())
 
     let finalCSS = Array.from(new Set([...getCSS])).toString().split(',').join(' ')
 
 
-    let copyText= finalCSS
+    console.log( 'new css generated : data:text/plain;charset=utf-11,' + encodeURIComponent(style.innerHTML + finalCSS) );
+
+
+    let copyText = style.innerHTML + finalCSS
 
     navigator.clipboard.writeText(copyText);
 }
