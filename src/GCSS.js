@@ -6,6 +6,9 @@ document.getElementsByTagName('html')[0].appendChild(style)
 
 export default function GenerateCSS() {
 
+
+    ///// Generate css by shortcut css directly in class of element in inspector
+
     const properties = [
         {name: 'w-'  , propertie : 'width'},
         {name: 'h-'  , propertie : 'height'},
@@ -29,77 +32,94 @@ export default function GenerateCSS() {
     ]  
 
 
-    let getAllClass = []
-    let all = document.getElementsByTagName("*")
-    style.type = 'text/css'
-    style.id = 'v____________COPY YOUR CSS_GEN HERE____________v'
+    function ClassCss() {
+
+        let getAllClass = []
+        let all = document.getElementsByTagName("*")
+        style.type = 'text/css'
+        style.id = 'v____________COPY YOUR CSS_GEN HERE____________v'
+        
+        Object.values(all).map(e=> {
     
-    Object.values(all).map(e=> {
-
-        let allArray = e.className.split(' ')
-
-        getAllClass.push(...allArray)
-    })
-
-    let allClass = Array.from(new Set([...getAllClass])).sort().filter(element => element !== '')
-
-    let createCSS = []
-
-    for (const v in properties) {
-        for (let i = 0; i < 1000; i++) {
-
-            if (allClass.includes(`${properties[v].name}${i}`)) {
-
-                createCSS.push(`
-.${properties[v].name}${i} { 
-    ${properties[v].propertie} : ${i}px; 
-}
-                `)
+            let allArray = e.className.split(' ')
+    
+            getAllClass.push(...allArray)
+        })
+    
+        let allClass = Array.from(new Set([...getAllClass])).sort().filter(element => element !== '')
+    
+        let createCSS = []
+    
+        for (const v in properties) {
+            for (let i = 0; i < 1000; i++) {
+    
+                if (allClass.includes(`${properties[v].name}${i}`)) {
+    
+                    createCSS.push(`
+    .${properties[v].name}${i} { 
+        ${properties[v].propertie} : ${i}px; 
+    }
+                    `)
+                }
+                
             }
-            
         }
+
+        let CSS = Array.from(new Set([...createCSS])).sort().toString()
+        let CSSF = CSS.split(',').join(' ')
+        style.innerHTML = 
+    `   
+    /*_____ New CSS change : ${new Date().toDateString()} at ${new Date().toLocaleTimeString()} | user : ${'user?.email'} _____ */ 
+        ${CSSF}
+    `
+
+        return createCSS.sort()
+    
     }
 
-
-    let CSS = Array.from(new Set([...createCSS])).sort().toString()
-    let CSSF = CSS.split(',').join(' ')
-    style.innerHTML = 
-`   
-/*_____ New CSS change : ${new Date().toDateString()} at ${new Date().toLocaleTimeString()} | user : ${'user?.email'} _____ */ 
-    ${CSSF}
-`
+    const generateByClass = ClassCss()
 
 
-    // User doit entrer id avec cssgen pour que le programme détecte l'id et puisse accoller le cssText
 
-    let elements = document.getElementsByTagName('*')
 
-    const allCSS = []
+    ///// Generate css directly in style section of element in inspector
+    function StyleCss() {
 
-    Object.values(elements).map(element=> {
-
-        let indicator = 'CG'
-        let isCSS_GEN = element.classList
-
-        Object.values(isCSS_GEN).map(cssElement=> {
-
-            if (cssElement.split('-')[0] === indicator) {
-        
-                if (element.style.cssText) {
-
-                    allCSS.push(
-                        `
-                            .${cssElement} {
-                                ${element.style.cssText}
-                            }
-                        `
-                    )
-                }
-            } 
+        let elements = document.getElementsByTagName('*')
+    
+        const allCSS = []
+    
+        Object.values(elements).map(element=> {
+    
+            let indicator = 'CG'
+            let isCSS_GEN = element.classList
+    
+            Object.values(isCSS_GEN).map(cssElement=> {
+    
+                if (cssElement.split('-')[0] === indicator) {
+            
+                    if (element.style.cssText) {
+    
+                        allCSS.push(
+                            `
+                                .${cssElement} {
+                                    ${element.style.cssText}
+                                }
+                            `
+                        )
+                    }
+                } 
+            })
         })
-    })
 
-    return allCSS
+        return allCSS
+    }
+
+    const generateByStyle = StyleCss()
+
+
+
+    return generateByClass
 
 }
 
