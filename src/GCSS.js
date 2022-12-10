@@ -3,6 +3,10 @@ var style = document.createElement('style')
 document.getElementsByTagName('html')[0].appendChild(style) 
 
 
+
+const getCSS = []
+
+
 export default function GenerateCSS() {
 
     const properties = [
@@ -62,15 +66,6 @@ export default function GenerateCSS() {
     let CSS = '' /* Array.from(new Set([...createCSS])).sort().toString() */
     
     let CSSF = CSS.split(',').join(' ')
-    console.log(`New CSS genered ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`);
-    style.innerHTML = 
-`   
-/* _____New CSS change_____ 
-    ${new Date().toDateString()} at ${new Date().toLocaleTimeString()}
-    user : ${'user?.email'}
-*/ 
-    ${CSSF}
-`
 
 
     // User doit entrer id avec cssgen pour que le programme détecte l'id et puisse accoller le cssText
@@ -83,7 +78,7 @@ export default function GenerateCSS() {
 
     Object.values(elements).map(element=> {
 
-        let indicator = 'CSS_GEN'
+        let indicator = 'CG'
         let isCSS_GEN = element.classList
 
         Object.values(isCSS_GEN).map(cssElement=> {
@@ -92,18 +87,30 @@ export default function GenerateCSS() {
         
                 if (element.style.cssText) {
 
-                    results = `${cssElement} : {${element.style.cssText}}`
+                    allCSS.push(
+                        `
+                            .${cssElement} {
+                                ${element.style.cssText}
+                            }
+                        `
+                    )
+
+                    style.innerHTML = 
+`   
+/* _____New CSS change_____ 
+    ${new Date().toDateString()} at ${new Date().toLocaleTimeString()}
+    user : ${'user?.email'}
+*/ 
+    .${cssElement} {
+        ${element.style.cssText}
+    }
+`
                 }
             } 
         })
-
     })
 
-
-    console.log(results);
-
-
-    return allCSS.cssText
+    return allCSS
 
 }
 
@@ -147,7 +154,13 @@ btn.onmouseup = () => {
 if (btn) btn.onclick = () => {
     GenerateCSS()
 
-    let copyText= GenerateCSS()
+
+    getCSS.push(...GenerateCSS())
+
+    let finalCSS = Array.from(new Set([...getCSS])).toString().split(',').join(' ')
+
+
+    let copyText= finalCSS
 
     navigator.clipboard.writeText(copyText);
 }

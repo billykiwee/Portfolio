@@ -300,8 +300,8 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display align-top border-r-40 w-100p' style={{flex: '1 0 22%'}}>
-                            <img className='w-100p border-r-40 CSS_GEN-img' src={ProfilImg}  id='profil_img'/>
+                        <div className='display align-top border-r-40 w-100p CG-ekfkez' style={{flex: '1 0 22%'}}>
+                            <img className='w-100p border-r-40 CG-img' src={ProfilImg}  id='profil_img'/>
                         </div>
                     </section>
 
