@@ -73,33 +73,37 @@ export default function GenerateCSS() {
 `
 
 
-// User doit entrer id avec cssgen pour que le programme détecte l'id et puisse accoller le cssText
+    // User doit entrer id avec cssgen pour que le programme détecte l'id et puisse accoller le cssText
 
-let elements = document.getElementsByTagName('*')
+    let elements = document.getElementsByTagName('*')
 
-
-let result = Object.values(elements).map(element=> {
-    
-    let r = ''
-
-    let indicator = 'CSS_GEN'
-    let isCSS_GEN = element.classList
+    let results = ''
+    const allCSS = []
 
 
-    Object.values(isCSS_GEN).map(cssElement=> {
+    Object.values(elements).map(element=> {
 
-        if (cssElement.split('-')[0] === indicator) {
-     
-            if (element.style.cssText) {
-         
-                r = `.${cssElement} : {${element.style.cssText}}`
-            }
-        } 
+        let indicator = 'CSS_GEN'
+        let isCSS_GEN = element.classList
+
+        Object.values(isCSS_GEN).map(cssElement=> {
+
+            if (cssElement.split('-')[0] === indicator) {
+        
+                if (element.style.cssText) {
+
+                    results = `${cssElement} : {${element.style.cssText}}`
+                }
+            } 
+        })
+
     })
-    return r
-})
 
-    return result
+
+    console.log(results);
+
+
+    return allCSS.cssText
 
 }
 
