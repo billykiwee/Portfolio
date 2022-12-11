@@ -16,54 +16,6 @@ import GCSS from '../GCSS'
 export default function App() {
 
 
-    const [{user}, dispatch] = useStateValue('')
-    const auth = getAuth()
-    
-    useEffect(() => {
-        auth.onAuthStateChanged(authUser => {
-            if (authUser) {
-                // The user just ged in or the user is ged in
-                dispatch({
-                    type: 'SET_USER',
-                    user: authUser
-                })
-            } else { 
-                // The user is logged out
-                dispatch({
-                    type: 'OUT',
-                    user: null
-                })
-            }
-        })
-    }, [dispatch, auth])
-
-
-   /*  const properties = [
-        {name: 'w-'  , style : 'width'},
-        {name: 'h-'  , style : 'height'},
-        {name: 'm-t-', style : 'margin-top'},
-        {name: 'm-b-', style : 'margin-bottom'},
-        {name: 'm-l-', style : 'margin-left'},
-        {name: 'm-r-', style : 'margin-right'},
-        {name: 'p-t-', style : 'padding-top'},
-        {name: 'p-b-', style : 'padding-bottom'},
-        {name: 'p-l-', style : 'padding-left'},
-        {name: 'p-r-', style : 'padding-right'},
-    ]          
-    
-    
-    useEffect(e=> {
-        for (let i = 0; i < 1000; i++) {
-            for (const v in properties) {
-
-                if (document.querySelectorAll('.' + properties[v].name + i))
-                document.querySelectorAll('.' + properties[v].name + i).forEach(e=> e.style = `${properties[v].style}:${i}px;`)
-            }
-        }
-    }, [])
-     */
-
-
     return (
         <BrowserRouter>
             <main>

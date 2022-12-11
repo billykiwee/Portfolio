@@ -6,10 +6,8 @@ import formatCurrency from '../App/utils/formatCurrency'
 import '../Website/portfolio.css'
 
 
+
 export default function Netflix() {
-
-
-    const [{user}] = useStateValue()
 
 
     const ProfilImg = 'https://images.unsplash.com/photo-1670272499188-79fe22656f64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxNnx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60'
@@ -19,7 +17,7 @@ export default function Netflix() {
             logo1 : '/images/github.svg',
             logo2: '/images/github-white.svg',
             name : 'GitHub',
-            color: '#24a641',
+            color: '#1dd1a1',
             link: 'https://github.com/billykiwee'
         },
         Instagram : {
@@ -244,7 +242,7 @@ export default function Netflix() {
                                     <div className='gap' id='social-bar'>
                                         <div>
                                             <a href='mailto:billyturpin642@gmail.com'>
-                                                <button className='black hover-black border-r-100 p-lr-2 h-58' >
+                                                <button className='black hover-black border-r-100 p-lr-2 h-58' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}>
                                                     <span className='f-s-16'>Me contacter</span>
                                                 </button>
                                             </a>
