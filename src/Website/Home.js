@@ -4,7 +4,6 @@ import Container from '../App/components/Container'
 import { useStateValue } from '../App/components/StateProvider'
 import formatCurrency from '../App/utils/formatCurrency'
 import '../Website/portfolio.css'
-import ProjectView from './views/ProjectView'
 
 
 export default function Netflix() {
@@ -20,14 +19,14 @@ export default function Netflix() {
             logo1 : '/images/github.svg',
             logo2: '/images/github-white.svg',
             name : 'GitHub',
-            color: 'black',
+            color: '#24a641',
             link: 'https://github.com/billykiwee'
         },
         Instagram : {
             logo1 : '/images/instagram.svg',
             logo2: '/images/instagram-white.svg',
             name : 'Instagram',
-            color: 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 58%,#285AEB 90%)',
+            color: 'rgb(255, 99, 72)',
             link: 'https://www.instagram.com/kiwee.site/'
         },
         LinkedIn : {
@@ -125,23 +124,6 @@ export default function Netflix() {
         },
     }
 
-    var date1 = new Date()
-    var date2 = new Date('03/02/1998')
-
-    var difference = date1.getTime() - date2.getTime()
-
-    var days = Math.ceil(difference / (1000 * 3580 * 24))
-
-    /* console.log({
-        an      : days / 365,
-        mois    : days / 30,
-        jours   : days,
-        heures  : days * 24,
-        minutes : days * 24 * 58,
-        secondes: days * 24 * 58 * 58,
-    }) */
-
-
 
     function Level({level}) {
 
@@ -200,13 +182,11 @@ export default function Netflix() {
 
     })
  
-
-
-
     return (
 
         <Container>
             <div classpassword='grid gap-1rem '>
+
 
                 {/* <header className='display justify-c p-lr-2 h-3 zi-2 white border-r-100'>
                     <div className='display gap'>
@@ -276,6 +256,7 @@ export default function Netflix() {
                                                         <a href={social.link}>
                                                             <button 
                                                                 className='white border-r-100 h-58 w-58 transition' 
+                                                                style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}
                                                                 id={social.name} 
                                                                 onMouseEnter={e=> {
                                                                     document.querySelector('#' + social.name).style.background = social.color
@@ -339,7 +320,7 @@ export default function Netflix() {
                                                                 </div>
                                                                 <div className='display gap-1rem'>
                                                                     <span className='display justify-c'>
-                                                                        <img src={project.logo} className='border-r-1 w-58 h-58' />
+                                                                        <img src={project.logo} className='border-r-100 w-58 h-58' />
                                                                     </span>
                                                                     <div className='grid' style={{background: 'unset!important'}}>
                                                                         <span className='c-white f-w-500 f-s-18'>{project.name}</span>
@@ -436,5 +417,5 @@ export default function Netflix() {
             </div>
 
         </Container>
-)
+    )
 }
