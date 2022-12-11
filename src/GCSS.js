@@ -50,37 +50,36 @@ window.onclick = () => {
 
     function generateVariableColor() {
 
-        const colors = ['black', 'white', 'blue', 'yellow', 'green', 'red', 'grey', 'orange', 'violet', 'pink', 'brown']
+        const colorGen = []
+
+        const colors = ['black', 'white', 'blue', 'yellow', 'green', 'red', 'grey', 'orange', 'violet', 'pink', 'brown', 'gold']
     
-        for (const v in properties) {
-            console.log(properties[v].name);
-            for (let i = 0; i < 101; i++) {
-    
-    
-                if (properties[v].variable) {
-    /* 
-                    rem.push({
-                        name : `${properties[v].name}${(i).toString().split('.').join('')}`,
-                        style: `.${properties[v].name}${(i).toString().split('.').join('')} { ${properties[v].propertie} : ${i}px; }`
-                    })
-    
-                    px.push({
-                        name : `${properties[v].name}${(i).toString().split('.').join('')}`,
-                        style: `.${properties[v].name}${(i).toString().split('.').join('')} { ${properties[v].propertie} : ${i}px; }`
-                    }) */
-                }               
+        for (const c in colors) {
+        
+            for (const v in properties) {
+
+                if (properties[v].color) {
+
+                    if (properties[v].name === 'bg-') {
+
+                        colorGen.push({
+                            name : `${properties[v].name}${colors[c]}`,
+                            style: `.${properties[v].name}${colors[c]} { background-color : var(--${colors[c]}); }`
+                        })
+                    }
+
+                }
             }
         }
-    
-        let r = []
-        let v = /* r.concat(rem, px) */''
-        let result = JSON.stringify(v)
+
+
+        let result = JSON.stringify(colorGen)
     
         console.log(result);
     
         navigator.clipboard.writeText(result);
     }
-
+    generateVariableColor()
 }
 ////////////////////////////////////////////////
 

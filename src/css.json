@@ -1,6 +1,5 @@
 {
     "css" : [
-
         {
           "name": "w-0",
           "style": ".w-0 { width : 0px; }"
@@ -7272,6 +7271,54 @@
         {
           "name": "f-w-100",
           "style": ".f-w-100 { font-weight : 100px; }"
+        },
+        {
+          "name": "bg-black",
+          "style": ".bg-black { background-color : var(--black); }"
+        },
+        {
+          "name": "bg-white",
+          "style": ".bg-white { background-color : var(--white); }"
+        },
+        {
+          "name": "bg-blue",
+          "style": ".bg-blue { background-color : var(--blue); }"
+        },
+        {
+          "name": "bg-yellow",
+          "style": ".bg-yellow { background-color : var(--yellow); }"
+        },
+        {
+          "name": "bg-green",
+          "style": ".bg-green { background-color : var(--green); }"
+        },
+        {
+          "name": "bg-red",
+          "style": ".bg-red { background-color : var(--red); }"
+        },
+        {
+          "name": "bg-grey",
+          "style": ".bg-grey { background-color : var(--grey); }"
+        },
+        {
+          "name": "bg-orange",
+          "style": ".bg-orange { background-color : var(--orange); }"
+        },
+        {
+          "name": "bg-violet",
+          "style": ".bg-violet { background-color : var(--violet); }"
+        },
+        {
+          "name": "bg-pink",
+          "style": ".bg-pink { background-color : var(--pink); }"
+        },
+        {
+          "name": "bg-brown",
+          "style": ".bg-brown { background-color : var(--brown); }"
+        },
+        {
+          "name": "bg-gold",
+          "style": ".bg-gold { background-color : var(--gold); }"
         }
     ]
 }
