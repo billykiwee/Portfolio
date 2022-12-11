@@ -1,6 +1,126 @@
+import { properties } from "./properties"
+import CSS_FILE from './css.json'
+
+
 
 var style = document.createElement('style')
 document.getElementsByTagName('html')[0].appendChild(style) 
+
+
+
+
+////////////////////// GENERATE JSON CSS ////////////////////////
+
+window.onclick = () => {
+
+
+    function generateVariableNumber() {
+
+        let rem = []
+        let px = []
+    
+        for (const v in properties) {
+            console.log(properties[v].name);
+            for (let i = 0; i < 101; i++) {
+    
+    
+                if (properties[v].variable) {
+    
+                    rem.push({
+                        name : `${properties[v].name}${(i).toString().split('.').join('')}`,
+                        style: `.${properties[v].name}${(i).toString().split('.').join('')} { ${properties[v].propertie} : ${i}px; }`
+                    })
+    
+                    px.push({
+                        name : `${properties[v].name}${(i).toString().split('.').join('')}`,
+                        style: `.${properties[v].name}${(i).toString().split('.').join('')} { ${properties[v].propertie} : ${i}px; }`
+                    })
+                }               
+            }
+        }
+    
+        let r = []
+        let v = r.concat(rem, px)
+        let result = JSON.stringify(v)
+    
+        console.log(result);
+    
+        navigator.clipboard.writeText(result);
+    }
+
+    function generateVariableColor() {
+
+        const colors = ['black', 'white', 'blue', 'yellow', 'green', 'red', 'grey', 'orange', 'violet', 'pink', 'brown']
+    
+        for (const v in properties) {
+            console.log(properties[v].name);
+            for (let i = 0; i < 101; i++) {
+    
+    
+                if (properties[v].variable) {
+    /* 
+                    rem.push({
+                        name : `${properties[v].name}${(i).toString().split('.').join('')}`,
+                        style: `.${properties[v].name}${(i).toString().split('.').join('')} { ${properties[v].propertie} : ${i}px; }`
+                    })
+    
+                    px.push({
+                        name : `${properties[v].name}${(i).toString().split('.').join('')}`,
+                        style: `.${properties[v].name}${(i).toString().split('.').join('')} { ${properties[v].propertie} : ${i}px; }`
+                    }) */
+                }               
+            }
+        }
+    
+        let r = []
+        let v = /* r.concat(rem, px) */''
+        let result = JSON.stringify(v)
+    
+        console.log(result);
+    
+        navigator.clipboard.writeText(result);
+    }
+
+}
+////////////////////////////////////////////////
+
+
+window.onload = e=> {
+
+    let getAllClass = []
+    let all = document.getElementsByTagName("*")
+    style.type = 'text/css'
+    style.id = 'v____________COPY YOUR CSS_GEN HERE____________v'
+    
+    Object.values(all).map(e=> {
+    
+        let allArray = e.className.split(' ')
+    
+        getAllClass.push(...allArray)
+    })
+    
+    let allClass = Array.from(new Set([...getAllClass])).sort().filter(element => element !== '')
+    
+    
+    let compileCSS = []
+    Object.values(CSS_FILE)[0].map(cssProperties=> {
+
+    
+        for (let i = 0; i < allClass.length; i++) {
+
+            
+            if (allClass[i] === cssProperties.name) {
+
+                compileCSS.push(cssProperties.style)
+                style.innerHTML = compileCSS.toString().split(',').join('')
+            }
+        }
+        
+    })
+
+}    
+
+
 
 
 
@@ -8,29 +128,6 @@ export default function GenerateCSS() {
 
 
     ///// Generate css by shortcut css directly in class of element in inspector
-
-    const properties = [
-        {name: 'w-'  , propertie : 'width'},
-        {name: 'h-'  , propertie : 'height'},
-        {name: 'm-t-', propertie : 'margin-top'},
-        {name: 'm-b-', propertie : 'margin-bottom'},
-        {name: 'm-l-', propertie : 'margin-left'},
-        {name: 'm-r-', propertie : 'margin-right'},
-        {name: 'm-', propertie : 'margin'},
-        {name: 'p-t-', propertie : 'padding-top'},
-        {name: 'p-b-', propertie : 'padding-bottom'},
-        {name: 'p-l-', propertie : 'padding-left'},
-        {name: 'p-r-', propertie : 'padding-right'},
-        {name: 'p-', propertie : 'padding'},
-        
-        {name: 'border-r-', propertie : 'border-radius'},
-        {name: 'gap-', propertie : 'gap'},
-        {name: 'zi-', propertie : 'z-index'},
-
-        {name: 'f-s-', propertie : 'font-size'},
-        {name: 'f-w-', propertie : 'font-weight'},
-    ]  
-
 
     function ClassCss() {
 
@@ -42,26 +139,72 @@ export default function GenerateCSS() {
         Object.values(all).map(e=> {
     
             let allArray = e.className.split(' ')
-    
+
             getAllClass.push(...allArray)
         })
-    
+
         let allClass = Array.from(new Set([...getAllClass])).sort().filter(element => element !== '')
+        
     
+
         let createCSS = []
     
         for (const v in properties) {
-            for (let i = 0; i < 1000; i++) {
+
+            // If propertie is variable 
+            if (properties[v].variable === false) {
+
+                    createCSS.push(
+                        `
+                            .${properties[v].name} { 
+                                ${properties[v].style}
+                            }
+                        `
+                    )
+            }
+
+
+            else if (properties[v].color === true) {
+
+                allClass.map(className=> {
+
+
+                    const colors = ['black', 'white', 'blue', 'yellow', 'green', 'red', 'grey', 'orange', 'violet', 'pink', 'brown']
+
+                    if (colors.includes(`${className.split('-')[1]}`)) {
+
+                        if (className.split('-')[0] === 'bg') {
+
+                            createCSS.push(
+                                `
+                                    .${className} { 
+                                        background-color : rgb(${className.split('-')[2]} ${className.split('-')[2]} ${className.split('-')[2]})};
+                                    }
+                                `
+                            )
+                        }
     
-                if (allClass.includes(`${properties[v].name}${i}`)) {
+                    }
+                })
+
+            }
+
+            else {
+
+                for (let i = 0; i < 100; i++) {
+                    
+                    if (allClass.includes(`${properties[v].name}${i}`)) {
     
-                    createCSS.push(`
-    .${properties[v].name}${i} { 
-        ${properties[v].propertie} : ${i}px; 
-    }
-                    `)
+                        createCSS.push(
+                            `
+                                .${properties[v].name}${i} { 
+                                    ${properties[v].propertie} : ${i}px; 
+                                }
+                            `       
+                        )
+                    }
+                    
                 }
-                
             }
         }
 
@@ -148,7 +291,7 @@ newDiv.innerHTML = 'Copy CSS'
 document.body.appendChild(newDiv);
 
 
-window.onload = () => GenerateCSS()
+//window.onload = () => GenerateCSS()
 let btn = document.querySelector('#css_gen_reload')
 
 btn.onmousedown = () => newDiv.style.borderBottom = 'unset'
@@ -158,7 +301,7 @@ btn.onmouseup = () => newDiv.style.borderBottom = '6px solid #00000017'
 const getCSS = []
 
 
-if (btn) btn.onclick = () => {
+if (!btn) btn.onclick = () => {
     GenerateCSS()
 
     getCSS.push(...GenerateCSS())
@@ -166,12 +309,11 @@ if (btn) btn.onclick = () => {
     let finalCSS = Array.from(new Set([...getCSS])).toString().split(',').join(' ')
 
 
-    console.log( 'new css generated : data:text/plain;charset=utf-11,' + encodeURIComponent(style.innerHTML + finalCSS) );
+    //console.log( 'new css generated : data:text/plain;charset=utf-11,' + encodeURIComponent(style.innerHTML + finalCSS) );
 
 
-    let copyText = style.innerHTML + finalCSS
+    let copyText = finalCSS
 
     navigator.clipboard.writeText(copyText);
 }
-
 

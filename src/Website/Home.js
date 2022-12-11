@@ -6,6 +6,7 @@ import formatCurrency from '../App/utils/formatCurrency'
 import '../Website/portfolio.css'
 import ProjectView from './views/ProjectView'
 
+
 export default function Netflix() {
 
 
