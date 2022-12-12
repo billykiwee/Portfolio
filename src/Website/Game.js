@@ -1,103 +1,90 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import QRCode from 'react-qr-code';
+import { Swiper, SwiperSlide } from "swiper/react";
 import Container from '../App/components/Container'
+
 
 export default function Game() {
 
 
-    const [Input, setInput] = useState('Super')
 
-    const alpha = [
-        {leter : 'a', equal : '1-'},
-        {leter : 'b', equal : '2-'},
-        {leter : 'c', equal : '3-'},
-        {leter : 'd', equal : '4-'},
-        {leter : 'e', equal : '5-'},
-        {leter : 'f', equal : '6-'},
-        {leter : 'g', equal : '7-'},
-        {leter : 'h', equal : '8-'},
-        {leter : 'i', equal : '9-'},
-        {leter : 'j', equal : '10-'},
-        {leter : 'k', equal : '11-'},
-        {leter : 'l', equal : '12-'},
-        {leter : 'm', equal : '13-'},
-        {leter : 'n', equal : '14-'},
-        {leter : 'o', equal : '15-'},
-        {leter : 'p', equal : '16-'},
-        {leter : 'q', equal : '17-'},
-        {leter : 'r', equal : '18-'},
-        {leter : 's', equal : '19 -'},
-        {leter : 't', equal : '20-'},
-        {leter : 'u', equal : '21-'},
-        {leter : 'v', equal : '22-'},
-        {leter : 'w', equal : '23-'},
-        {leter : 'x', equal : '24-'},
-        {leter : 'y', equal : '25-'},
-        {leter : 'z', equal : '26-'},
-        {leter : ' ', equal : '__'}
-    ]
+    const [Input,setInput] = useState('')
+
+    const lol = 'azertyuiopqsdfghjklmwxcvbn_' + 'azertyuiopqsdfghjklmwxcvbn'.toLocaleUpperCase() + '1234567890'
+
+    const [cool, setCool] = useState([])
+
+    window.onclick = e => {
+
+    }
 
 
-    function getTranslaion() {
+    function Convert(input) {
 
-        let string = Input.toLowerCase().split('')
-        let cryptWord = []
+        if (input.length > 0) {
 
-
-
-        alpha.map(a=> {
+            let r = ''
         
-            for (const v in string) {
-                if (string[v] === a.leter) {
-                    cryptWord.push(a.equal)
-                }
+            for (let i = 0; i < 50; i++) {
+                r += lol[Math.floor(Math.random() * lol.length)]
             }
-        })
-
-        return cryptWord
-    }
-
-    let crypt = getTranslaion()
-
-
-    const [InputTranslate, setInputTranslate] = useState('')
-    const [translated, setTranslated] = useState('')
-    function translate() {
-
-        let string = InputTranslate.toLowerCase().split('-')
-        let translate = []
-
-        alpha.map(a=> {
+         
+            let msg = {
+                message : input,
+                crypto : r,
+                date : new Date().toDateString() + ' at ' + new Date().toLocaleTimeString()
+            }
     
-            for (const v in string) {
-                console.log((string[v] + '-'));
-                if ((string[v] + '-') === a.equal) {
-                    translate.push(a.leter)
-                }
-            }
-        })
-        setTranslated(translate.toString().split(',').join(''))
+            if (!cool.includes(msg.message)) setCool([...cool, msg])
+        }
+
     }
 
-    console.log(translated);
+
+    console.log(cool);
+
 
     return (
-        <Container>
-            <div className='grid gap'>
-                <input type='text' onChange={e=> setInput(e.target.value) }  className='div-input' />
-                <span>{crypt}</span>
 
-                <div className='display gap'>
-                    <input type='text' onChange={e=> setInputTranslate(e.target.value) }  className='div-input w-100p' />
-                    <div>
-                        <button className='blue h-40' onClick={translate}>Traduire</button>
+        <Container>
+
+            <div className='grid gap-2rem'>
+
+                <div className='display gap m-t-4'>
+                    <div className='display w-100p'>
+                        <input type='text' onChange={e=> setInput(e.target.value)} className='div-input border-r-100 w-100p' />
                     </div>
+                    <div className='display'>
+                        <button onClick={e=> Convert(Input)} className='border-r-100 blue h-3 p-lr-2' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}>
+                            <span>convertir</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div className='grid gap'>
                     {
-                        translated &&
-                        <span>{translated}</span>
+                        cool.map(w=> {
+
+                            return (
+                                <div className='display gap p-1 shadow border border-r-1'>
+                                    <QRCode
+                                        className='click'
+                                        size={256}
+                                        style={{ height: "50px", width: '50px'}}
+                                        value={w.crypto}
+                                        viewBox={`0 0 256 256`}
+                                    />
+                                    <div className='display justify-s-b w-100p'>
+                                        <span>Message</span>
+                                        <small className='c-grey'>{w.date}</small>
+                                    </div>
+                                </div>
+                            )
+                        }).reverse()
                     }
                 </div>
             </div>
         </Container>
-  )
+    )
 }

@@ -4,6 +4,7 @@ import Container from '../App/components/Container'
 import { useStateValue } from '../App/components/StateProvider'
 import formatCurrency from '../App/utils/formatCurrency'
 import '../Website/portfolio.css'
+import { useScrollDirection } from 'react-use-scroll-direction'
 
 
 
@@ -32,7 +33,7 @@ export default function Netflix() {
             logo2: '/images/linkedin-white.svg',
             name : 'LinkedIn',
             color: '#0A66C2',
-            link: 'https://github.com/billykiwee'
+            link: 'https://www.linkedin.com/in/billy-turpin-a5b283217/'
         },
         Twitter : {
             logo1 : '/images/twitter.svg',
@@ -162,7 +163,7 @@ export default function Netflix() {
     }
     
 
-    useEffect(e=> {
+    /* useEffect(e=> {
         window.onscroll = (e) => {
             var h = document.documentElement, 
             b = document.body,
@@ -178,42 +179,21 @@ export default function Netflix() {
 
         document.querySelector('video').controls = false
 
-    })
- 
+    }) */
+
+
+
+
+
     return (
 
         <Container>
             <div classpassword='grid gap-1rem '>
 
-
-                {/* <header className='display justify-c p-lr-2 h-3 zi-2 white border-r-100'>
-                    <div className='display gap'>
-                        <div>
-                            <button onClick={e=> document.getElementById('Home').scrollIntoView()}>
-                                <span className='f-s-16'>Home</span>
-                            </button>
-                        </div>
-                        <div>
-                            <button onClick={e=> document.getElementById('Works').scrollIntoView()} >
-                                <span className='f-s-16 c-grey'>Works</span>
-                            </button>
-                        </div>
-                        <div>
-                            <button onClick={e=> document.getElementById('Profil').scrollIntoView()}>
-                                <span className='f-s-16 c-grey'>Profil</span>
-                            </button>
-                        </div>
-                        <div>
-                            <button onClick={e=> document.getElementById('Contact').scrollIntoView()}>
-                                <span className='f-s-16 c-grey'>Contact</span>
-                            </button>
-                        </div>
-                    </div>
-                </header> */}
-
                 <div className='grid gap-1rem'>
+                    
                     <section className=' gap-1rem align-top' id='Home' >
-                        <div className='block grid border-r-40 gap-2rem white' 
+                        <div className='block grid border-r-2 gap-2rem white' 
                             style={{
                                 flex: '1 0 55%', 
                                 backgroundSize: 'cover',
@@ -222,19 +202,19 @@ export default function Netflix() {
                             }}
                         >
                             <div 
-                                className='grid border-r-40 gap-2rem h-100p'  
+                                className='grid border-r-2 gap-2rem h-100p'  
                                 style={{
                                     backdropFilter: 'blur(44px)',
                                     background: '#ffffff94',
                                 }}
                             >
-                                <div className='grid p-36 justify-s-b h-100p gap-2rem'>
+                                <div className='grid p-2 justify-s-b h-100p gap-2rem'>
                                     <div className='grid gap'>   
                                         <div className='grid'>   
-                                            <span className='f-s-40 f-w-600'>Bonjour World,</span>
-                                            <span className='f-s-40 f-w-600'>Je suis Billy, votre futur développeur !</span>
+                                            <span className='f-s-2rem f-w-600'>Bonjour World,</span>
+                                            <span className='f-s-2rem f-w-600'>Je suis Billy, votre futur développeur !</span>
                                         </div>
-                                        <div className='display m-t-18'>
+                                        <div className='display m-t-1'>
                                             <span className='f-w-300 f-s-18'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
                                         </div>
                                     </div>
@@ -242,7 +222,7 @@ export default function Netflix() {
                                     <div className='gap' id='social-bar'>
                                         <div>
                                             <a href='mailto:billyturpin642@gmail.com'>
-                                                <button className='black hover-black border-r-100 p-lr-2 h-58' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}>
+                                                <button className='black hover-black border-r-100 p-lr-2 h-3' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}>
                                                     <span className='f-s-16'>Me contacter</span>
                                                 </button>
                                             </a>
@@ -253,7 +233,7 @@ export default function Netflix() {
                                                     return (
                                                         <a href={social.link}>
                                                             <button 
-                                                                className='white border-r-100 h-58 w-58 transition' 
+                                                                className='white border-r-100 h-3 w-3 transition' 
                                                                 style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}
                                                                 id={social.name} 
                                                                 onMouseEnter={e=> {
@@ -280,13 +260,13 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display align-top border-r-40 w-100p CG-ekfkez' style={{flex: '1 0 22%'}}>
-                            <img className='w-100p border-r-40 CG-img' src={ProfilImg}  id='profil_img'/>
+                        <div className='display align-top border-r-2 w-100p CG-ekfkez' style={{flex: '1 0 22%'}}>
+                            <img className='w-100p border-r-2 CG-img' src={ProfilImg}  id='profil_img'/>
                         </div>
                     </section>
 
 
-                    <video className='w-100p h-100p border-r-40' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/>
+                   {/*  <video className='w-100p h-100p border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/> */}
                     
                     <section className='gap-1rem' id='Works' >
                         <div className='gap-1rem align-top' id='works'>
@@ -294,9 +274,9 @@ export default function Netflix() {
                                 Object.values(projects)
                                 .map(project=> {
                                     return (
-                                        <div className='border-r-40 click overflow-hidden relative' style={{flex: '1 0 38%', height: '500px'}} >
+                                        <div className='border-r-2 click overflow-hidden relative' style={{flex: '1 0 38%', height: '500px'}} >
                                             <div 
-                                                className='zi-2 absolute border-r-40 w-100p h-100p transition' 
+                                                className='zi-2 absolute border-r-2 w-100p h-100p transition' 
                                                 id={'project-' + project.id}
                                                 onMouseMove={e=> hoverImage(project.id)}
                                                 onMouseLeave={e=> unFocusImage(project.id)}
@@ -331,7 +311,7 @@ export default function Netflix() {
                                                 </div>
                                             </div>
                                             <span className='display h-100p transition'>
-                                                <img className='w-100p h-100p border-r-40 transition' src={project.img} id={project.id} />
+                                                <img className='w-100p h-100p border-r-2 transition' src={project.img} id={project.id} />
                                             </span> 
                                         </div> 
                                     )
@@ -343,9 +323,8 @@ export default function Netflix() {
                     </section>
 
                     <section className='gap-1rem' id='Profil'>
-                        <div className='display wrap gap-1rem align-top'>
-                            <div className='grid gap-1rem border-r-40 p-36 white' style={{flex: '1 0 38%'}}>
-
+                        <div className='display wrap gap-1rem align-top block border-r-2 p-2 white'>
+                            <div className='grid gap-1rem' style={{flex: '1 0 38%'}}>
                                 <div>
                                     <span className='f-s-25'>Mon profil</span>
                                 </div>
@@ -361,18 +340,15 @@ export default function Netflix() {
                                         Object.values(skills)
                                         .map(skill=> {
                                             return (
-                                                <div className='grid gap-1rem shadow border-r-1 p-20'>
-                                                    <div>
-                                                        <span className='display gap'>
-                                                            <img src={skill.logo} className='display h-40' />
-                                                            <span>{skill.name}</span>
-                                                        </span>
-                                                    </div>
-                                                    <div className='grid'>
-                                                        <div className='display gap-04'>
-                                                            <Level level={skill.level} />
+                                                <div className='grid gap justify-c'>  
+                                                    <div className='display gap justify-c'>
+                                                        <div className='display click'>
+                                                            <img src={skill.logo} className='display h-3 ' />
                                                         </div>
                                                     </div>
+                                                   {/*  <div className='display justify-c grey border-r-04 p-1 h-1 '>
+                                                        <small className='c-grey'>{skill.name}</small>
+                                                    </div> */}
                                                 </div>
                                             )
                                         })
@@ -383,7 +359,7 @@ export default function Netflix() {
                     </section>
 
                     <section className='gap-1rem' id='Contact' >
-                        <div className='grid border-r-40 gap-2rem p-36 white' style={{flex: '1 0 20%'}} >
+                        <div className='grid border-r-2 gap-2rem p-2 white' style={{flex: '1 0 20%'}} >
                             <div className='grid gap'>
                                 <span className='f-s-25'>Contact</span>
                                 <span>Et si on se faisait un petit café ?</span>

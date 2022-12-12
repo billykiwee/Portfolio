@@ -21,9 +21,9 @@ export default function App() {
             <main>
                 <Routes>
                     <Route path="/" exact element={<Home />} />
-                    <Route path="/Game" exact element={<Game />} />
+                    <Route path="/game" exact element={<Game />} />
                     <Route path="/ProjectView" exact element={<ProjectView />} />
-                    <Route path="/GCSS" exact element={<GCSS />} />
+                   {/*  <Route path="/GCSS" exact element={<GCSS />} /> */}
                 </Routes>
             </main>
         </BrowserRouter>

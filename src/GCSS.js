@@ -1,7 +1,4 @@
 import { properties } from "./properties"
-import CSS_FILE from './css.json'
-
-
 
 var style = document.createElement('style')
 document.getElementsByTagName('html')[0].appendChild(style) 
@@ -79,46 +76,9 @@ window.onclick = () => {
     
         navigator.clipboard.writeText(result);
     }
-    generateVariableColor()
+
 }
 ////////////////////////////////////////////////
-
-
-window.onload = e=> {
-
-    let getAllClass = []
-    let all = document.getElementsByTagName("*")
-    style.type = 'text/css'
-    style.id = 'v____________COPY YOUR CSS_GEN HERE____________v'
-    
-    Object.values(all).map(e=> {
-    
-        let allArray = e.className.split(' ')
-    
-        getAllClass.push(...allArray)
-    })
-    
-    let allClass = Array.from(new Set([...getAllClass])).sort().filter(element => element !== '')
-    
-    
-    let compileCSS = []
-    Object.values(CSS_FILE)[0].map(cssProperties=> {
-
-    
-        for (let i = 0; i < allClass.length; i++) {
-
-            
-            if (allClass[i] === cssProperties.name) {
-
-                compileCSS.push(cssProperties.style)
-                style.innerHTML = compileCSS.toString().split(',').join('')
-            }
-        }
-        
-    })
-
-}    
-
 
 
 
@@ -300,7 +260,7 @@ btn.onmouseup = () => newDiv.style.borderBottom = '6px solid #00000017'
 const getCSS = []
 
 
-if (!btn) btn.onclick = () => {
+if (btn) btn.onclick = () => {
     GenerateCSS()
 
     getCSS.push(...GenerateCSS())
