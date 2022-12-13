@@ -236,7 +236,7 @@ height: 3rem;
 background: #26de81;
 padding: 0.4rem;
 top: 0px;
-display: flex;
+display: none;
 align-items: center;
 border-bottom: 6px solid #00000017;
 justify-content: center;

@@ -26,6 +26,7 @@
     "firebase-admin": "^11.0.1",
     "firebase-functions": "^3.22.0",
     "get-eth-price": "^1.0.0",
+    "get-website-favicon": "^0.0.7",
     "google-map-react": "^2.2.0",
     "google-maps-reviews": "^0.3.0",
     "process": "^0.11.10",

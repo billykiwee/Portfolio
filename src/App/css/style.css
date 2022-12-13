@@ -94,7 +94,7 @@ input {
     border-radius: 0.4rem;
     background: transparent;
     box-sizing: border-box;
-    padding: 0.4rem;
+    padding: 1rem;
 }
 textarea {
     font-size: 16px;
@@ -1075,3 +1075,8 @@ input[type=number] {
 
 
 
+
+
+.border-b {
+    border-bottom: 6px solid rgba(0, 0, 0, 0.09);
+}

@@ -8,10 +8,10 @@ import { useScrollDirection } from 'react-use-scroll-direction'
 
 
 
+export const ProfilImg = 'https://images.unsplash.com/photo-1670272499188-79fe22656f64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxNnx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60'
+
 export default function Netflix() {
 
-
-    const ProfilImg = 'https://images.unsplash.com/photo-1670272499188-79fe22656f64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxNnx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60'
 
     const socialMedia = {
         GitHub : {
@@ -188,6 +188,7 @@ export default function Netflix() {
     return (
 
         <Container>
+
             <div classpassword='grid gap-1rem '>
 
                 <div className='grid gap-1rem'>
