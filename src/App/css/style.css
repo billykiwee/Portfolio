@@ -1,5 +1,6 @@
 * {
     font-family: 'Poppins', sans-serif;
+    line-height: 150%;
 }
 
 :root {
@@ -43,7 +44,7 @@ body {
     color: var(--text-color);
     background-color: var(--background);
     height: 100%;
-   /*  scroll-behavior: smooth; */
+    scroll-behavior: smooth;
 }
 
 main {
@@ -66,14 +67,10 @@ h1 {
 }
 
 h2 {
-    font-size: 1.8rem;
-    line-height: 2.4rem;
+    font-size: 3.8rem;
     font-weight: 500;
 }
 
-.lh-1 {
-    line-height: 1
-}
 
 ul {
     padding: 0;
@@ -1079,4 +1076,25 @@ input[type=number] {
 
 .border-b {
     border-bottom: 6px solid rgba(0, 0, 0, 0.09);
+}
+
+
+
+
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (min-width: 780px) {
+
+    section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

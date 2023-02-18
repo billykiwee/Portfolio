@@ -67,3 +67,14 @@ button:hover {
 
 
 
+
+
+@media screen and (min-width: 700px) {
+
+    .blocks {
+        flex-direction: unset;
+    }
+    .blocks > div {
+       width: 50%;
+    }
+}

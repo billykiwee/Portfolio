@@ -9,6 +9,7 @@ import { getAuth } from "firebase/auth"
 import { db } from './database/firebase'
 import Game from '../Website/Game'
 import ProjectView from '../Website/views/ProjectView'
+import Edit from '../Website/Edit'
 
 
 
@@ -22,6 +23,7 @@ export default function App() {
                     <Route path="/" exact element={<Home />} />
                     <Route path="/game" exact element={<Game />} />
                     <Route path="/ProjectView" exact element={<ProjectView />} />
+                    <Route path="/edit/:LinkID" exact element={<Edit />} />
                 </Routes>
             </main>
         </BrowserRouter>
