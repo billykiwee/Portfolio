@@ -341,7 +341,7 @@ export default function Netflix() {
 
                                             return (
                                                 
-                                                <div className='grid justify-s-b' style={{width: '100px'}}>  
+                                                <div className='grid justify-s-b'>  
                                                     <div className='display  justify-c gap'>
                                                         <img src={skill.logo} style={{ width: '64px' }} />
                                                     </div>
