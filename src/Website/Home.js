@@ -229,19 +229,20 @@ export default function Netflix() {
                                         <div className='gap' id='social-bar'>
                                             <div>
                                                 <a href='mailto:billyturpin642@gmail.com'>
-                                                    <button className='black hover-black border-r-100 p-lr-2 h-3' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}>
+                                                    <button className='black hover-black border-r-100 p-lr-2 h-3' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', height: '3.8rem' }}>
                                                         <span className='f-s-16'>Me contacter</span>
                                                     </button>
                                                 </a>
                                             </div>
                                             <div className='display justify-s-a gap'>
                                                 {
-                                                    Object.values(socialMedia).map(social=> {
+                                                    Object.values(socialMedia)
+                                                    .map(social=> {
                                                         return (
                                                             <a href={social.link}>
                                                                 <button 
-                                                                    className='white border-r-100 h-3 w-3 transition' 
-                                                                    style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)'}}
+                                                                    className='white border-r-100 transition' 
+                                                                    style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', width: '3.8rem', height: '3.8rem'}}
                                                                     id={social.name} 
                                                                     onMouseEnter={e=> {
                                                                         document.querySelector('#' + social.name).style.background = social.color
