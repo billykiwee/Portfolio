@@ -171,7 +171,6 @@ export default function Netflix() {
     const [scrollDirection, setScrollDirection] = useState('')
     const [NewPosition, setNewPosition] = useState([])
 
-
     const breakPoint = [0, 1032, 2176]
 
     const [updateDirection, setUpdateDirection] = useState('')
@@ -183,8 +182,6 @@ export default function Netflix() {
 
         window.onscroll = () => {
 
-
-
             scrollPosition.push(window.scrollY)
             setNewPosition(scrollPosition.slice(scrollPosition.length -2, scrollPosition.length))
         }
@@ -192,32 +189,45 @@ export default function Netflix() {
     }, [updateDirection])
 
 
+    const [stopScroll, setStopScroll]= useState(false)
     useEffect(e=> {
 
-        setTimeout(e=> {
 
-            if ((NewPosition[1] - NewPosition[0]) > 0) {
-                setUpdateDirection('down')
-            }
-            if ((NewPosition[1] - NewPosition[0]) < 0) {
-                setUpdateDirection('up')
-            }
-            
-            if ((NewPosition[1] - NewPosition[0]) === 1) {
-                setUpdateDirection('')
-            }
+        if ((NewPosition[1] - NewPosition[0]) > 0) {
+            setUpdateDirection('down')
+            setStopScroll(false)
+        }
+        if ((NewPosition[1] - NewPosition[0]) < 0) {
+            setUpdateDirection('up')
+            setStopScroll(false)
+        }
 
-            if ((NewPosition[1] - NewPosition[0]) === -1) {
-                setUpdateDirection('')
-            }
 
-        }, 10)
+        if ((NewPosition[1] - NewPosition[0]) === 1 || (NewPosition[1] - NewPosition[0]) === -1 ) {
+            setStopScroll(true)
+        }
         
     }, [NewPosition])
 
 
+    const [sectionPosition, setSectionPosition] = useState(0)
 
-    console.log(updateDirection);
+    useEffect(e=> {
+
+        if (!stopScroll) {
+            setSectionPosition(sectionPosition + 1000)
+        }
+    }, [stopScroll])
+
+
+    useEffect(e=> {
+
+        if (updateDirection === 'down') {
+            document.querySelector('#sections').style.top = -sectionPosition + 'px'
+        }
+        else    document.querySelector('#sections').style.top = sectionPosition + 'px'
+    }, [sectionPosition])
+
 
 
 
