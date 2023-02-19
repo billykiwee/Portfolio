@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Container from '../App/components/Container'
 import { useStateValue } from '../App/components/StateProvider'
 import formatCurrency from '../App/utils/formatCurrency'
@@ -169,13 +169,13 @@ export default function Netflix() {
 
 
     const [scrollDirection, setScrollDirection] = useState('')
-    const [WindowY, setWindowY] = useState(0)
-
+    const [StateWindow, setStateWindow] = useState(0)
+    const [windowY, setWindowY] = useState(0)
 
 
     const breakPoint = [0, 1032, 2176]
 
-    useEffect(e=> {
+  /*   useEffect(e=> {
         
         const scrollPosition = []
 
@@ -195,72 +195,36 @@ export default function Netflix() {
             }
         }
 
-    }, [])
-
+    }, []) */
 
     const location = useLocation()
 
     useEffect(e=> {
 
-        if (scrollDirection === 'down') {
 
-            window.location.href = '#Works'
+        window.addEventListener('scroll', () => {
+            const wY = window.scrollY
 
+            console.log(wY);
 
-        }
+            if (wY >= 1) {
+                window.location.href = '#Works'
+            }
+        })
+      
 
-
-    }, [scrollDirection, WindowY])
-
-
-    
-/*     const [count, setCount] = useState(0)
-    
-    useEffect(e=> {
-
-        if (scrollDirection === 'down') {
-            if (count < sections.length) {
-                setCount(count + 1)
+        for (const v in sections) {
+            if (sections[v] === location.hash) {
+                window.scrollTo(0, breakPoint[v])
             }
         }
+       
 
-        if (scrollDirection === 'up') {
-            if (count > 0) {
-                setCount(count - 1)
-            }
-        }
-
-    }, [scrollDirection])
-    
-
-    useEffect(e=> {
-
-        if (count === 0) {
-            window.scrollTo(0, 0)
-        }
-        else if (count === 1) {
-            window.scrollTo(0, 1000)
-        }
-        else if (count === 2) {
-            window.scrollTo(0, 2176)
-        }
-
-    }, [count]) */
+    }, [])
 
 
-    const [scrollPosition, setScrollPosition] = useState(0);
-    const handleScroll = () => {
-        const position = window.pageYOffset;
-        setScrollPosition(position);
-    };
-    
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
-    
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+
+
 
     return (
 
