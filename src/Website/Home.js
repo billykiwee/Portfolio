@@ -175,35 +175,30 @@ export default function Netflix() {
         
         const scrollPosition = []
 
-        window.onpopstate = () =>
         window.onscroll = () => {
             scrollPosition.push(window.scrollY)
     
             const newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
     
-            const direction = () => newPosition[1] > newPosition[0] ? 'down' : 'up'
-
-
-            if (direction() === 'down') {
-                if (sectionCount < sections.length) {
-                    setSectionCount(sectionCount + 1)
+            const direction = () => {
+                if (newPosition[1] > newPosition[0]) {
+                    setScrollDirection('')
+                    return 'down'
                 }
-            }
-            if (direction() === 'up') {
-                if (sectionCount > 0) {
-                    setSectionCount(sectionCount - 1)
+                if (newPosition[1] < newPosition[0]) {
+                    setScrollDirection('')
+                    return 'up'
                 }
             }
 
-            console.log(newPosition);
+            setScrollDirection(direction())
         }
-
 
     }, [])
     
-    
-    console.log(sectionCount);
 
+
+    console.log(scrollDirection);
 
 
 
