@@ -130,7 +130,8 @@ export default function Netflix() {
         document.querySelector('#project-' + id).style.background= '#00000066'
         document.querySelector('#info-' + id).style.display= 'flex'
 
-        document.querySelector('#project-' + id).onmousemove = w => {
+        document.querySelector('#project-' + id)
+        .onmousemove = w => {
 
             let imgHeight =  document.querySelector('#' + id).clientHeight
             let imgWidth =  document.querySelector('#' + id).clientWidth
@@ -335,19 +336,19 @@ export default function Netflix() {
                                 <div className='display justify-c m-b-2'>
                                     <span className='f-s-2rem'>J'utilise les dernières technologies</span>
                                 </div>
-                                <div className='display justify-c wrap gap-1rem'>
+                                <div className='display justify-c wrap gap-1rem w-100p'>
                                     {
                                         Object.values(skills)
                                         .map(skill=> {
 
                                             return (
                                                 
-                                                <div className='grid justify-s-b'>  
+                                                <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }}>  
                                                     <div className='display  justify-c gap'>
                                                         <img src={skill.logo} style={{ width: '64px' }} />
                                                     </div>
-                                                    <div className='display justify-c grey border-r-04 p-1 h-1 '>
-                                                        <small className='c-grey'>{skill.name}</small>
+                                                    <div className='display justify-c border-r-04 p-1 h-1 '>
+                                                        <small className='c-grey f-s-18'>{skill.name}</small>
                                                     </div>
                                                 </div>
                                             )
