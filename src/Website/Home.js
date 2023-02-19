@@ -253,29 +253,6 @@ export default function Netflix() {
     }, [sectionPosition])
      */
 
-
-    useEffect(e=> {
-
-        window.onscroll = () => {
-
-            document.querySelector('#bubble3').style = `
-                transform: 
-                    translate(
-                        ${(window.scrollY / document.documentElement.clientHeight) * -10}rem, 
-                        ${(window.scrollY / document.documentElement.clientHeight) * -2}rem
-                    );
-            `
-
-            document.querySelector('#bubble2').style = `
-                transform: 
-                    translate(
-                        ${(window.scrollY / document.documentElement.clientHeight) * 12}rem, 
-                        ${(window.scrollY / document.documentElement.clientHeight) * 8}rem
-                    );
-            `
-        }
-    })
-
     return (
 
         <>
@@ -303,11 +280,10 @@ export default function Netflix() {
                 }
             </div>
 
-            <span className='absolute w-100p h-100p'>
             
                 <div class="bubbles">
-                    <div class="bubble" id='bubble2'></div>
-                    <div class="bubble" id='bubble3'></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
                     <div class="bubble"></div>
                     <div class="bubble"></div>
                     <div class="bubble"></div>
@@ -317,9 +293,7 @@ export default function Netflix() {
                     <div class="bubble"></div>
                     <div class="bubble"></div>
                     
-                </div>
-            </span>
-                            
+                </div>    
             <Container>
 
 
@@ -339,7 +313,7 @@ export default function Netflix() {
                                     background: '#ffffff94',
                                 }}
                             >
-                                <div className='grid justify-s-b h-100p gap-2rem' style={{ padding: '3rem' }}>
+                                <div className='grid justify-s-b h-100p gap-2rem p-2'>
                                     <div className='grid gap'>   
                                         <div className='grid'>   
                                             <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end !</span>

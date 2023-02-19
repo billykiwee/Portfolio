@@ -48,7 +48,6 @@ body {
 }
 
 main {
-    margin-top: 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -150,15 +149,14 @@ table, tr, th {
 
 
 .container {
-    width: 94%;
-    max-width: 1000px;
-    margin: 0 auto;
+    padding: 4%;
     top: 0;
     height: 100%;
     position: relative;
+    background: #f0f8ffdb;
     display: flex;
+    backdrop-filter: blur(10px);
     flex-direction: column;
-    margin-bottom: 8rem;
 }
 
 
