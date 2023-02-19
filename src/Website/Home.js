@@ -169,35 +169,31 @@ export default function Netflix() {
 
 
     const [scrollDirection, setScrollDirection] = useState('')
+    const [onscroll, setOnscroll] = useState(0)
 
     useEffect(e=> {
         
         const scrollPosition = []
-        const count = []
-        
 
         window.onscroll = () => {
+
             scrollPosition.push(window.scrollY)
             let newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
-            
 
+            
             if ((newPosition[1] - newPosition[0]) > '0') {
-                setScrollDirection( 'down' )
+                setOnscroll(c=> c +1)
+                return setScrollDirection( 'down' )
             }
             if ((newPosition[1] - newPosition[0]) < '0') {
-                setScrollDirection( 'up' )
+                setOnscroll(c=> c -1)
+                return setScrollDirection( 'up' )
             }
-    
         }
         
     }, [])
     
-
-    console.log(scrollDirection);
-
-    useEffect(e=> {
-        return () => setScrollDirection('')
-    }, [scrollDirection])
+    console.log(onscroll);
 /*     
     const [count, setCount] = useState(0)
     
