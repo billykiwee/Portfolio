@@ -156,7 +156,7 @@ export default function Netflix() {
     const [section, setSection] = useState('Home')
 
 
-
+/* 
     const [windowY, setwindowY] = useState(0)
 
     useEffect(e=> {
@@ -165,7 +165,7 @@ export default function Netflix() {
 
 
     }, [section])
-    
+     */
 
 
     const [scrollDirection, setScrollDirection] = useState('')
@@ -183,32 +183,38 @@ export default function Netflix() {
             const newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
     
             const direction = () => {
-
-                setScrollDirection('')
-
                 return newPosition[1] > newPosition[0] ? 'down' : 'up'
             }
 
-            count.push(direction())
+            setScrollDirection( direction() )
 
-            const newCount = count.slice(count.length -1, count.length)
-
-            setSectionCount(newCount);
         }
+        window.ontouchend = () => setScrollDirection('')
 
     }, [])
     
 
+    const [count, setCount] = useState(0)
+
     useEffect(e=> {
 
-        if (sectionCount === ['down']) {
-            window.scrollTo(1000, 0)
-            console.log('ol');
+        if (scrollDirection === 'down') {
+            if (count < sections.length) {
+                setCount(count + 1)
+            }
         }
-        console.log(sectionCount ,['down']);
 
-        
-    }, [sectionCount])
+        if (scrollDirection === 'up') {
+            if (count > 0) {
+                setCount(count - 1)
+            }
+        }
+
+    }, [scrollDirection])
+    
+
+
+    console.log(count);
 
 
 
