@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Container from '../App/components/Container'
 import { useStateValue } from '../App/components/StateProvider'
 import formatCurrency from '../App/utils/formatCurrency'
@@ -197,21 +197,18 @@ export default function Netflix() {
 
     }, [])
 
-    console.log(WindowY);
+
+    const location = useLocation()
 
     useEffect(e=> {
 
         if (scrollDirection === 'down') {
 
-            if (WindowY <= breakPoint[1]) {
-                window.scrollTo(0, breakPoint[1])
-            }
+            window.location.href = '#Works'
 
-            if (WindowY > breakPoint[1]) {
-                window.scrollTo(0, breakPoint[2])
-            }
 
         }
+
 
     }, [scrollDirection, WindowY])
 
@@ -251,7 +248,19 @@ export default function Netflix() {
     }, [count]) */
 
 
-
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+    };
+    
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
 
@@ -264,7 +273,8 @@ export default function Netflix() {
                 {
                     sections
                     .map(s=> {
-                        return <div 
+                        return <a 
+                            href={'#'+s}
                             id={'section-' + s}
                             style={{ transform: section === s && 'scale(1.3)' }}
                             className={
@@ -283,194 +293,193 @@ export default function Netflix() {
 
                 <div classpassword='grid gap-1rem '>
 
-                    <div className='grid gap-1rem'>
-                        
-                        <section className=' section  gap-1rem' id='Home' >
-                            <div className='block grid border-r-2 gap-2rem white shadow' 
-                                style={{
-                                    flex: '1 0 55%', 
+                    
+                    <section className=' section  gap-1rem' id='Home' >
+                        <div className='block grid border-r-2 gap-2rem white shadow' 
+                            style={{
+                                flex: '1 0 55%', 
 
+                            }}
+                        >
+                            <div 
+                                className='grid border-r-2 gap-2rem h-100p'  
+                                style={{
+                                    backdropFilter: 'blur(44px)',
+                                    background: '#ffffff94',
                                 }}
                             >
-                                <div 
-                                    className='grid border-r-2 gap-2rem h-100p'  
-                                    style={{
-                                        backdropFilter: 'blur(44px)',
-                                        background: '#ffffff94',
-                                    }}
-                                >
-                                    
-                                    <div className='grid justify-s-b h-100p gap-2rem' style={{ padding: '3rem' }}>
-                                        <div className='grid gap'>   
-                                            <div className='grid'>   
-                                                <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end !</span>
-                                            </div>
-                                            <div className='display m-t-1'>
-                                                <span className='f-w-300 f-s-18'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
-                                            </div>
+                                
+                                <div className='grid justify-s-b h-100p gap-2rem' style={{ padding: '3rem' }}>
+                                    <div className='grid gap'>   
+                                        <div className='grid'>   
+                                            <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end !</span>
                                         </div>
-
-                                        <div className='gap' id='social-bar'>
-                                            <div>
-                                                <a href='mailto:billyturpin642@gmail.com'>
-                                                    <button className='black hover-black border-r-100 p-lr-2 h-3' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', height: '3.8rem' }}>
-                                                        <span className='f-s-16'>Me contacter</span>
-                                                    </button>
-                                                </a>
-                                            </div>
-                                            <div className='display justify-s-a gap'>
-                                                {
-                                                    Object.values(socialMedia)
-                                                    .map(social=> {
-                                                        return (
-                                                            <a href={social.link}>
-                                                                <button 
-                                                                    className='white border-r-100 transition' 
-                                                                    style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', width: '3.8rem', height: '3.8rem'}}
-                                                                    id={social.name} 
-                                                                    onMouseEnter={e=> {
-                                                                        document.querySelector('#' + social.name).style.background = social.color
-                                                                        document.querySelector('.' + social.name).src = social.logo2
-                                                                    }}
-                                                                    onMouseLeave={e=> {
-                                                                        document.querySelector('#' + social.name).style.background = ''
-                                                                        document.querySelector('.' + social.name).src = social.logo1
-                                                                    }}
-                                                                >
-                                                                    <span className='display justify-c'>
-                                                                        <img src={social.logo1} className={'w-56 h-56 ' + social.name} />
-                                                                    </span>
-                                                                </button>
-                                                            </a>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
+                                        <div className='display m-t-1'>
+                                            <span className='f-w-300 f-s-18'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
                                         </div>
-
                                     </div>
+
+                                    <div className='gap' id='social-bar'>
+                                        <div>
+                                            <a href='mailto:billyturpin642@gmail.com'>
+                                                <button className='black hover-black border-r-100 p-lr-2 h-3' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', height: '3.8rem' }}>
+                                                    <span className='f-s-16'>Me contacter</span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div className='display justify-s-a gap'>
+                                            {
+                                                Object.values(socialMedia)
+                                                .map(social=> {
+                                                    return (
+                                                        <a href={social.link}>
+                                                            <button 
+                                                                className='white border-r-100 transition' 
+                                                                style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', width: '3.8rem', height: '3.8rem'}}
+                                                                id={social.name} 
+                                                                onMouseEnter={e=> {
+                                                                    document.querySelector('#' + social.name).style.background = social.color
+                                                                    document.querySelector('.' + social.name).src = social.logo2
+                                                                }}
+                                                                onMouseLeave={e=> {
+                                                                    document.querySelector('#' + social.name).style.background = ''
+                                                                    document.querySelector('.' + social.name).src = social.logo1
+                                                                }}
+                                                            >
+                                                                <span className='display justify-c'>
+                                                                    <img src={social.logo1} className={'w-56 h-56 ' + social.name} />
+                                                                </span>
+                                                            </button>
+                                                        </a>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                        </div>
 
-                            <div className='display border-r-2 w-100p shadow' style={{flex: '1 0 22%'}}>
-                                <img className='w-100p border-r-2 CG-img' src={ProfilImg}  id='profil_img'/>
-                            </div>
-                        </section>
+                        <div className='display border-r-2 w-100p shadow' style={{flex: '1 0 22%'}}>
+                            <img className='w-100p border-r-2 CG-img' src={ProfilImg}  id='profil_img'/>
+                        </div>
+                    </section>
 
 
-                    {/*  <video className='w-100p h-100p border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/> */}
-                        
-                        <section className=' section gap-1rem' id='Works' >
-                            <div className='gap-1rem  display justify-c ' id='works'>
-                                {
-                                    Object.values(projects)
-                                    .map(project=> {
-                                        return (
-                                            <div className='border-r-2 click overflow-hidden relative shadow' style={{height: '444px', width: '444px'}} >
-                                                <div 
-                                                    className='zi-2 absolute border-r-2 w-100p h-100p transition' 
-                                                    id={'project-' + project.id}
-                                                    onMouseMove={e=> hoverImage(project.id)}
-                                                    onMouseLeave={e=> unFocusImage(project.id)}
-                                                >
-                                                    <div className='display h-100p align-end disable w-100p' id={'info-' + project.id}>
-                                                        <div className='grid w-100p h-100p'>
-                                                            <div className='grid h-100p w-100p'>
-                                                                <div className='grid p-2 justify-s-b h-100p'>
-                                                                    <div className='display'>
-                                                                        <div className='display justify-e  w-100p'>
-                                                                            <a href={project.link}>
-                                                                                <button className='display justify-c w-3 h-3 white hover-white border-r-100'>
-                                                                                    <span className='display'>
-                                                                                        <img src='/images/link.svg' />
-                                                                                    </span>
-                                                                                </button>
-                                                                            </a>
-                                                                        </div>
+                {/*  <video className='w-100p h-100p border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/> */}
+                    
+                    <section className=' section gap-1rem' id='Works' >
+                        <div className='gap-1rem  display justify-c ' id='works'>
+                            {
+                                Object.values(projects)
+                                .map(project=> {
+                                    return (
+                                        <div className='border-r-2 click overflow-hidden relative shadow' style={{height: '444px', width: '444px'}} >
+                                            <div 
+                                                className='zi-2 absolute border-r-2 w-100p h-100p transition' 
+                                                id={'project-' + project.id}
+                                                onMouseMove={e=> hoverImage(project.id)}
+                                                onMouseLeave={e=> unFocusImage(project.id)}
+                                            >
+                                                <div className='display h-100p align-end disable w-100p' id={'info-' + project.id}>
+                                                    <div className='grid w-100p h-100p'>
+                                                        <div className='grid h-100p w-100p'>
+                                                            <div className='grid p-2 justify-s-b h-100p'>
+                                                                <div className='display'>
+                                                                    <div className='display justify-e  w-100p'>
+                                                                        <a href={project.link}>
+                                                                            <button className='display justify-c w-3 h-3 white hover-white border-r-100'>
+                                                                                <span className='display'>
+                                                                                    <img src='/images/link.svg' />
+                                                                                </span>
+                                                                            </button>
+                                                                        </a>
                                                                     </div>
-                                                                    <div className='display gap-1rem'>
-                                                                        <span className='display justify-c'>
-                                                                            <img src={project.logo} className='border-r-100 w-3 h-3' />
-                                                                        </span>
-                                                                        <div className='grid' style={{background: 'unset!important'}}>
-                                                                            <span className='c-white f-w-500 f-s-18'>{project.name}</span>
-                                                                            <span className='c-white f-s-14 f-w-100'>{project.text}</span>
-                                                                        </div>
+                                                                </div>
+                                                                <div className='display gap-1rem'>
+                                                                    <span className='display justify-c'>
+                                                                        <img src={project.logo} className='border-r-100 w-3 h-3' />
+                                                                    </span>
+                                                                    <div className='grid' style={{background: 'unset!important'}}>
+                                                                        <span className='c-white f-w-500 f-s-18'>{project.name}</span>
+                                                                        <span className='c-white f-s-14 f-w-100'>{project.text}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span className='display h-100p transition'>
-                                                    <img className='w-100p h-100p border-r-2 transition' src={project.img} id={project.id} />
-                                                </span> 
-                                            </div> 
+                                            </div>
+                                            <span className='display h-100p transition'>
+                                                <img className='w-100p h-100p border-r-2 transition' src={project.img} id={project.id} />
+                                            </span> 
+                                        </div> 
+                                    )
+                                })
+                            }
+                        </div>
+                    
+                        
+                    </section>
+
+                    <section className=' section gap-1rem' id='Skills'>
+                        <div className='grid gap-2rem'>
+                            <div className='display justify-c m-b-2'>
+                                <span className='f-s-2rem' style={{textAlign: 'center'}}>J'utilise les dernières technologies</span>
+                            </div>
+                            <div className='display justify-c wrap gap-1rem w-100p'>
+                                {
+                                    Object.values(skills)
+                                    .map(skill=> {
+
+                                        return (
+                                            
+                                            <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }}>  
+                                                <div className='display  justify-c gap'>
+                                                    <img src={skill.logo} style={{ width: '64px' }} />
+                                                </div>
+                                                <div className='display justify-c border-r-04 p-1 h-1 '>
+                                                    <small className='c-grey f-s-18'>{skill.name}</small>
+                                                </div>
+                                            </div>
                                         )
                                     })
                                 }
                             </div>
-                        
-                            
-                        </section>
+                        </div>
+                    </section>
 
-                        <section className=' section gap-1rem' id='Skills'>
-                            <div className='grid gap-2rem'>
-                                <div className='display justify-c m-b-2'>
-                                    <span className='f-s-2rem' style={{textAlign: 'center'}}>J'utilise les dernières technologies</span>
-                                </div>
-                                <div className='display justify-c wrap gap-1rem w-100p'>
-                                    {
-                                        Object.values(skills)
-                                        .map(skill=> {
-
-                                            return (
-                                                
-                                                <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }}>  
-                                                    <div className='display  justify-c gap'>
-                                                        <img src={skill.logo} style={{ width: '64px' }} />
-                                                    </div>
-                                                    <div className='display justify-c border-r-04 p-1 h-1 '>
-                                                        <small className='c-grey f-s-18'>{skill.name}</small>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
+                {/*   <section className=' section gap-1rem' id='Contact' >
+                        <div className='grid border-r-2 gap-2rem p-2 white' style={{flex: '1 0 20%'}} >
+                            <div className='grid gap'>
+                                <span className='f-s-25'>Contact</span>
+                                <span>Et si on se faisait un petit café ?</span>
                             </div>
-                        </section>
-
-                    {/*   <section className=' section gap-1rem' id='Contact' >
-                            <div className='grid border-r-2 gap-2rem p-2 white' style={{flex: '1 0 20%'}} >
-                                <div className='grid gap'>
-                                    <span className='f-s-25'>Contact</span>
-                                    <span>Et si on se faisait un petit café ?</span>
-                                </div>
-                                <div className='grid gap-1rem w-100'>
-                                    <div className='grid gap-1rem'>
-                                        <div className='grid gap-04'>
-                                            <label>Nom</label>
-                                            <input className='div-input' placeholder='John Doe'/>
-                                        </div>
-                                        <div className='grid gap-04'>
-                                            <label>Email</label>
-                                            <input className='div-input' placeholder='monemail@gmail.com'/>
-                                        </div>
-                                        <div className='grid gap-04'>
-                                            <label>Message</label>
-                                            <textarea className='div-input' placeholder="J'aimerai collaborer avec vous" />
-                                        </div>
+                            <div className='grid gap-1rem w-100'>
+                                <div className='grid gap-1rem'>
+                                    <div className='grid gap-04'>
+                                        <label>Nom</label>
+                                        <input className='div-input' placeholder='John Doe'/>
                                     </div>
-                                    <div>
-                                        <button className='black p-20 border-r-100'>
-                                            <span className='f-s-16'>Envoyer</span>
-                                        </button>
+                                    <div className='grid gap-04'>
+                                        <label>Email</label>
+                                        <input className='div-input' placeholder='monemail@gmail.com'/>
+                                    </div>
+                                    <div className='grid gap-04'>
+                                        <label>Message</label>
+                                        <textarea className='div-input' placeholder="J'aimerai collaborer avec vous" />
                                     </div>
                                 </div>
+                                <div>
+                                    <button className='black p-20 border-r-100'>
+                                        <span className='f-s-16'>Envoyer</span>
+                                    </button>
+                                </div>
                             </div>
-                        </section> */}
-                    </div>
+                        </div>
+                    </section> */}
+                    
                 </div>
             </Container>
 
