@@ -1,0 +1,15 @@
+
+#sections.visible {
+    animation: main 0.4s ease;
+}
+
+@keyframes main {
+    from {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+}

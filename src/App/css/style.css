@@ -126,20 +126,20 @@ img {
     object-fit: cover;
 }
 
-div {
+/* div {
     animation: main 0.3s ease-out;
 }
 
 @keyframes main {
     from {
-        transform: translateY(-0.2rem);
+        transform: translateY(-0.4rem);
         opacity: 0;
     }
     to {
         transform: translateY(0rem);
         opacity: 1;
     }
-}
+} */
 
 
 

@@ -4,8 +4,7 @@ import Container from '../App/components/Container'
 import { useStateValue } from '../App/components/StateProvider'
 import formatCurrency from '../App/utils/formatCurrency'
 import '../Website/portfolio.css'
-
-
+import '../Website/effect.css'
 
 export const ProfilImg = 'https://kiwee.site/wp-content/uploads/2023/02/portfolioPP.png'
 
@@ -166,7 +165,7 @@ export default function Netflix() {
 
     useEffect(e=> {
 
-
+/* 
         window.onscroll = () => {
             if (window.scrollY === 0) {
                 setSection(sections[0])
@@ -179,7 +178,7 @@ export default function Netflix() {
             }
         }
 
-        window.location.href = '#' + section
+        window.location.href = '#' + section */
 
     }, [section])
 
@@ -253,6 +252,25 @@ export default function Netflix() {
     }, [sectionPosition])
      */
 
+    
+    useEffect(e=> {
+
+        for (const v in sections) {
+
+            const divToObserve = document.querySelector('#' + sections[v]);
+    
+            const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        divToObserve.classList.add('visible')
+                    }
+                });
+            });
+            observer.observe(divToObserve);
+        }
+
+    })
+
     return (
 
         <>
@@ -319,7 +337,7 @@ export default function Netflix() {
                                             <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end 👨🏻‍💻</span>
                                         </div>
                                         <div className='display m-t-1'>
-                                            <span className='f-w-300 f-s-18'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
+                                            <span className='f-w-300 f-s-18 c-grey'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
                                         </div>
                                     </div>
 
