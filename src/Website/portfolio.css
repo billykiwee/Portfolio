@@ -81,14 +81,28 @@ button:hover {
 
 
 
-#sections {
-    transition: 0.6s ease-in;
+/* #sections {
+    transition: 0.6s ease;
     position: fixed;
     top: 0;
-    right: 3rem;
-    left: 3rem;
+    right: 10%;
+    left: 10%;
 }
+
 
 body {
     height: 8000vh;
 }
+
+
+@media screen and (max-width: 700px) {
+
+    body {
+        height: 100%;
+    }
+    html {
+        overflow:scroll;
+    }
+}
+
+ */

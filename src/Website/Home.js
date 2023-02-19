@@ -156,19 +156,7 @@ export default function Netflix() {
     const [section, setSection] = useState('Home')
 
 
-/* 
-    const [windowY, setwindowY] = useState(0)
-
-    useEffect(e=> {
-        const div = document.querySelector('#' + section)
-        div.scrollIntoView({ behavior: "smooth" })
-
-
-    }, [section])
-     */
-
-
-    const [scrollDirection, setScrollDirection] = useState('')
+ /*    const [scrollDirection, setScrollDirection] = useState('')
     const [NewPosition, setNewPosition] = useState([])
 
 
@@ -208,6 +196,7 @@ export default function Netflix() {
     }, [NewPosition])
 
 
+
     const [sectionPosition, setSectionPosition] = useState(0)
 
     useEffect(e=> {
@@ -233,8 +222,9 @@ export default function Netflix() {
         
         document.querySelector('#sections').style.top = sectionPosition + 'px'
 
+
     }, [sectionPosition])
-    
+     */
 
 
 
