@@ -7,7 +7,7 @@ import '../Website/portfolio.css'
 
 
 
-export const ProfilImg = 'https://scontent-cdg2-1.xx.fbcdn.net/v/t39.30808-6/329741559_585700209797783_5646518292296135177_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Gz1JbPJpvPgAX-dRGnK&_nc_ht=scontent-cdg2-1.xx&oh=00_AfDozyn70_UQvXkiTMNd2OxC9ZBXMw31R24iyFTllK3ysQ&oe=63F72B0C'
+export const ProfilImg = 'https://kiwee.site/wp-content/uploads/2023/02/portfolioPP.png'
 
 export default function Netflix() {
 
@@ -75,24 +75,24 @@ export default function Netflix() {
     }
 
     const skills = {
-            JS : {
-                name: 'JS',
-                logo: '/images/js.svg',
-                level: 5,
-                type: 'F'
-            },
-            React : {
-                name: 'React',
-                logo: '/images/react.svg',
-                level: 5,
-                type: 'F'
-            },
-            TypeScript : {
-                name: 'TypeScript',
-                logo: '/images/typescript.svg',
-                level: 1,
-                type: 'F'
-            },
+        React : {
+            name: 'React',
+            logo: '/images/react.svg',
+            level: 5,
+            type: 'F'
+        },
+        TypeScript : {
+            name: 'TypeScript',
+            logo: '/images/typescript.svg',
+            level: 1,
+            type: 'F'
+        },
+        JS : {
+            name: 'JS',
+            logo: '/images/js.svg',
+            level: 5,
+            type: 'F'
+        },
             HTML : {
                 name: 'HTML',
                 logo: '/images/html.svg',
@@ -257,14 +257,13 @@ export default function Netflix() {
 
             <Container>
 
-                <div classpassword='grid gap-1rem ' id='sections'>
+                <div class='grid gap-2rem ' id='sections'>
 
                     
                     <section className=' section  gap-1rem' id='Home' >
                         <div className='block grid border-r-2 gap-2rem white shadow' 
                             style={{
                                 flex: '1 0 55%', 
-
                             }}
                         >
                             <div 
@@ -327,8 +326,8 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display border-r-2 w-100p shadow' style={{flex: '1 0 22%'}}>
-                            <img className='w-100p border-r-2 CG-img' src={ProfilImg}  id='profil_img'/>
+                        <div className='display w-100p' style={{flex: '1 0 32%'}}>
+                            <img className='w-100p' src={ProfilImg} />
                         </div>
                     </section>
 
@@ -402,8 +401,8 @@ export default function Netflix() {
                                         return (
                                             
                                             <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }}>  
-                                                <div className='display  justify-c gap'>
-                                                    <img src={skill.logo} style={{ width: '64px' }} />
+                                                <div className='display justify-c margin-auto' style={{ width: '64px', height: '64px' }} >
+                                                    <img src={skill.logo}  style={{ width: '64px', height: '64px' }} />
                                                 </div>
                                                 <div className='display justify-c border-r-04 p-1 h-1 '>
                                                     <small className='c-grey f-s-18'>{skill.name}</small>
