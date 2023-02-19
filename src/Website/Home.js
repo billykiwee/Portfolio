@@ -169,7 +169,7 @@ export default function Netflix() {
 
 
     const [scrollDirection, setScrollDirection] = useState('')
-    const [onscroll, setOnscroll] = useState(0)
+    const [WindowY, setWindowY] = useState(0)
 
 
 
@@ -181,12 +181,14 @@ export default function Netflix() {
 
         window.onscroll = () => {
 
+            setWindowY(window.scrollY)
+
             scrollPosition.push(window.scrollY)
             let newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
 
 
             if ((newPosition[1] - newPosition[0]) > '0') {
-                setScrollDirection( [...scrollDirection, 'down'] )
+                setScrollDirection( 'down' )
             }
             if ((newPosition[1] - newPosition[0]) < '0') {
                 setScrollDirection( 'up' )
@@ -195,15 +197,23 @@ export default function Netflix() {
 
     }, [])
 
+    console.log(WindowY);
 
     useEffect(e=> {
 
         if (scrollDirection === 'down') {
-            console.log('d');
+
+            if (WindowY <= breakPoint[1]) {
+                window.scrollTo(0, breakPoint[1])
+            }
+
+            if (WindowY > breakPoint[1]) {
+                window.scrollTo(0, breakPoint[2])
+            }
+
         }
 
-
-    }, [scrollDirection])
+    }, [scrollDirection, WindowY])
 
 
     
