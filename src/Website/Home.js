@@ -255,7 +255,25 @@ export default function Netflix() {
 
 
     useEffect(e=> {
-        document.querySelector('#bubble2').style = 'transform: translate(3rem, 2rem);'
+
+        window.onscroll = () => {
+
+            document.querySelector('#bubble3').style = `
+                transform: 
+                    translate(
+                        ${(window.scrollY / document.documentElement.clientHeight) * -10}rem, 
+                        ${(window.scrollY / document.documentElement.clientHeight) * -2}rem
+                    );
+            `
+
+            document.querySelector('#bubble2').style = `
+                transform: 
+                    translate(
+                        ${(window.scrollY / document.documentElement.clientHeight) * 12}rem, 
+                        ${(window.scrollY / document.documentElement.clientHeight) * 8}rem
+                    );
+            `
+        }
     })
 
     return (
@@ -285,111 +303,21 @@ export default function Netflix() {
                 }
             </div>
 
-            <span className='absolute' style={{ filter: 'opacity(1)'}}>
-                <svg width="1872" height="1378" viewBox="0 0 1872 1378" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1214_61)">
-<rect x="1872" width="1378" height="1872" rx="88" transform="rotate(90 1872 0)" fill="white"/>
-<rect x="1872" width="1378" height="1937" transform="rotate(90 1872 0)" fill="#0071FF" fill-opacity="0.04"/>
-<g filter="url(#filter0_dii_1214_61)">
-<circle cx="222" cy="222" r="222" transform="matrix(0 -1 -1 0 1824 1279)" fill="url(#paint0_linear_1214_61)"/>
-</g>
-<g filter="url(#filter1_dii_1214_61)">
-<circle cx="333" cy="333" r="333" transform="matrix(0 -1 -1 0 441 1579)" fill="url(#paint1_linear_1214_61)"/>
-</g>
-<g filter="url(#filter2_dii_1214_61)" id='bubble2'>
-<circle cx="166.5" cy="166.5" r="166.5" transform="matrix(0 -1 -1 0 1100 403)" fill="url(#paint2_linear_1214_61)"/>
-</g>
-<g filter="url(#filter3_b_1214_61)">
-<rect x="1872" width="1378" height="1872" transform="rotate(90 1872 0)" fill="white" fill-opacity="0.77"/>
-</g>
-</g>
-<defs>
-<filter id="filter0_dii_1214_61" x="1292" y="791" width="620" height="620" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="44"/>
-<feGaussianBlur stdDeviation="44"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.443137 0 0 0 0 1 0 0 0 0.44 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1214_61"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1214_61" result="shape"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="13.8133"/>
-<feGaussianBlur stdDeviation="6.90667"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.170097 0 0 0 0 0.558574 0 0 0 0 1 0 0 0 1 0"/>
-<feBlend mode="normal" in2="shape" result="effect2_innerShadow_1214_61"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="-13.8133"/>
-<feGaussianBlur stdDeviation="6.90667"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.148434 0 0 0 0 0.487435 0 0 0 0 0.913437 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect2_innerShadow_1214_61" result="effect3_innerShadow_1214_61"/>
-</filter>
-<filter id="filter1_dii_1214_61" x="-313" y="869" width="842" height="842" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="44"/>
-<feGaussianBlur stdDeviation="44"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.443137 0 0 0 0 1 0 0 0 0.44 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1214_61"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1214_61" result="shape"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="13.8133"/>
-<feGaussianBlur stdDeviation="6.90667"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.170097 0 0 0 0 0.558574 0 0 0 0 1 0 0 0 1 0"/>
-<feBlend mode="normal" in2="shape" result="effect2_innerShadow_1214_61"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="-13.8133"/>
-<feGaussianBlur stdDeviation="6.90667"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.148434 0 0 0 0 0.487435 0 0 0 0 0.913437 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect2_innerShadow_1214_61" result="effect3_innerShadow_1214_61"/>
-</filter>
-<filter id="filter2_dii_1214_61" x="679" y="26" width="509" height="509" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="44"/>
-<feGaussianBlur stdDeviation="44"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.443137 0 0 0 0 1 0 0 0 0.44 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1214_61"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1214_61" result="shape"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="13.8133"/>
-<feGaussianBlur stdDeviation="6.90667"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.170097 0 0 0 0 0.558574 0 0 0 0 1 0 0 0 1 0"/>
-<feBlend mode="normal" in2="shape" result="effect2_innerShadow_1214_61"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="-13.8133"/>
-<feGaussianBlur stdDeviation="6.90667"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.148434 0 0 0 0 0.487435 0 0 0 0 0.913437 0 0 0 1 0"/>
-<feBlend mode="normal" in2="effect2_innerShadow_1214_61" result="effect3_innerShadow_1214_61"/>
-</filter>
-<filter id="filter3_b_1214_61" x="-444" y="-444" width="2760" height="2266" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feGaussianBlur in="BackgroundImageFix" stdDeviation="222"/>
-<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_1214_61"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_1214_61" result="shape"/>
-</filter>
-<linearGradient id="paint0_linear_1214_61" x1="222" y1="0" x2="222" y2="444" gradientUnits="userSpaceOnUse">
-<stop stop-color="#1B91EB"/>
-<stop offset="1" stop-color="#3359DA"/>
-</linearGradient>
-<linearGradient id="paint1_linear_1214_61" x1="333" y1="0" x2="333" y2="666" gradientUnits="userSpaceOnUse">
-<stop stop-color="#1B91EB"/>
-<stop offset="1" stop-color="#3359DA"/>
-</linearGradient>
-<linearGradient id="paint2_linear_1214_61" x1="166.5" y1="0" x2="166.5" y2="333" gradientUnits="userSpaceOnUse">
-<stop stop-color="#1B91EB"/>
-<stop offset="1" stop-color="#3359DA"/>
-</linearGradient>
-<clipPath id="clip0_1214_61">
-<rect x="1872" width="1378" height="1872" rx="88" transform="rotate(90 1872 0)" fill="white"/>
-</clipPath>
-</defs>
-                </svg>
+            <span className='absolute w-100p h-100p'>
+            
+                <div class="bubbles">
+                    <div class="bubble" id='bubble2'></div>
+                    <div class="bubble" id='bubble3'></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    <div class="bubble"></div>
+                    
+                </div>
             </span>
                             
             <Container>
