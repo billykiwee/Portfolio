@@ -153,9 +153,8 @@ table, tr, th {
     top: 0;
     height: 100%;
     position: relative;
-    background: #f0f8ffdb;
     display: flex;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(66px);
     flex-direction: column;
 }
 
@@ -877,7 +876,7 @@ input[type="radio"] {
 
 
 .shadow {
-    box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
+    box-shadow: 0px 2px 24px 10px rgb(124 134 152 / 10%);
 }
 
 .align-l {

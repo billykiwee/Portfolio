@@ -316,7 +316,7 @@ export default function Netflix() {
                                 <div className='grid justify-s-b h-100p gap-2rem p-2'>
                                     <div className='grid gap'>   
                                         <div className='grid'>   
-                                            <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end !</span>
+                                            <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end 👨🏻‍💻</span>
                                         </div>
                                         <div className='display m-t-1'>
                                             <span className='f-w-300 f-s-18'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
@@ -326,7 +326,7 @@ export default function Netflix() {
                                     <div className='gap' id='social-bar'>
                                         <div>
                                             <a href='mailto:billyturpin642@gmail.com'>
-                                                <button className='black hover-black border-r-100 p-lr-2 h-3' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', height: '3.8rem' }}>
+                                                <button className='blue hover-blue border-r-100 p-lr-2 h-3' style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', height: '3.8rem' }}>
                                                     <span className='f-s-16'>Me contacter</span>
                                                 </button>
                                             </a>
@@ -376,7 +376,7 @@ export default function Netflix() {
                     <section className=' section gap-1rem' id='Works' >
                         <div className='grid 2rem'>
                             <div className='display justify-c m-b-2'>
-                                <span className='f-s-2rem' style={{textAlign: 'center'}}>Mes plus beau projets</span>
+                                <span className='f-s-2rem' style={{textAlign: 'center'}}>Mes plus beaux projets</span>
                             </div>
                             <div className='gap-1rem  display justify-c ' id='works'>
                                 {
@@ -446,7 +446,7 @@ export default function Netflix() {
                                                 <div className='display justify-c margin-auto' style={{ width: '64px', height: '64px' }} >
                                                     <img src={skill.logo}  style={{ width: '64px', height: '64px' }} />
                                                 </div>
-                                                <div className='display justify-c border-r-04 p-1 h-1 '>
+                                                <div className='display justify-c border-r-04 m-t-1 h-1 '>
                                                     <small className='c-grey f-s-18'>{skill.name}</small>
                                                 </div>
                                             </div>
