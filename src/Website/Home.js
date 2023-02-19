@@ -171,6 +171,10 @@ export default function Netflix() {
     const [scrollDirection, setScrollDirection] = useState('')
     const [onscroll, setOnscroll] = useState(0)
 
+
+
+    const breakPoint = [0, 1032, 2176]
+
     useEffect(e=> {
         
         const scrollPosition = []
@@ -180,31 +184,30 @@ export default function Netflix() {
             scrollPosition.push(window.scrollY)
             let newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
 
-            
+
             if ((newPosition[1] - newPosition[0]) > '0') {
-                setScrollDirection( 'down' )
+                setScrollDirection( [...scrollDirection, 'down'] )
             }
             if ((newPosition[1] - newPosition[0]) < '0') {
                 setScrollDirection( 'up' )
             }
-
-            if (window.scrollY === 0) {
-                setScrollDirection( '' )
-            }
-            if (window.scrollY === 1000) {
-                setScrollDirection( '' )
-            }
-            if (window.scrollY === 2176) {
-                setScrollDirection( '' )
-            }
         }
 
-        
     }, [])
 
 
+    useEffect(e=> {
+
+        if (scrollDirection === 'down') {
+            console.log('d');
+        }
+
+
+    }, [scrollDirection])
+
+
     
-    const [count, setCount] = useState(0)
+/*     const [count, setCount] = useState(0)
     
     useEffect(e=> {
 
@@ -235,7 +238,7 @@ export default function Netflix() {
             window.scrollTo(0, 2176)
         }
 
-    }, [count])
+    }, [count]) */
 
 
 
@@ -253,6 +256,7 @@ export default function Netflix() {
                     .map(s=> {
                         return <div 
                             id={'section-' + s}
+                            style={{ transform: section === s && 'scale(1.3)' }}
                             className={
                                 (section === s 
                                 ? ' w-1 h-1 blue ' 
