@@ -178,24 +178,27 @@ export default function Netflix() {
 
         window.onscroll = () => {
             scrollPosition.push(window.scrollY)
-    
             let newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
+            
+
+            if ((newPosition[1] - newPosition[0]) > '0') {
+                setScrollDirection( 'down' )
+            }
+            if ((newPosition[1] - newPosition[0]) < '0') {
+                setScrollDirection( 'up' )
+            }
     
-            const direction = newPosition[1] > newPosition[0] ? 'down' : 'up'
-
-            setScrollDirection( direction )
-        }
-
-        window.onmouseout = () => {
-            setScrollDirection('')
         }
         
     }, [])
-
-
-    window.ontouchstart = () =>          console.log('oio');
     
-    
+
+    console.log(scrollDirection);
+
+    useEffect(e=> {
+        return () => setScrollDirection('')
+    }, [scrollDirection])
+/*     
     const [count, setCount] = useState(0)
     
     useEffect(e=> {
@@ -218,18 +221,18 @@ export default function Netflix() {
     useEffect(e=> {
 
         if (count === 0) {
-            document.querySelector('html').style= 'transfrom: translateY(0px)'
+            window.scrollTo(0, 0)
         }
-        if (count === 1) {
-            document.querySelector('html').style= 'transfrom: translateY(-990px)'
+        else if (count === 1) {
+            window.scrollTo(0, 1000)
         }
-        if (count === 2) {
-            document.querySelector('html').style= 'transfrom: translateY(-2176px)'
+        else if (count === 2) {
+            window.scrollTo(0, 2176)
         }
 
-        console.log(count);
     }, [count])
-
+    
+    console.log(count); */
 
 
 
