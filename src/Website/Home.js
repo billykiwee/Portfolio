@@ -87,6 +87,10 @@ export default function Netflix() {
             level: 1,
             type: 'F'
         },
+        VueJS: {
+            name: 'Vue.js',
+            logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png",
+        },
         JS : {
             name: 'JS',
             logo: '/images/js.svg',
@@ -104,6 +108,10 @@ export default function Netflix() {
                 logo: '/images/css.svg',
                 level: 5,
                 type: 'F'
+            },
+            Tailwind: {
+                name: 'TailwindCSS',
+                logo: 'https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://tailwindcss.com/&size=256',
             },
             Node : {
                 name: 'Node',
@@ -158,17 +166,27 @@ export default function Netflix() {
 
     useEffect(e=> {
 
-        for (const v in sections) {
 
-            const height = document.querySelector('#' + sections[v]).clientHeight
-
-
-            window.onscroll = () => {
-                console.log(window.scrollY);
+        window.onscroll = () => {
+            if (window.scrollY >= 0) {
+                setSection(sections[0])
+            }
+            if (window.scrollY >= 10) {
+                setSection(sections[1])
+            }
+            if (window.scrollY >= 2176) {
+                setSection(sections[2])
             }
         }
 
-    }, [])
+        for (const v in sections) {
+
+            if (section === sections[v]) {
+                document.querySelector('#section-'+ sections[v]).click()
+            }
+        }
+
+    }, [section])
 
  /*    const [scrollDirection, setScrollDirection] = useState('')
     const [NewPosition, setNewPosition] = useState([])

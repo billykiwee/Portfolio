@@ -1080,15 +1080,6 @@ input[type=number] {
 
 
 
-
-
-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 @media (min-width: 780px) {
 
     section {
