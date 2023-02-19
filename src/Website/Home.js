@@ -177,7 +177,6 @@ export default function Netflix() {
         
 
         window.onscroll = () => {
-
             scrollPosition.push(window.scrollY)
     
             let newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
@@ -185,51 +184,51 @@ export default function Netflix() {
             const direction = newPosition[1] > newPosition[0] ? 'down' : 'up'
 
             setScrollDirection( direction )
-            
-
         }
-        setTimeout(e=> {
+
+        window.onmouseout = () => {
             setScrollDirection('')
-        }, 300)
+        }
         
     }, [])
 
+
+    window.ontouchstart = () =>          console.log('oio');
     
     
     const [count, setCount] = useState(0)
     
     useEffect(e=> {
-        console.log(scrollDirection);
 
         if (scrollDirection === 'down') {
-           /*  if (count < sections.length) {
+            if (count < sections.length) {
                 setCount(count + 1)
-            } */
-
-            document.querySelector('main').style.background= 'red'
+            }
         }
 
         if (scrollDirection === 'up') {
-           /*  if (count > 0) {
+            if (count > 0) {
                 setCount(count - 1)
-            } */
-
-            document.querySelector('main').style.background= 'blue'
+            }
         }
-
-        if (scrollDirection === '')  document.querySelector('main').style.background= 'white'
 
     }, [scrollDirection])
     
 
-/*     useEffect(e=> {
+    useEffect(e=> {
 
+        if (count === 0) {
+            document.querySelector('html').style= 'transfrom: translateY(0px)'
+        }
+        if (count === 1) {
+            document.querySelector('html').style= 'transfrom: translateY(-990px)'
+        }
+        if (count === 2) {
+            document.querySelector('html').style= 'transfrom: translateY(-2176px)'
+        }
 
-        window.scrollTo(0, window.scrollY + 1000)
-
+        console.log(count);
     }, [count])
-     */
-
 
 
 
