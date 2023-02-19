@@ -189,7 +189,7 @@ export default function Netflix() {
     }, [updateDirection])
 
 
-    const [stopScroll, setStopScroll]= useState(false)
+    const [stopScroll, setStopScroll]= useState(true)
     useEffect(e=> {
 
 
@@ -215,19 +215,27 @@ export default function Netflix() {
     useEffect(e=> {
 
         if (!stopScroll) {
-            setSectionPosition(sectionPosition + 1000)
+            if (updateDirection === 'down') {
+                if (sectionPosition > (sections.length * -1000)) {
+                    setSectionPosition(sectionPosition - 1000)
+                }
+
+            }
+            if (updateDirection === 'up') {
+                if (sectionPosition < 0) {
+                    setSectionPosition(sectionPosition + 1000)
+                }
+            }
         }
-    }, [stopScroll])
 
-
+    }, [stopScroll, updateDirection])
+    
+    
     useEffect(e=> {
-
-        if (updateDirection === 'down') {
-            document.querySelector('#sections').style.top = -sectionPosition + 'px'
-        }
-        else    document.querySelector('#sections').style.top = sectionPosition + 'px'
+        
+        document.querySelector('#sections').style.top = sectionPosition + 'px'
     }, [sectionPosition])
-
+    
 
 
 
