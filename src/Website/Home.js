@@ -169,19 +169,16 @@ export default function Netflix() {
 
 
     const [scrollDirection, setScrollDirection] = useState('')
-    const [StateWindow, setStateWindow] = useState(0)
-    const [windowY, setWindowY] = useState(0)
+    const [count, setCount] = useState(0)
 
 
     const breakPoint = [0, 1032, 2176]
 
-  /*   useEffect(e=> {
+    useEffect(e=> {
         
         const scrollPosition = []
 
         window.onscroll = () => {
-
-            setWindowY(window.scrollY)
 
             scrollPosition.push(window.scrollY)
             let newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
@@ -195,33 +192,29 @@ export default function Netflix() {
             }
         }
 
-    }, []) */
+    }, [count])
 
-    const location = useLocation()
-
+    
     useEffect(e=> {
 
 
-        window.addEventListener('scroll', () => {
-            const wY = window.scrollY
-
-            console.log(wY);
-
-            if (wY >= 1) {
-                window.location.href = '#Works'
-            }
-        })
-      
-
-        for (const v in sections) {
-            if (sections[v] === location.hash) {
-                window.scrollTo(0, breakPoint[v])
-            }
+        if (scrollDirection === 'down') {
+            setCount(count + 1)
         }
-       
+        if (scrollDirection === 'up') {
+            setCount(count - 1)
+        }
 
-    }, [])
+    }, [scrollDirection])
 
+
+    useEffect(e=> {
+
+        console.log(document.querySelector('#' + sections[count]));
+
+       // document.querySelector('#sections').style.top = document.querySelector('#' + sections[count]).clientHeight
+       console.log(count);
+    }, [count])
 
 
 
@@ -255,7 +248,7 @@ export default function Netflix() {
 
             <Container>
 
-                <div classpassword='grid gap-1rem '>
+                <div classpassword='grid gap-1rem ' id='sections'>
 
                     
                     <section className=' section  gap-1rem' id='Home' >

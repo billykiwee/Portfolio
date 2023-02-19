@@ -78,3 +78,13 @@ button:hover {
        width: 50%;
     }
 }
+
+
+
+#sections {
+    transition: 0.6s;
+    position: fixed;
+    top: 0;
+    right: 3rem;
+    left: 3rem;
+}
