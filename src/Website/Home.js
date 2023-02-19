@@ -186,36 +186,36 @@ export default function Netflix() {
 
             if ((newPosition[1] - newPosition[0]) > '0') {
                 setScrollDirection( 'down' )
+                setCount(c=> c+1)
             }
             if ((newPosition[1] - newPosition[0]) < '0') {
                 setScrollDirection( 'up' )
+                setCount(c=> c-1)
             }
         }
 
-    }, [count])
+        return () => setScrollDirection( 'up' )
+    }, [])
+
 
     
-    useEffect(e=> {
 
+    useEffect(e=> {
 
         if (scrollDirection === 'down') {
-            setCount(count + 1)
+            document.querySelector('#sections').style.top = '-1000px'
         }
         if (scrollDirection === 'up') {
-            setCount(count - 1)
+            document.querySelector('#sections').style.top = '00px'   
         }
 
-    }, [scrollDirection])
+
+        return () => setScrollDirection('')
+
+    }, [scrollDirection, count])
 
 
-    useEffect(e=> {
-
-        console.log(document.querySelector('#' + sections[count]));
-
-       // document.querySelector('#sections').style.top = document.querySelector('#' + sections[count]).clientHeight
-       console.log(count);
-    }, [count])
-
+    console.log(scrollDirection);
 
 
 

@@ -88,3 +88,7 @@ button:hover {
     right: 3rem;
     left: 3rem;
 }
+
+body {
+    height: 8000vh;
+}
