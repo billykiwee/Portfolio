@@ -158,9 +158,6 @@ export default function Netflix() {
 
 
     const [windowY, setwindowY] = useState(0)
-    window.onscroll = () => {
-        setwindowY(window.scrollY)
-    }
 
     useEffect(e=> {
         const div = document.querySelector('#' + section)
@@ -171,15 +168,43 @@ export default function Netflix() {
     
 
 
-    const scrollPosition = []
+    const [scrollDirection, setScrollDirection] = useState('')
+    const [sectionCount, setSectionCount] = useState(0)
+    
+    useEffect(e=> {
+        
+        const scrollPosition = []
 
-    window.onscroll = () => {
-        scrollPosition.push(window.scrollY)
+        window.onpopstate = () =>
+        window.onscroll = () => {
+            scrollPosition.push(window.scrollY)
+    
+            const newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
+    
+            const direction = () => newPosition[1] > newPosition[0] ? 'down' : 'up'
 
-       const n =  scrollPosition.slice(scrollPosition.length -1, scrollPosition.length)
 
-       console.log(n);
-    }
+            if (direction() === 'down') {
+                if (sectionCount < sections.length) {
+                    setSectionCount(sectionCount + 1)
+                }
+            }
+            if (direction() === 'up') {
+                if (sectionCount > 0) {
+                    setSectionCount(sectionCount - 1)
+                }
+            }
+
+            console.log(newPosition);
+        }
+
+
+    }, [])
+    
+    
+    console.log(sectionCount);
+
+
 
 
 
