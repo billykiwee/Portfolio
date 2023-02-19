@@ -168,11 +168,13 @@ export default function Netflix() {
      */
 
 
-    const [scrollDirection, setScrollDirection] = useState([])
-    const [count, setCount] = useState(0)
+    const [scrollDirection, setScrollDirection] = useState('')
+    const [NewPosition, setNewPosition] = useState([])
 
 
     const breakPoint = [0, 1032, 2176]
+
+    const [updateDirection, setUpdateDirection] = useState('')
     
 
     useEffect(e=> {
@@ -181,30 +183,41 @@ export default function Netflix() {
 
         window.onscroll = () => {
 
-            setTimeout(e=> {
 
-                scrollPosition.push(window.scrollY)
-                let newPosition = scrollPosition.slice(scrollPosition.length -2, scrollPosition.length)
-    
-    
-                if ((newPosition[1] - newPosition[0]) > '0') {
-                    setScrollDirection([...scrollDirection, 'down'])
-                }
-                if ((newPosition[1] - newPosition[0]) < '0') {
-                    setScrollDirection([...scrollDirection, 'up'])
-                }
-            }, 10)
+
+            scrollPosition.push(window.scrollY)
+            setNewPosition(scrollPosition.slice(scrollPosition.length -2, scrollPosition.length))
         }
 
-    }, [])
+    }, [updateDirection])
 
 
-    const [dim, setDim] = useState(1000)
-    
+    useEffect(e=> {
+
+        setTimeout(e=> {
+
+            if ((NewPosition[1] - NewPosition[0]) > 0) {
+                setUpdateDirection('down')
+            }
+            if ((NewPosition[1] - NewPosition[0]) < 0) {
+                setUpdateDirection('up')
+            }
+            
+            if ((NewPosition[1] - NewPosition[0]) === 1) {
+                setUpdateDirection('')
+            }
+
+            if ((NewPosition[1] - NewPosition[0]) === -1) {
+                setUpdateDirection('')
+            }
+
+        }, 10)
+        
+    }, [NewPosition])
 
 
 
-    console.log(scrollDirection);
+    console.log(updateDirection);
 
 
 
