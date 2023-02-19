@@ -182,19 +182,28 @@ export default function Netflix() {
 
             
             if ((newPosition[1] - newPosition[0]) > '0') {
-                setOnscroll(c=> c +1)
-                return setScrollDirection( 'down' )
+                setScrollDirection( 'down' )
             }
             if ((newPosition[1] - newPosition[0]) < '0') {
-                setOnscroll(c=> c -1)
-                return setScrollDirection( 'up' )
+                setScrollDirection( 'up' )
+            }
+
+            if (window.scrollY === 0) {
+                setScrollDirection( '' )
+            }
+            if (window.scrollY === 1000) {
+                setScrollDirection( '' )
+            }
+            if (window.scrollY === 2176) {
+                setScrollDirection( '' )
             }
         }
+
         
     }, [])
+
+
     
-    console.log(onscroll);
-/*     
     const [count, setCount] = useState(0)
     
     useEffect(e=> {
@@ -227,9 +236,6 @@ export default function Netflix() {
         }
 
     }, [count])
-    
-    console.log(count); */
-
 
 
 
