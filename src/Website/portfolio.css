@@ -47,13 +47,13 @@ button:hover {
 
 
 
-#profil_img {
-    height: 500px;
-}
-
 @media screen and (max-width: 700px) {
     #profil_img   {
-        height: 300px;
+        margin: auto;
+        justify-content: center;
+        display: flex;
+        height: 188px;
+        width: 188px;
     }
 }
 
