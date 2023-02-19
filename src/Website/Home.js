@@ -156,6 +156,20 @@ export default function Netflix() {
     const [section, setSection] = useState('Home')
 
 
+    useEffect(e=> {
+
+        for (const v in sections) {
+
+            const height = document.querySelector('#' + sections[v]).clientHeight
+
+
+            window.onscroll = () => {
+                console.log(window.scrollY);
+            }
+        }
+
+    }, [])
+
  /*    const [scrollDirection, setScrollDirection] = useState('')
     const [NewPosition, setNewPosition] = useState([])
 
