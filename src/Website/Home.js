@@ -134,7 +134,7 @@ export default function Netflix() {
 
 
     function hoverImage(id) {
-        document.querySelector('#project-' + id).style.background= '#00000066'
+        document.querySelector('#project-' + id).style.background= '#f0f8ff87'
         document.querySelector('#info-' + id).style.display= 'flex'
 
         document.querySelector('#project-' + id)
@@ -165,12 +165,12 @@ export default function Netflix() {
 
     useEffect(e=> {
 
-/* 
+
         window.onscroll = () => {
             if (window.scrollY === 0) {
                 setSection(sections[0])
             }
-            if (window.scrollY > 10 && window.scrollY < 2176) {
+            if (window.scrollY > 900 && window.scrollY < 2176) {
                 setSection(sections[1])
             }
             if (window.scrollY >= 2000) {
@@ -178,7 +178,7 @@ export default function Netflix() {
             }
         }
 
-        window.location.href = '#' + section */
+        window.location.href = '#' + section
 
     }, [section])
 
@@ -415,9 +415,9 @@ export default function Netflix() {
                                                                     <div className='display'>
                                                                         <div className='display justify-e  w-100p'>
                                                                             <a href={project.link}>
-                                                                                <button className='display justify-c w-3 h-3 white hover-white border-r-100'>
+                                                                                <button className='display justify-c white hover-white border-r-100' style={{ width: '3.8rem', height: '3.8rem'}}>
                                                                                     <span className='display'>
-                                                                                        <img src='/images/link.svg' />
+                                                                                        <img src='/images/link.svg' width={56} />
                                                                                     </span>
                                                                                 </button>
                                                                             </a>

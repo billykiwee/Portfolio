@@ -1,11 +1,12 @@
 
 #sections.visible {
-    animation: main 0.4s ease;
+    transition: 8s ease;
+    
 }
 
 @keyframes main {
     from {
-        transform: translateY(1rem);
+        transform: translateY(4rem);
         opacity: 0;
     }
     to {
