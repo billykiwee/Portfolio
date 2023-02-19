@@ -165,7 +165,21 @@ export default function Netflix() {
     useEffect(e=> {
         const div = document.querySelector('#' + section)
         div.scrollIntoView({ behavior: "smooth" })
+
+
     }, [section])
+    
+
+
+    const scrollPosition = []
+
+    window.onscroll = () => {
+        scrollPosition.push(window.scrollY)
+
+       const n =  scrollPosition.slice(scrollPosition.length -1, scrollPosition.length)
+
+       console.log(n);
+    }
 
 
 
@@ -219,8 +233,7 @@ export default function Netflix() {
                                     <div className='grid justify-s-b h-100p gap-2rem' style={{ padding: '3rem' }}>
                                         <div className='grid gap'>   
                                             <div className='grid'>   
-                                                <span className='f-s-2rem f-w-600'>Bonjour World,</span>
-                                                <span className='f-s-2rem f-w-600'>Je suis Billy, votre futur développeur web !</span>
+                                                <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end !</span>
                                             </div>
                                             <div className='display m-t-1'>
                                                 <span className='f-w-300 f-s-18'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
@@ -334,7 +347,7 @@ export default function Netflix() {
                         <section className=' section gap-1rem' id='Skills'>
                             <div className='grid gap-2rem'>
                                 <div className='display justify-c m-b-2'>
-                                    <span className='f-s-2rem'>J'utilise les dernières technologies</span>
+                                    <span className='f-s-2rem' style={{textAlign: 'center'}}>J'utilise les dernières technologies</span>
                                 </div>
                                 <div className='display justify-c wrap gap-1rem w-100p'>
                                     {
