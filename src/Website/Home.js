@@ -171,7 +171,6 @@ export default function Netflix() {
     const [scrollDirection, setScrollDirection] = useState('')
     const [NewPosition, setNewPosition] = useState([])
 
-    const breakPoint = [0, 1032, 2176]
 
     const [updateDirection, setUpdateDirection] = useState('')
     
@@ -191,7 +190,6 @@ export default function Netflix() {
 
     const [stopScroll, setStopScroll]= useState(true)
     useEffect(e=> {
-
 
         if ((NewPosition[1] - NewPosition[0]) > 0) {
             setUpdateDirection('down')
@@ -229,11 +227,12 @@ export default function Netflix() {
         }
 
     }, [stopScroll, updateDirection])
-    
+
     
     useEffect(e=> {
         
         document.querySelector('#sections').style.top = sectionPosition + 'px'
+
     }, [sectionPosition])
     
 
