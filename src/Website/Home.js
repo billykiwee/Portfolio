@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Container from '../App/components/Container'
-import { useStateValue } from '../App/components/StateProvider'
-import formatCurrency from '../App/utils/formatCurrency'
+
 import '../Website/portfolio.css'
 import '../Website/effect.css'
 
