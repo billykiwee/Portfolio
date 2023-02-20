@@ -126,7 +126,7 @@ img {
     object-fit: cover;
 }
 
-/* div {
+div {
     animation: main 0.3s ease-out;
 }
 
@@ -139,7 +139,7 @@ img {
         transform: translateY(0rem);
         opacity: 1;
     }
-} */
+}
 
 
 
@@ -157,6 +157,15 @@ table, tr, th {
     backdrop-filter: blur(66px);
     flex-direction: column;
 }
+
+
+@media screen and (min-width: 1000px) {
+    .container > div {
+        max-width: 1200px;
+        margin: auto;
+    }
+}
+
 
 
 button {
@@ -1077,7 +1086,7 @@ input[type=number] {
 
 
 
-@media (min-width: 780px) {
+@media (min-width: 1000px) {
 
     section {
         height: 100vh;
