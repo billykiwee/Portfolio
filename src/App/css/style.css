@@ -126,7 +126,7 @@ img {
     object-fit: cover;
 }
 
-div {
+/* div {
     animation: main 0.3s ease-out;
 }
 
@@ -141,7 +141,7 @@ div {
     }
 }
 
-
+ */
 
 table, tr, th {
     font-weight: normal;
@@ -1093,5 +1093,12 @@ input[type=number] {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    #sections {
+       gap: 6rem;
     }
 }

@@ -75,13 +75,11 @@ export default function Netflix() {
         React : {
             name: 'React.js',
             logo: '/images/react.svg',
-            level: 5,
             type: 'F'
         },
         TypeScript : {
             name: 'TypeScript',
             logo: '/images/typescript.svg',
-            level: 1,
             type: 'F'
         },
         VueJS: {
@@ -91,44 +89,39 @@ export default function Netflix() {
         JS : {
             name: 'JS',
             logo: '/images/js.svg',
-            level: 5,
             type: 'F'
         },
-            HTML : {
-                name: 'HTML',
-                logo: '/images/html.svg',
-                level: 5,
-                type: 'F'
-            },
-            CSS : {
-                name: 'CSS',
-                logo: '/images/css.svg',
-                level: 5,
-                type: 'F'
-            },
-            Tailwind: {
-                name: 'TailwindCSS',
-                logo: 'https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://tailwindcss.com/&size=256',
-            },
-            Node : {
-                name: 'Node',
-                logo: '/images/node.svg',
-                level: 2,
-                type: 'B'
-            },
-            PHP : {
-                name: 'PHP',
-                logo: '/images/php.svg',
-                level: 3,
-                type: 'F'
-            },
-            Firebase : {
-                name: 'Firebase',
-                logo: '/images/firebase.svg',
-                level: 4,
-                type: 'F'
-            }
+        HTML : {
+            name: 'HTML',
+            logo: '/images/html.svg',
+            type: 'F'
+        },
+        CSS : {
+            name: 'CSS',
+            logo: '/images/css.svg',
+            type: 'F'
+        },
+        Tailwind: {
+            name: 'TailwindCSS',
+            logo: 'https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://tailwindcss.com/&size=256',
+            type: 'B'
+        },
+        Node : {
+            name: 'Node',
+            logo: '/images/node.svg',
+            type: 'B'
+        },
+        PHP : {
+            name: 'PHP',
+            logo: '/images/php.svg',
+            type: 'F'
+        },
+        Firebase : {
+            name: 'Firebase',
+            logo: '/images/firebase.svg',
+            type: 'S'
         }
+    }
 
 
     function hoverImage(id) {
@@ -157,11 +150,11 @@ export default function Netflix() {
     }
     
 
-    const sections = ['Home', 'Works', 'Skills']
+    const sections = ['Home', 'Works', 'Skills', 'CV']
     const [section, setSection] = useState('Home')
 
 
-    useEffect(e=> {
+    /* useEffect(e=> {
 
 
         window.onscroll = () => {
@@ -175,10 +168,7 @@ export default function Netflix() {
                 setSection(sections[2])
             }
         }
-
-        window.location.href = '#' + section
-
-    }, [section])
+    }) */
 
  /*    const [scrollDirection, setScrollDirection] = useState('')
     const [NewPosition, setNewPosition] = useState([])
@@ -250,24 +240,10 @@ export default function Netflix() {
     }, [sectionPosition])
      */
 
-    
-    useEffect(e=> {
 
-        for (const v in sections) {
 
-            const divToObserve = document.querySelector('#' + sections[v]);
-    
-            const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        divToObserve.classList.add('visible')
-                    }
-                });
-            });
-            observer.observe(divToObserve);
-        }
 
-    })
+    useInView('#profil-img', 'rotate') 
 
     return (
 
@@ -296,26 +272,22 @@ export default function Netflix() {
                 }
             </div>
 
-            
-                <div class="bubbles">
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    <div class="bubble"></div>
-                    
-                </div>    
+            <div class="bubbles">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                
+            </div>    
             <Container>
 
-
-                <div class='grid gap-2rem ' id='sections'>
-
-                    
+                <div class='grid gap-2rem ' id='sections'>  
                     <section className=' section  gap-1rem' id='Home' >
                         <div className='block grid border-r-2 gap-2rem white shadow' 
                             style={{
@@ -332,7 +304,8 @@ export default function Netflix() {
                                 <div className='grid justify-s-b h-100p gap-2rem p-2'>
                                     <div className='grid gap'>   
                                         <div className='grid'>   
-                                            <span className='f-s-2rem f-w-600'>Je suis Billy, votre développeur web front-end 👨🏻‍💻</span>
+                                            <span className='f-s-2rem f-w-600'>Billy</span>
+                                            <span className='f-s-25 c-grey'>Développeur web 👨🏻‍💻</span>
                                         </div>
                                         <div className='display m-t-1'>
                                             <span className='f-w-300 f-s-18 c-grey'>Développeur depuis 4 ans, je suis passioné par le code et le design et aujourd'hui je vous présente qui je suis et ce que je fais.</span>
@@ -381,14 +354,11 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display w-100p' style={{flex: '1 0 32%'}}>
+                        <div className='display w-100p' style={{flex: '1 0 32%'}} id='profil-img'>
                             <img className='w-100p' id='profil_img' src={ProfilImg} />
                         </div>
                     </section>
 
-
-                {/*  <video className='w-100p h-100p border-r-2' controls src="/videos/nikoferro.mp4" type="sample/mp4" style={{height: '500px', objectFit: 'cover'}}/> */}
-                    
                     <section className=' section gap-1rem' id='Works' >
                         <div className='grid 2rem'>
                             <div className='display justify-c m-b-2'>
@@ -399,7 +369,7 @@ export default function Netflix() {
                                     Object.values(projects)
                                     .map(project=> {
                                         return (
-                                            <div className='border-r-2 click overflow-hidden relative shadow' style={{height: '444px', width: '444px'}} >
+                                            <div className='border-r-2 click overflow-hidden relative shadow' style={{height: '400px', width: '400px'}} >
                                                 <div 
                                                     className='zi-2 absolute border-r-2 w-100p h-100p transition' 
                                                     id={'project-' + project.id}
@@ -451,62 +421,91 @@ export default function Netflix() {
                             <div className='display justify-c m-b-2'>
                                 <span className='f-s-2rem' style={{textAlign: 'center'}}>J'utilise les dernières technologies</span>
                             </div>
-                            <div className='display justify-c wrap gap-1rem w-100p'>
-                                {
-                                    Object.values(skills)
-                                    .map(skill=> {
+                            <div className='display justify-s-b gap-2rem align-top'>
+                                <div className='display justify-c wrap gap-1rem w-100p'>
+                                    {
+                                        Object.values(skills)
+                                        .sort((a,b)=> b.name - a.name)
+                                        .map(skill=> {
 
-                                        return (
-                                            
-                                            <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }}>  
-                                                <div className='display justify-c margin-auto' style={{ width: '64px', height: '64px' }} >
-                                                    <img src={skill.logo}  style={{ width: '64px', height: '64px' }} />
+                                            return (
+                                                
+                                                <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }}>  
+                                                    <div className='display justify-c margin-auto' style={{ width: '64px', height: '64px' }} >
+                                                        <img src={skill.logo}  style={{ width: '64px', height: '64px' }} />
+                                                    </div>
+                                                    <div className='display justify-c border-r-04 m-t-1 h-1 '>
+                                                        <small className='c-grey f-s-18'>{skill.name}</small>
+                                                    </div>
                                                 </div>
-                                                <div className='display justify-c border-r-04 m-t-1 h-1 '>
-                                                    <small className='c-grey f-s-18'>{skill.name}</small>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </section>
 
-                {/*   <section className=' section gap-1rem' id='Contact' >
-                        <div className='grid border-r-2 gap-2rem p-2 white' style={{flex: '1 0 20%'}} >
-                            <div className='grid gap'>
-                                <span className='f-s-25'>Contact</span>
-                                <span>Et si on se faisait un petit café ?</span>
+                    <section id='CV'>
+                        <div className='grid gap-2rem'>
+                            <div className='display justify-c'>
+                                <span className='f-s-2rem'>Télécharger mon CV</span>
                             </div>
-                            <div className='grid gap-1rem w-100'>
-                                <div className='grid gap-1rem'>
-                                    <div className='grid gap-04'>
-                                        <label>Nom</label>
-                                        <input className='div-input' placeholder='John Doe'/>
-                                    </div>
-                                    <div className='grid gap-04'>
-                                        <label>Email</label>
-                                        <input className='div-input' placeholder='monemail@gmail.com'/>
-                                    </div>
-                                    <div className='grid gap-04'>
-                                        <label>Message</label>
-                                        <textarea className='div-input' placeholder="J'aimerai collaborer avec vous" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <button className='black p-20 border-r-100'>
-                                        <span className='f-s-16'>Envoyer</span>
+                            <div className='display justify-c m-t-1'>
+                                <a href='https://kiwee.site/wp-content/uploads/2023/02/CV2023.pdf' download className='display gap'> 
+                                    <button style={{ width: '18rem',  height: '18rem', borderRadius: '100%' }} className='blue shadow'>
+                                        <span className='f-s-2rem'>CV</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
                                     </button>
-                                </div>
+                                </a>
                             </div>
                         </div>
-                    </section> */}
-                    
+                    </section>    
+                        
                 </div>
             </Container>
 
         </>
 
     )
+}
+
+
+
+function useInView(element, effect) {
+
+    const [view, setView] = useState(false)
+
+    
+    useEffect(e=> {
+
+        function Observer() {
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    setView(entry.isIntersecting)
+                })
+            });
+            
+            const getElement = document.querySelector(element)
+            
+            return observer.observe(getElement)
+        }
+        Observer()
+
+        
+        window.onscroll = () => Observer()
+
+        return () => view
+    })
+
+    useEffect(e=> {
+        if (view) {
+            document.querySelector(element).classList.add(effect)
+        }
+        /* else document.querySelector(element).classList.remove(effect) */
+    }, [view])
+
+
+    return view
 }

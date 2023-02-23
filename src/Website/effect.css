@@ -1,12 +1,28 @@
 
-#sections.visible {
-    transition: 8s ease;
-    
+.visible {
+    animation: effect 0.5s ease; 
 }
 
-@keyframes main {
+@keyframes effect {
     from {
-        transform: translateY(4rem);
+        transform: translateY(8rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+}
+
+
+
+.rotate {
+    animation: effect 1s cubic-bezier(0.645,0.045,0.355,1); 
+}
+
+@keyframes effect {
+    from {
+        transform: rotate(-20deg) translateY(8rem); 
         opacity: 0;
     }
     to {
