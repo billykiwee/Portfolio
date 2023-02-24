@@ -201,4 +201,11 @@ body {
       bottom:1080px;
       transform:translateX(-200px);
     }
-  }
+}
+
+
+
+.section {
+    position: sticky;
+    top: 2rem;
+}
