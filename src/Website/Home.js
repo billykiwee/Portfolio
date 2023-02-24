@@ -123,7 +123,6 @@ export default function Netflix() {
         }
     }
 
-
     function hoverImage(id) {
         document.querySelector('#project-' + id).style.background= '#f0f8ff87'
         document.querySelector('#info-' + id).style.display= 'flex'
@@ -149,7 +148,6 @@ export default function Netflix() {
         document.querySelector('#' + id).parentElement.style.transform= 'scale(1)'
     }
     
-
     const sections = ['Home', 'Works', 'Skills', 'CV']
     const [section, setSection] = useState('Home')
 
@@ -242,8 +240,31 @@ export default function Netflix() {
 
 
 
+    const N = 8
+    const C = 'x'
 
-    useInView('#profil-img', 'rotate') 
+    const lign = N
+    let inLine = ''
+    
+    for (let i = 0; i < lign; i++) {
+ 
+        inLine += ' ' + C
+
+        let c = lign-i-1
+        
+        const v = new Array(c)
+
+        v.fill(' ')
+
+        const spaces = v.toString().split(',').join('')
+
+       console.log(spaces + inLine)
+
+    }
+
+
+
+
 
     return (
 
@@ -354,15 +375,15 @@ export default function Netflix() {
                             </div>
                         </div>
 
-                        <div className='display w-100p' style={{flex: '1 0 32%'}} id='profil-img'>
+                        <div className='display w-100p animation-1' style={{flex: '1 0 32%'}} id='profil-img'>
                             <img className='w-100p' id='profil_img' src={ProfilImg} />
                         </div>
                     </section>
 
-                    <section className=' section gap-1rem' id='Works' >
+                    <section className='section gap-1rem' id='Works' >
                         <div className='grid 2rem'>
                             <div className='display justify-c m-b-2'>
-                                <span className='f-s-2rem' style={{textAlign: 'center'}}>Mes plus beaux projets</span>
+                                <span className='f-s-2rem' style={{ textAlign: 'center' }}>Mes plus beaux projets</span>
                             </div>
                             <div className='gap-1rem  display justify-c ' id='works'>
                                 {

@@ -16,7 +16,8 @@
 
 
 
-.rotate {
+
+.animation-1 {
     animation: effect 1s cubic-bezier(0.645,0.045,0.355,1); 
 }
 
