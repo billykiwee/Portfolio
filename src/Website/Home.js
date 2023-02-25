@@ -239,7 +239,6 @@ export default function Netflix() {
      */
 
 
-
     const N = 8
     const C = 'x'
 
