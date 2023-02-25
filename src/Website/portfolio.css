@@ -109,6 +109,7 @@ body {
     top: 0;
     left: 0;
     transition: 1s ease;
+    transform: translateY(2rem);
   }
   .bubble{
     position: absolute;
