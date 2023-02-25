@@ -115,7 +115,7 @@ body {
   }
   .bubble{
     position: absolute;
-    bottom:100px;
+    bottom:-100px;
     width:40px;
     height: 40px;
     background:var(--blue);
