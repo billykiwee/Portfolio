@@ -73,6 +73,11 @@ button:hover {
 }
 
 
+#section {
+    transition: 0.6s ease;
+}
+
+
 
 /* #sections {
     transition: 0.6s ease;

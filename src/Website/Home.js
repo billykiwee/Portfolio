@@ -219,8 +219,20 @@ export default function Netflix() {
 
     useEffect(e=> {
 
-        return () =>  setUpdateDirection('')
-    }, [updateDirection])
+        setTimeout(e=> {
+            window.onscroll = () => {
+    
+                if (window.scrollY > 0 && window.scrollY < 1000) {
+                    document.querySelector('#Home').style = 'position : absolute; top: -1000px;'
+        
+                    console.log('oi');
+                }
+            }
+        }, 2000)
+
+
+    })
+
 
 
 
