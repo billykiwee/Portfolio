@@ -73,12 +73,10 @@ button:hover {
 }
 
 
-.section {
-    transition: 1s ease;
-    position: sticky;
-    top: 0;
-    background-color: white;
+html {
+    overflow: hidden;
 }
+
 
 
 

@@ -1085,7 +1085,14 @@ input[type=number] {
 }
 
 
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+/* 
 @media (min-width: 1000px) {
 
     section {
@@ -1095,7 +1102,7 @@ input[type=number] {
         align-items: center;
     }
 }
-
+ */
 @media (max-width: 1000px) {
 
     #sections {
