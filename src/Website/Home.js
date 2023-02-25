@@ -217,21 +217,21 @@ export default function Netflix() {
         
     }, [NewPosition])
 
+ /*    const [scroll, setScroll] = useState(0)
+
     useEffect(e=> {
 
-        setTimeout(e=> {
-            window.onscroll = () => {
-    
-                if (window.scrollY > 0 && window.scrollY < 1000) {
-                    document.querySelector('#Home').style = 'position : absolute; top: -1000px;'
+        window.onscroll = () => {
+            setScroll(window.scrollY)
+        }
         
-                    console.log('oi');
-                }
-            }
-        }, 2000)
-
-
     })
+
+    useEffect(e=> {
+
+        document.querySelector('#sections').style.top =  -scroll + 'px'
+        
+    }, [scroll]) */
 
 
 
@@ -475,7 +475,7 @@ export default function Netflix() {
                         </div>
                     </section>
 
-                    <section id='CV'>
+                    <section id='CV' className='section gap-1rem' >
                         <div className='grid gap-2rem'>
                             <div className='display justify-c'>
                                 <span className='f-s-2rem'>Télécharger mon CV</span>
@@ -492,7 +492,7 @@ export default function Netflix() {
                     </section>  
 
 
-                     <section id='Propose'>
+                     <section id='Propose' className='section gap-1rem' >
                         <div className='grid gap-2rem'>
                             <div className='display justify-c'>
                                 <span className='f-s-2rem'>Proposez-moi votre projet !</span>
