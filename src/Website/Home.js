@@ -271,6 +271,11 @@ export default function Netflix() {
     
 
 
+    const v = Array(100).fill(0).map((_, e)=> e+1)
+
+    console.log(v);
+
+
 
     return (
 
