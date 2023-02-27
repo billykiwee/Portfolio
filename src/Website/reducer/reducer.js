@@ -11,7 +11,6 @@ const reducer = (state, action) => {
             lign: action.lign
         }
 
-
         default : return state
     }
 }

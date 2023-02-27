@@ -82,6 +82,14 @@ function Table() {
 
     const [{ lign }, dispatch] = useStateValue('')
 
+    useEffect(e=> {
+        dispatch({
+            type: 'set_Lign',
+            lign: lignInitial
+        })
+
+        return () => lign
+    }, [])
 
     function addLign() {
         return dispatch({
@@ -101,14 +109,10 @@ function Table() {
         })
     }
 
-    useEffect(e=> {
-        dispatch({
-            type: 'set_Lign',
-            lign: lignInitial
-        })
-    }, [])
 
-    console.log(lign.length);
+
+    const TOTAL = lign.length && lign.map(e=> e.subtotal).reduce((a,b)=> a+b)
+
 
    
     return (
@@ -131,15 +135,21 @@ function Table() {
             <div>
                 {
                     lign
-                    .map(lign=> {
+                    .map(l=> {
+
+                        const { id ,name, price, qte } = l
+
+                        console.log(price * qte);
+
                         return (
                             <TableLign 
-                            id={lign.id}
-                            name={lign.name}
-                            price={lign.price}
-                            qte={lign.qte} 
-                            subTotal={lign.subtotal} 
-                        />
+                                lign={lign}
+                                id={id}
+                                name={name}
+                                price={price}
+                                qte={qte} 
+                                subTotal={price * qte} 
+                            />
                         )
                     })
                 }
@@ -160,23 +170,38 @@ function Table() {
                     <span className='f-w-600 f-s-18'>TOTAL TTC :</span>
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18'>{
-                       
-                    }</span>
+                    <span className='f-w-600 f-s-18'>{TOTAL}</span>
                 </div>
             </div>
         </div>
     )
 }
 
-function TableLign({ id, name, price, qte, subTotal }) {
+function TableLign({ lign, id, name, price, qte, subTotal }) {
+
+
+
+    function editLign(edit, value, id) {
+        
+        return lign?.map(e=> {
+            if (e.id === id) {
+                
+                console.log(edit);
+                return {
+                    ...lign,
+                    [edit]: value
+                }
+            }
+        })
+    }
+
     return (
         <div className='display ' id={id}>
             <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
                 <span contentEditable>{name}</span>
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom'>
-                <span contentEditable>{price}</span>
+                <span contentEditable onInput={e=> editLign('price', e.target.innerHTML, id)}>{price}</span>
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                 <span contentEditable>{qte}</span>
