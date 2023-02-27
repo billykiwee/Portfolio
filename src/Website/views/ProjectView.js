@@ -79,6 +79,9 @@ function Table() {
 
 
     const [Total, setTotal] = useState(0)
+
+
+
    
     return (
         <div className='grid m-t-2'>
@@ -106,6 +109,7 @@ function Table() {
 
                         return (
                             <TableLign 
+                                lign={lign}
                                 name={name}
                                 Total={Total}
                                 setTotal={setTotal}
@@ -137,33 +141,29 @@ function Table() {
     )
 }
 
-function TableLign({ name, Total, setTotal }) {
+function TableLign({ name, lign, setTotal }) {
 
-    const [price, setPrice] = useState(0)
-    const [qte, setQte] = useState(0)
+    const [subtotal, setSubtotal] = useState({
+        price: 0,
+        qte: 0
+    })
+    const getSum = subtotal.price * subtotal.qte
 
-
-    useEffect(e=> {
-        document.querySelectorAll('subtotal').forEach(e=> {
-            console.log(e);
-        })
-    }, [price, qte])
-
-    console.log(Total);
+   console.log(getSum);
 
     return (
-        <div className='display '>
+        <div className='display ' >
             <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
                 <span >{name}</span>
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setPrice(e.target.value)} placeholder={price} />
+                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={subtotal.price} />
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setQte(e.target.value)} placeholder={qte} />
+                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={subtotal.qte} />
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal'>{formatCurrency(price * qte)}</span>
+                <span className='subtotal'>{formatCurrency(getSum)}</span>
             </div>
         </div>
     )
