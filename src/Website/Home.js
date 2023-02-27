@@ -268,7 +268,12 @@ export default function Netflix() {
 
 
     }, [sectionPosition]) */
-    
+    const v = 'pglnhenftjdscs pmdchawvngmckde'
+    const S = v.split``.reduce((a,e,i)=>((i+1)%3==0)?a+e:a,'');
+
+    console.log(S);
+
+
 
 
     return (
