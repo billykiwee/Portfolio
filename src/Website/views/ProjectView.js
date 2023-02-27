@@ -9,8 +9,7 @@ export default function ProjectView() {
 
     return (
         <Container>
-
-            <div className='grid'>
+            <div className='grid w-100p'>
                 <div className='display w-100p justify-s-b' style={{ width: '700px' }}>
                     <div className='grid w-100p'>
                         <span className='f-w-600'>TJM</span>
@@ -41,7 +40,7 @@ export default function ProjectView() {
                 </div>
 
                 <Table />   
-               
+            
 
                 <div className='display m-t-1'>
                     <BottomPage />
@@ -60,14 +59,15 @@ function Table() {
         })
     }
 
-    const lignInitial =
+    const lignInitial = [
         {
             name: 'Fabrication',
             price: 0,
             qte: 0,
             subTotal: 0,
             id: UniqueID(8)
-        }
+        },
+    ]
 
     const [lign, setLign] = useState([])
 
@@ -76,12 +76,11 @@ function Table() {
     }, [])
 
     function addLign() {
-        return setLign([...lign, lignInitial])
+        return setLign([...lign, ...lignInitial])
     }
 
     function removeLign() {
-
-        return lign.filter(e=> e.id !== lign[lign.length-1].id)
+        return setLign(lign.filter(e=> e.id !== lign[lign.length-1].id))
     }
 
 
@@ -151,54 +150,29 @@ function Table() {
     )
 }
 
-function TableLign({ id, name, price, qte, subTotal }) {
-
-    const [SUB, setSUB] = useState(subTotal)
-
-    const [{ lign }, dispatch] = useStateValue('')
+function TableLign({ name }) {
 
     
-    function editLign(edit, value, id) {
-        
-        return dispatch({
-            type: 'set_Lign',
-            lign: 
-                lign
-                .filter(e=> e.id === id)
-                .map(e=> {
-                    return {
-                        ...e,
-                        [edit]: value,
-                        subTotal : edit == 'qte' ? value * e.price : e.qte 
-                    }
-                }) 
-            
-        })
-    }
-
-
-    const [showPrice, setshowPrice] = useState(false)
-
+    const [price, setPrice] = useState(0)
+    const [qte, setQte] = useState(0)
     
 
 
     return (
-        <div className='display ' id={id}>
+        <div className='display '>
             <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
                 <span contentEditable>{name}</span>
             </div>
-            <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' onClick={e=> setshowPrice(true)} onBlur={e=> setshowPrice(false)}>
-                {/* <span contentEditable onChange={e=> editLign('price',e.target.innerHTML, id)} >{price}</span> */}
-                {
-                    showPrice ? <input onChange={e=> editLign('price',e.target.innerHTML, id)} />
-                    : <span>{price}</span>
-                }
+            <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
+                <input style={{opacity: 0}} onInput={e=> setPrice(e.target.innerHTML)}/>
+                <span>{price}</span>
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span contentEditable onInput={e=> editLign('qte',e.target.innerHTML, id)} >{qte}</span>
+                <input />
+                <span contentEditable onInput={e=> setQte(e.target.innerHTML)} >{qte}</span>
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal'>{formatCurrency(subTotal)}</span>
+                <span className='subtotal'>{formatCurrency(price * qte)}</span>
             </div>
         </div>
     )
@@ -269,6 +243,28 @@ function BottomPage({  }) {
                 <span>Numéro de SIRET : 8892147800014</span>
                 <span>Adresse : 34 b chemin des palmistes, Palmiste Rouge, CILAOS 97413</span>
                 <span>3 Téléphone : 06 92 35 80 12</span>
+            </div>
+        </div>
+    )
+}
+
+
+
+function Froms() {
+    return (
+        <div className='grid gap w-100p border p-1'>
+
+            <div className='grid gap-04'>
+                <label>Projet</label>
+                <input placeholder='bonjour' />
+            </div>
+            <div className='grid gap-04'>
+                <label>Projet</label>
+                <input placeholder='bonjour' />
+            </div>
+            <div className='grid gap-04'>
+                <label>Projet</label>
+                <input placeholder='bonjour' />
             </div>
         </div>
     )
