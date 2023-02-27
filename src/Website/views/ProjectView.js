@@ -60,45 +60,30 @@ function Table() {
         })
     }
 
-    const lignInitial = [
+    const lignInitial =
         {
             name: 'Fabrication',
             price: 0,
             qte: 0,
             subTotal: 0,
             id: UniqueID(8)
-        },
-    ]
+        }
 
-
-    const [{ lign }, dispatch] = useStateValue('')
+    const [lign, setLign] = useState([])
 
     useEffect(e=> {
-        dispatch({
-            type: 'set_Lign',
-            lign: lignInitial
-        })
-
-        return () => lign
+        setLign(lignInitial)
     }, [])
 
     function addLign() {
-        return dispatch({
-            type: 'set_Lign',
-            lign: [
-                ...lign,
-                ...lignInitial ,
-            ]
-        })
+        return setLign([...lign, lignInitial])
     }
 
     function removeLign() {
 
-        return dispatch({
-            type: 'set_Lign',
-            lign: lign.filter(e=> e.id !== lign[lign.length-1].id)
-        })
+        return lign.filter(e=> e.id !== lign[lign.length-1].id)
     }
+
 
 
 
@@ -177,24 +162,22 @@ function TableLign({ id, name, price, qte, subTotal }) {
         
         return dispatch({
             type: 'set_Lign',
-            lign: [
-                ...lign,
+            lign: 
                 lign
+                .filter(e=> e.id === id)
                 .map(e=> {
-                    if (e.id === id) {
-                        return {
-                            [edit]: value 
-                        }
+                    return {
+                        ...e,
+                        [edit]: value,
+                        subTotal : edit == 'qte' ? value * e.price : e.qte 
                     }
                 }) 
-            ]
+            
         })
     }
 
-    console.log(
-        lign.filter(e=> e.id === id)
-    )
 
+    const [showPrice, setshowPrice] = useState(false)
 
     
 
@@ -204,14 +187,18 @@ function TableLign({ id, name, price, qte, subTotal }) {
             <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
                 <span contentEditable>{name}</span>
             </div>
-            <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom'>
-                <span contentEditable onInput={e=> editLign('price',e.target.innerHTML, id)} >{price}</span>
+            <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' onClick={e=> setshowPrice(true)} onBlur={e=> setshowPrice(false)}>
+                {/* <span contentEditable onChange={e=> editLign('price',e.target.innerHTML, id)} >{price}</span> */}
+                {
+                    showPrice ? <input onChange={e=> editLign('price',e.target.innerHTML, id)} />
+                    : <span>{price}</span>
+                }
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                 <span contentEditable onInput={e=> editLign('qte',e.target.innerHTML, id)} >{qte}</span>
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal'>{formatCurrency(SUB)}</span>
+                <span className='subtotal'>{formatCurrency(subTotal)}</span>
             </div>
         </div>
     )
