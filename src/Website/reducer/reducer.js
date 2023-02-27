@@ -1,27 +1,16 @@
 export const initialState = {
-    user    : null,
-    snackBar: [],
-    popUp   : {},
+    lign: []
 }
 
 const reducer = (state, action) => {
 
     switch(action.type) {
-        case 'SET_USER' : return {
+
+        case 'add_' : return {
             ...state,
-            user : action.user,
-            
+            lign: action.lign
         }
 
-        case 'SET_SNACKBAR' : return {
-            ...state,
-            snackBar : action.snackBar
-        }
-
-        case 'SET_POPUP' : return {
-            ...state,
-            popUp : action.popUp
-        }
 
         default : return state
     }

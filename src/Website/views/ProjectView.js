@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Container from '../../App/components/Container'
 import formatCurrency from '../../App/components/formatCurrency'
 import UniqueID from '../../App/components/uniqueID'
+import { useStateValue } from '../reducer/StateProvider'
 
 
 export default function ProjectView() {
@@ -78,6 +79,20 @@ function Table() {
     ]
 
 
+    const [{ lign }, dispatch] = useStateValue('')
+
+
+    function addLign() {
+        return dispatch({
+            type: 'add_',
+            lign: [
+                ...lign,
+                ligns ,
+            ]
+        })
+    }
+
+
    
     return (
         <div className='grid m-t-2'>
@@ -98,7 +113,7 @@ function Table() {
 
             <div>
                 {
-                    ligns
+                    lign
                     .map(lign=> {
                         return (
                             <TableLign 
@@ -113,7 +128,7 @@ function Table() {
             </div>
 
             <div>
-                <button className='blue w-2 h-2'>
+                <button className='blue w-2 h-2' onClick={addLign}>
                     <span>+</span>
                 </button>
             </div>
