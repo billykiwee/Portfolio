@@ -35,7 +35,7 @@ export default function ProjectView() {
                 </div>
 
 
-                <div className='m-t-2 display justify-s-b'>
+                <div className='m-t-4 display justify-s-b'>
                     <Project projet='Fabrication' />
                     <Encode />
                 </div>
@@ -54,15 +54,6 @@ export default function ProjectView() {
 
 function Table() {
 
-    const [PRICE, setPRICE] = useState(10)
-    const [QTE, setQTE] = useState(10)
-    const [subTOTAL, setSubTOTAL] = useState(0)
-
-    useEffect(e=> {
-        setSubTOTAL(QTE * PRICE)
-    }, [QTE, PRICE])
-
-
     function getSum() {
         return document.querySelectorAll('price').forEach(p=> {
             return p
@@ -74,7 +65,7 @@ function Table() {
             name: 'Fabrication',
             price: 250,
             qte: 2,
-            subtotal: 500,
+            subTotal: 500,
             id: UniqueID(8)
         },
     ]
@@ -111,7 +102,7 @@ function Table() {
 
 
 
-    const TOTAL = lign.length && lign.map(e=> e.subtotal).reduce((a,b)=> a+b)
+    const TOTAL = lign.length && lign.map(e=> e.subTotal).reduce((a,b)=> a+b)
 
 
    
@@ -137,10 +128,9 @@ function Table() {
                     lign
                     .map(l=> {
 
-                        const { id ,name, price, qte } = l
+                        const { id ,name, price, qte, subTotal } = l
 
-                        console.log(price * qte);
-
+                        console.log(subTotal);
                         return (
                             <TableLign 
                                 lign={lign}
@@ -148,7 +138,7 @@ function Table() {
                                 name={name}
                                 price={price}
                                 qte={qte} 
-                                subTotal={price * qte} 
+                                subTotal={subTotal} 
                             />
                         )
                     })
@@ -170,7 +160,7 @@ function Table() {
                     <span className='f-w-600 f-s-18'>TOTAL TTC :</span>
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18'>{TOTAL}</span>
+                    <span className='f-w-600 f-s-18'>{formatCurrency(TOTAL)}</span>
                 </div>
             </div>
         </div>
@@ -179,21 +169,20 @@ function Table() {
 
 function TableLign({ lign, id, name, price, qte, subTotal }) {
 
+    const [SUB, setSUB] = useState(subTotal)
 
-
-    function editLign(edit, value, id) {
-        
+    function editLign(value, id) {
         return lign?.map(e=> {
             if (e.id === id) {
-                
-                console.log(edit);
+                console.log(e);
                 return {
                     ...lign,
-                    [edit]: value
+                    subTotal: value * e.qte
                 }
             }
         })
     }
+
 
     return (
         <div className='display ' id={id}>
@@ -201,13 +190,13 @@ function TableLign({ lign, id, name, price, qte, subTotal }) {
                 <span contentEditable>{name}</span>
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom'>
-                <span contentEditable onInput={e=> editLign('price', e.target.innerHTML, id)}>{price}</span>
+                <span contentEditable onInput={e=> editLign(e.target.innerHTML, id)} >{price}</span>
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span contentEditable>{qte}</span>
+                <span contentEditable onInput={e=> editLign(e.target.innerHTML, id)} >{qte}</span>
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal'>{formatCurrency(subTotal)}</span>
+                <span className='subtotal'>{formatCurrency(SUB)}</span>
             </div>
         </div>
     )
