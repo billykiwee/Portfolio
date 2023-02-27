@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '../../App/components/Container'
+import formatCurrency from '../../App/components/formatCurrency'
 import UniqueID from '../../App/components/uniqueID'
 
 
@@ -32,13 +33,13 @@ export default function ProjectView() {
                     </div>
                 </div>
 
-                <Table />   
 
                 <div className='m-t-2 display justify-s-b'>
                     <Project projet='Fabrication' />
                     <Encode />
                 </div>
 
+                <Table />   
                
 
                 <div className='display m-t-1'>
@@ -52,7 +53,21 @@ export default function ProjectView() {
 
 function Table() {
 
-    const [QTE, setQTE] = useState(0)
+    const [PRICE, setPRICE] = useState(10)
+    const [QTE, setQTE] = useState(10)
+    const [subTOTAL, setSubTOTAL] = useState(0)
+
+    useEffect(e=> {
+        setSubTOTAL(QTE * PRICE)
+    }, [QTE, PRICE])
+
+
+    function getSum() {
+        return document.querySelectorAll('price').forEach(p=> {
+            return p
+        })
+    }
+
 
     return (
         <div className='grid m-t-2'>
@@ -76,15 +91,22 @@ function Table() {
                     <span contentEditable>Fabrication portail</span>
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom'>
-                    <span contentEditable>250,00€</span>
+                    <input className='border-0 h-2 p-0'  onChange={e=> setPRICE(e.target.value)} value={PRICE} />
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span contentEditable>{QTE}</span>
+                    <input className='border-0 h-2 p-0' onChange={e=> setQTE(e.target.value)} value={QTE} />
                 </div>
                 <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span>2 500,00 €</span>
+                    <span className='subtotal'>{formatCurrency(subTOTAL)}</span>
                 </div>
             </div>
+
+            <div>
+                <button className='blue w-2 h-2'>
+                    <span>+</span>
+                </button>
+            </div>
+
 
             <div className='display tb-bottom p-t-2'>
                 <div style={{ width: '100%', textAlign: 'end' }} className='tb'>
@@ -107,16 +129,16 @@ function Project({projet}) {
 }
 
 
-function Encode({}) {
+function Encode() {
     return (
         <div>
             <div className='display gap'>
                 <span>Facture en date du:</span>
                 <span contentEditable>{new Date().toLocaleDateString().replaceAll('/', '-')}</span>
             </div>
-            <div className='display gap' >
+            <div className='display gap justify-e' >
                 <span>Numéro:</span>
-                <span className='f-w-600'>{UniqueID(8)}</span>
+                <span className='f-w-600'>{UniqueID(4)}</span>
             </div>
         </div>
     )
