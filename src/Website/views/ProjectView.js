@@ -84,11 +84,7 @@ function Table() {
     }
 
 
-
-
-    const TOTAL = lign.length && lign.map(e=> e.subTotal).reduce((a,b)=> a+b)
-
-
+    const [Total, setTotal] = useState(0)
    
     return (
         <div className='grid m-t-2'>
@@ -116,12 +112,8 @@ function Table() {
 
                         return (
                             <TableLign 
-                                lign={lign}
-                                id={id}
                                 name={name}
-                                price={price}
-                                qte={qte} 
-                                subTotal={subTotal} 
+                                setTotal={setTotal}
                             />
                         )
                     })
@@ -143,20 +135,21 @@ function Table() {
                     <span className='f-w-600 f-s-18'>TOTAL TTC :</span>
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18'>{formatCurrency(TOTAL)}</span>
+                    <span className='f-w-600 f-s-18'>{formatCurrency(Total)}</span>
                 </div>
             </div>
         </div>
     )
 }
 
-function TableLign({ name }) {
+function TableLign({ name, setTotal }) {
 
-    
     const [price, setPrice] = useState(0)
     const [qte, setQte] = useState(0)
-    
 
+    useEffect(e=> {
+        setTotal(price * qte)
+    }, [price, qte])
 
     return (
         <div className='display '>
@@ -164,12 +157,10 @@ function TableLign({ name }) {
                 <span contentEditable>{name}</span>
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                <input style={{opacity: 0}} onInput={e=> setPrice(e.target.innerHTML)}/>
-                <span>{price}</span>
+                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setPrice(e.target.value)} placeholder={price} />
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <input />
-                <span contentEditable onInput={e=> setQte(e.target.innerHTML)} >{qte}</span>
+                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setQte(e.target.value)} placeholder={qte} />
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                 <span className='subtotal'>{formatCurrency(price * qte)}</span>
