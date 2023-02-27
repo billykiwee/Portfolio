@@ -68,7 +68,17 @@ function Table() {
         })
     }
 
+    const ligns = [
+        {
+            name: 'Fabrication',
+            price: 0,
+            qte: 0,
+            subtotal: 0
+        },
+    ]
 
+
+   
     return (
         <div className='grid m-t-2'>
             <div className='f-w-600 display '>
@@ -86,19 +96,20 @@ function Table() {
                 </div>
             </div>
 
-            <div className='display '>
-                <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
-                    <span contentEditable>Fabrication portail</span>
-                </div>
-                <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom'>
-                    <input className='border-0 h-2 p-0'  onChange={e=> setPRICE(e.target.value)} value={PRICE} />
-                </div>
-                <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <input className='border-0 h-2 p-0' onChange={e=> setQTE(e.target.value)} value={QTE} />
-                </div>
-                <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span className='subtotal'>{formatCurrency(subTOTAL)}</span>
-                </div>
+            <div>
+                {
+                    ligns
+                    .map(lign=> {
+                        return (
+                            <TableLign 
+                            name={lign.name}
+                            price={lign.price}
+                            qte={lign.qte} 
+                            subTotal={lign.subtotal} 
+                        />
+                        )
+                    })
+                }
             </div>
 
             <div>
@@ -113,8 +124,29 @@ function Table() {
                     <span className='f-w-600 f-s-18'>TOTAL TTC :</span>
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18'>2 500,00 €</span>
+                    <span className='f-w-600 f-s-18'>{
+                       
+                    }</span>
                 </div>
+            </div>
+        </div>
+    )
+}
+
+function TableLign({ name, price, qte, subTotal }) {
+    return (
+        <div className='display '>
+            <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
+                <span contentEditable>{name}</span>
+            </div>
+            <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom'>
+                <span contentEditable>{price}</span>
+            </div>
+            <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
+                <span contentEditable>{qte}</span>
+            </div>
+            <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
+                <span className='subtotal'>{formatCurrency(subTotal)}</span>
             </div>
         </div>
     )
