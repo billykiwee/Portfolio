@@ -53,17 +53,16 @@ export default function ProjectView() {
 
 function Table() {
 
-    const lignInitial = [
-        {
-            name: 'Fabrication',
-            price: 0,
-            qte: 0,
-            subTotal: 0,
-            id: UniqueID(8)
-        },
-    ]
+    const lignInitial = [{
+        name    : 'Fabrication',
+        price   : 200,
+        qte     : 1,
+        subTotal: 200,
+        id      : UniqueID(8)
+    }]
 
     const [lign, setLign] = useState([])
+
 
     useEffect(e=> {
         setLign(lignInitial)
@@ -74,31 +73,13 @@ function Table() {
     }
 
     function removeLign() {
+        if (lign.length === 1) return 
         return setLign(lign.filter(e=> e.id !== lign[lign.length-1].id))
     }
 
 
     const [Total, setTotal] = useState(0)
 
-
-    const getTotal = document.querySelectorAll('.subtotal')
-
-    const [align, setAlign]= useState(false)
-
-
-    useEffect(e=> {
-
-        console.log(align);
-
-        const subtotals = []
-        getTotal.forEach(sub=> {
-            subtotals.push(sub.id)
-        })
-        
-        if (subtotals.length > 0) {
-            setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
-        }
-    }, [align])
 
 
    
@@ -132,7 +113,6 @@ function Table() {
                                 id={id}
                                 name={name}
                                 setTotal={setTotal}
-                                setAlign={setAlign}
                             />
                         )
                     })
@@ -161,18 +141,29 @@ function Table() {
     )
 }
 
-function TableLign({ name, setAlign }) {
+function TableLign({ name, setTotal }) {
 
     const [subtotal, setSubtotal] = useState({
         price: 0,
         qte: 0
     })
     const getSum = subtotal.price * subtotal.qte
-
-
+    
     useEffect(e=> {
-        setAlign(true)
-    }, [getSum])
+        const getTotal = document.querySelectorAll('.subtotal')
+
+        const subtotals = []
+
+        getTotal.forEach(sub=> {
+            subtotals.push(sub.id)
+        })
+        
+        if (subtotals.length > 0) {
+            setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
+        }
+    })
+
+       
 
     return (
         <div className='display ' >
