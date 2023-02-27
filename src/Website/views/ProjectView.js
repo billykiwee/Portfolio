@@ -2,6 +2,7 @@ import React from 'react'
 import Container from '../../App/components/Container'
 import UniqueID from '../../App/components/uniqueID'
 
+
 export default function ProjectView() {
 
     return (
@@ -37,11 +38,27 @@ export default function ProjectView() {
                     <Encode />
                 </div>
 
-                <div className='f-w-600'>
-                    <span contentEditable>{'Description'.toUpperCase()}</span>
-                    <span contentEditable>{'Taux journalier'.toUpperCase()}</span>
-                    <span contentEditable>{'QTE'.toUpperCase()}</span>
-                    <span contentEditable>{'TOTAL'.toUpperCase()}</span>
+                <div className='grid'>
+                    <div className='m-t-2 f-w-600 display '>
+                        <div style={{ width: '50%' }} className='tb tb-top tb-left tb-bottom'>
+                            <span contentEditable>Description</span>
+                        </div>
+                        <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-top tb-right tb-left tb-bottom'>
+                            <span contentEditable>TAUX JOURNALIER</span>
+                        </div>
+                        <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
+                            <span contentEditable>QTE</span>
+                        </div>
+                        <div style={{ width: '30%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
+                            <span contentEditable>TOTAL</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            slef
+                        </div>
+                    </div>
                 </div>
             </div>
         </Container>

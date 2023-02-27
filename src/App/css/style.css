@@ -13,7 +13,7 @@
     --background: #fafafa;
     --black: black;
     --black-200 : rgb(49, 49, 49);
-    --grey : #F8F8F8;
+    --grey : #c5c5c5;
     --grey-200: #cccccc;
     --grey-2: var(--border);
     --grey-3: #8fa0ac;
@@ -1101,4 +1101,21 @@ input[type=number] {
     #sections {
        gap: 6rem;
     }
+}
+
+
+.tb {
+    padding: 0.4rem;
+}
+.tb-left {
+    border-left: 1px solid var(--grey);
+}
+.tb-right {
+    border-right: 1px solid var(--grey);
+}
+.tb-top {
+    border-top: 1px solid var(--grey);
+}
+.tb-bottom {
+    border-bottom: 1px solid var(--grey);
 }
