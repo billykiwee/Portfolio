@@ -269,9 +269,7 @@ export default function Netflix() {
 
     }, [sectionPosition]) */
     
-const v = 34
 
-console.log(v.split('').repeat(4))
 
     return (
 
