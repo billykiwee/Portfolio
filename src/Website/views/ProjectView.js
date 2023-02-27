@@ -81,7 +81,6 @@ function Table() {
     const [Total, setTotal] = useState(0)
 
 
-
    
     return (
         <div className='grid m-t-2'>
@@ -111,7 +110,6 @@ function Table() {
                             <TableLign 
                                 lign={lign}
                                 name={name}
-                                Total={Total}
                                 setTotal={setTotal}
                             />
                         )
@@ -149,7 +147,15 @@ function TableLign({ name, lign, setTotal }) {
     })
     const getSum = subtotal.price * subtotal.qte
 
-   console.log(getSum);
+    const getTotal = []
+
+    useEffect(e=> {
+        getTotal.push(getSum)
+    }, [getSum])
+
+
+    console.log(getTotal);
+
 
     return (
         <div className='display ' >
@@ -163,7 +169,7 @@ function TableLign({ name, lign, setTotal }) {
                 <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={subtotal.qte} />
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal'>{formatCurrency(getSum)}</span>
+                <span className='subtotal' value={getSum}>{formatCurrency(getSum)}</span>
             </div>
         </div>
     )
