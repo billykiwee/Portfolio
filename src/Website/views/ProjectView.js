@@ -81,6 +81,26 @@ function Table() {
     const [Total, setTotal] = useState(0)
 
 
+    const getTotal = document.querySelectorAll('.subtotal')
+
+    const [align, setAlign]= useState(false)
+
+
+    useEffect(e=> {
+
+        console.log(align);
+
+        const subtotals = []
+        getTotal.forEach(sub=> {
+            subtotals.push(sub.id)
+        })
+        
+        if (subtotals.length > 0) {
+            setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
+        }
+    }, [align])
+
+
    
     return (
         <div className='grid m-t-2'>
@@ -109,8 +129,10 @@ function Table() {
                         return (
                             <TableLign 
                                 lign={lign}
+                                id={id}
                                 name={name}
                                 setTotal={setTotal}
+                                setAlign={setAlign}
                             />
                         )
                     })
@@ -139,7 +161,7 @@ function Table() {
     )
 }
 
-function TableLign({ name, lign, setTotal }) {
+function TableLign({ name, setAlign }) {
 
     const [subtotal, setSubtotal] = useState({
         price: 0,
@@ -147,15 +169,10 @@ function TableLign({ name, lign, setTotal }) {
     })
     const getSum = subtotal.price * subtotal.qte
 
-    const getTotal = []
 
     useEffect(e=> {
-        getTotal.push(getSum)
+        setAlign(true)
     }, [getSum])
-
-
-    console.log(getTotal);
-
 
     return (
         <div className='display ' >
@@ -169,7 +186,7 @@ function TableLign({ name, lign, setTotal }) {
                 <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={subtotal.qte} />
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal' value={getSum}>{formatCurrency(getSum)}</span>
+                <span className='subtotal' id={getSum}>{formatCurrency(getSum)}</span>
             </div>
         </div>
     )
