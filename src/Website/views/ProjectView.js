@@ -53,12 +53,6 @@ export default function ProjectView() {
 
 function Table() {
 
-    function getSum() {
-        return document.querySelectorAll('price').forEach(p=> {
-            return p
-        })
-    }
-
     const lignInitial = [
         {
             name: 'Fabrication',
@@ -90,16 +84,16 @@ function Table() {
         <div className='grid m-t-2'>
             <div className='f-w-600 display '>
                 <div style={{ width: '50%' }} className='tb tb-top tb-left tb-bottom'>
-                    <span contentEditable>Description</span>
+                    <span >Description</span>
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-top tb-right tb-left tb-bottom'>
-                    <span contentEditable>Taux jounalier</span>
+                    <span >Taux jounalier</span>
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
-                    <span contentEditable>QTE</span>
+                    <span >QTE</span>
                 </div>
                 <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
-                    <span contentEditable>TOTAL</span>
+                    <span >TOTAL</span>
                 </div>
             </div>
 
@@ -113,6 +107,7 @@ function Table() {
                         return (
                             <TableLign 
                                 name={name}
+                                Total={Total}
                                 setTotal={setTotal}
                             />
                         )
@@ -142,19 +137,24 @@ function Table() {
     )
 }
 
-function TableLign({ name, setTotal }) {
+function TableLign({ name, Total, setTotal }) {
 
     const [price, setPrice] = useState(0)
     const [qte, setQte] = useState(0)
 
+
     useEffect(e=> {
-        setTotal(price * qte)
+        document.querySelectorAll('subtotal').forEach(e=> {
+            console.log(e);
+        })
     }, [price, qte])
+
+    console.log(Total);
 
     return (
         <div className='display '>
             <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
-                <span contentEditable>{name}</span>
+                <span >{name}</span>
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
                 <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setPrice(e.target.value)} placeholder={price} />
@@ -183,7 +183,7 @@ function Encode() {
         <div>
             <div className='display gap'>
                 <span>Facture en date du:</span>
-                <span contentEditable>{new Date().toLocaleDateString().replaceAll('/', '-')}</span>
+                <span >{new Date().toLocaleDateString().replaceAll('/', '-')}</span>
             </div>
             <div className='display gap justify-e' >
                 <span>Numéro:</span>
@@ -200,24 +200,24 @@ function Adress({ name, adress, additionalAdress, city, zipCode  }) {
         <div className='grid w-100p m-t-1' >
             {
                 name &&
-                <span contentEditable>{name}</span>
+                <span >{name}</span>
             }
             {
                 adress &&
-                <span contentEditable>{adress}</span>   
+                <span >{adress}</span>   
             }
             {
                 additionalAdress &&
-                <span contentEditable>{additionalAdress}</span>
+                <span >{additionalAdress}</span>
             }
             <div>
                 {
                     city &&
-                    <span contentEditable>{city.toUpperCase()}</span> 
+                    <span >{city.toUpperCase()}</span> 
                 }
                 {
                     zipCode &&
-                    <span contentEditable className='m-l-04'>{zipCode}</span>
+                    <span  className='m-l-04'>{zipCode}</span>
                 }
             </div>
         </div>
