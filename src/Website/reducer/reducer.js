@@ -6,7 +6,7 @@ const reducer = (state, action) => {
 
     switch(action.type) {
 
-        case 'add_' : return {
+        case 'set_Lign' : return {
             ...state,
             lign: action.lign
         }

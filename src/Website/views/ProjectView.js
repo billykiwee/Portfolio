@@ -69,12 +69,13 @@ function Table() {
         })
     }
 
-    const ligns = [
+    const lignInitial = [
         {
             name: 'Fabrication',
-            price: 0,
-            qte: 0,
-            subtotal: 0
+            price: 250,
+            qte: 2,
+            subtotal: 500,
+            id: UniqueID(8)
         },
     ]
 
@@ -84,14 +85,30 @@ function Table() {
 
     function addLign() {
         return dispatch({
-            type: 'add_',
+            type: 'set_Lign',
             lign: [
                 ...lign,
-                ligns ,
+                ...lignInitial ,
             ]
         })
     }
 
+    function removeLign() {
+
+        return dispatch({
+            type: 'set_Lign',
+            lign: lign.filter(e=> e.id !== lign[lign.length-1].id)
+        })
+    }
+
+    useEffect(e=> {
+        dispatch({
+            type: 'set_Lign',
+            lign: lignInitial
+        })
+    }, [])
+
+    console.log(lign.length);
 
    
     return (
@@ -117,6 +134,7 @@ function Table() {
                     .map(lign=> {
                         return (
                             <TableLign 
+                            id={lign.id}
                             name={lign.name}
                             price={lign.price}
                             qte={lign.qte} 
@@ -127,9 +145,12 @@ function Table() {
                 }
             </div>
 
-            <div>
+            <div className='display gap'>
                 <button className='blue w-2 h-2' onClick={addLign}>
-                    <span>+</span>
+                    <span className='f-w-600'>+</span>
+                </button>
+                <button className='red w-2 h-2' onClick={removeLign}>
+                    <span className='f-w-600'>-</span>
                 </button>
             </div>
 
@@ -148,9 +169,9 @@ function Table() {
     )
 }
 
-function TableLign({ name, price, qte, subTotal }) {
+function TableLign({ id, name, price, qte, subTotal }) {
     return (
-        <div className='display '>
+        <div className='display ' id={id}>
             <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
                 <span contentEditable>{name}</span>
             </div>
