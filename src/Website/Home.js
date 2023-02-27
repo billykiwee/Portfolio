@@ -268,14 +268,6 @@ export default function Netflix() {
 
 
     }, [sectionPosition]) */
-    
-
-    const v = 'abcd'.split('')
-
-    for (let i = 0; i < v.length; i++) {
-
-        console.log(v[i]);
-    }
 
 
 
