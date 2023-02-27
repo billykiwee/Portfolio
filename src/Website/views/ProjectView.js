@@ -174,23 +174,27 @@ function TableLign({ id, name, price, qte, subTotal }) {
 
     
     function editLign(edit, value, id) {
-
+        
         return dispatch({
             type: 'set_Lign',
-            lign: lign
-            .map(e=> {
-                if (e=> e.id === id) {
-                    
-                    setSUB(value * (edit == 'qte' ? e.price : e.qte))
-
-                    return {
-                        ...e,
-                        subTotal: value * (edit == 'qte' ? e.price : e.qte)
+            lign: [
+                ...lign,
+                lign
+                .map(e=> {
+                    if (e.id === id) {
+                        return {
+                            [edit]: value 
+                        }
                     }
-                }
-            }) 
+                }) 
+            ]
         })
     }
+
+    console.log(
+        lign.filter(e=> e.id === id)
+    )
+
 
     
 
