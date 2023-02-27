@@ -63,9 +63,9 @@ function Table() {
     const lignInitial = [
         {
             name: 'Fabrication',
-            price: 250,
-            qte: 2,
-            subTotal: 500,
+            price: 0,
+            qte: 0,
+            subTotal: 0,
             id: UniqueID(8)
         },
     ]
@@ -113,7 +113,7 @@ function Table() {
                     <span contentEditable>Description</span>
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-top tb-right tb-left tb-bottom'>
-                    <span contentEditable>TAUX JOURNALIER</span>
+                    <span contentEditable>Taux jounalier</span>
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
                     <span contentEditable>QTE</span>
@@ -130,7 +130,6 @@ function Table() {
 
                         const { id ,name, price, qte, subTotal } = l
 
-                        console.log(subTotal);
                         return (
                             <TableLign 
                                 lign={lign}
@@ -167,21 +166,33 @@ function Table() {
     )
 }
 
-function TableLign({ lign, id, name, price, qte, subTotal }) {
+function TableLign({ id, name, price, qte, subTotal }) {
 
     const [SUB, setSUB] = useState(subTotal)
 
-    function editLign(value, id) {
-        return lign?.map(e=> {
-            if (e.id === id) {
-                console.log(e);
-                return {
-                    ...lign,
-                    subTotal: value * e.qte
+    const [{ lign }, dispatch] = useStateValue('')
+
+    
+    function editLign(edit, value, id) {
+
+        return dispatch({
+            type: 'set_Lign',
+            lign: lign
+            .map(e=> {
+                if (e=> e.id === id) {
+                    
+                    setSUB(value * (edit == 'qte' ? e.price : e.qte))
+
+                    return {
+                        ...e,
+                        subTotal: value * (edit == 'qte' ? e.price : e.qte)
+                    }
                 }
-            }
+            }) 
         })
     }
+
+    
 
 
     return (
@@ -190,10 +201,10 @@ function TableLign({ lign, id, name, price, qte, subTotal }) {
                 <span contentEditable>{name}</span>
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom'>
-                <span contentEditable onInput={e=> editLign(e.target.innerHTML, id)} >{price}</span>
+                <span contentEditable onInput={e=> editLign('price',e.target.innerHTML, id)} >{price}</span>
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span contentEditable onInput={e=> editLign(e.target.innerHTML, id)} >{qte}</span>
+                <span contentEditable onInput={e=> editLign('qte',e.target.innerHTML, id)} >{qte}</span>
             </div>
             <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                 <span className='subtotal'>{formatCurrency(SUB)}</span>

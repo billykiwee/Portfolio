@@ -11,6 +11,12 @@ const reducer = (state, action) => {
             lign: action.lign
         }
 
+        case 'edit_Lign' : return {
+            ...state,
+            lign: action.lign
+        }
+
+
         default : return state
     }
 }
