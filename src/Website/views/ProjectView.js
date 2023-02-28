@@ -30,6 +30,7 @@ export default function ProjectView() {
         })
 	}
 
+
     return (
 
         <div className='display gap  p-2 h-100p' style={{ width: '540px', alignItems: 'baseline' }} ref={reportTemplateRef} >
@@ -181,7 +182,7 @@ function Table({ visible }) {
     )
 }
 
-function TableLign({ name,price, qte, setTotal }) {
+function TableLign({ name, price, qte, setTotal }) {
 
     const [subtotal, setSubtotal] = useState({
         price: 0,
