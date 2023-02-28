@@ -1,18 +1,44 @@
-import React, { useEffect, useState } from 'react'
-import Container from '../../App/components/Container'
+import React, { useEffect, useRef, useState } from 'react'
 import formatCurrency from '../../App/components/formatCurrency'
 import UniqueID from '../../App/components/uniqueID'
-import { useStateValue } from '../reducer/StateProvider'
+import jsPDF from 'jspdf';
 
 
 export default function ProjectView() {
 
+    const ID = UniqueID(8)
+
+    const [visible, setvisible] = useState(true)
+
+    const reportTemplateRef = useRef(null)
+	const handleGeneratePdf = () => {
+        
+            const doc = new jsPDF({
+                format: 'a4',
+                unit  : 'pt',
+                orientation: 'p',
+                putOnlyUsedFonts:true,
+                zoom: 1.5
+            })
+        setvisible(false)
+
+        doc.html(reportTemplateRef.current, {
+            async callback(doc) {
+                await doc.save('Facture n° ' + ID)
+                setvisible(true)
+            }
+        })
+	}
+
     return (
-        <Container>
-            <div className='grid w-100p'>
-                <div className='display w-100p justify-s-b' style={{ width: '700px' }}>
+
+        <div className='display gap  p-2 h-100p' style={{ width: '540px', alignItems: 'baseline' }} ref={reportTemplateRef} >
+            <div className='grid m-2 m-t-2' >
+                <div className='display w-100p justify-s-b'>
                     <div className='grid w-100p'>
-                        <span className='f-w-600'>TJM</span>
+                        <span className='f-w-600'>
+                           <img src='./images/tjm.png' height={44} /> 
+                        </span>
                         <Adress 
                             name='Turpin Jason'
                             adress='34 chemin des palmistes'
@@ -23,7 +49,7 @@ export default function ProjectView() {
                     </div>
 
                     <div style={{ textAlign: 'end' }} className='w-100p'>
-                        <span className='f-w-600 f-s-25'>FACTURE</span>
+                        <span className='f-w-600 f-s-20'>FACTURE</span>
                         <Adress 
                             name='Mr Martial'
                             adress='34 chemin des palmistes'
@@ -34,24 +60,34 @@ export default function ProjectView() {
                 </div>
 
 
-                <div className='m-t-4 display justify-s-b'>
+                <div className='m-t-4 display justify-s-b align-top'>
                     <Project projet='Fabrication' />
-                    <Encode />
+                    <Encode ID={ID} />
                 </div>
 
-                <Table />   
+                <Table visible={visible} />   
             
 
-                <div className='display m-t-1'>
+                <div className='display m-t-1' style={{ bottom: 0 }}>
                     <BottomPage />
                 </div>
             </div>
-        </Container>
+            {
+                visible&&
+                <div className='display justify-c fixed p-1' style={{ bottom : 0 }}>
+                    <div className='display'>
+                        <button className='blue p-1' onClick={handleGeneratePdf}>
+                            <span className='f-s-20'>Télécharger en PDF</span>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
     )
 }
 
 
-function Table() {
+function Table({ visible }) {
 
     const lignInitial = [{
         name    : 'Fabrication',
@@ -81,12 +117,11 @@ function Table() {
     const [Total, setTotal] = useState(0)
 
 
-
    
     return (
         <div className='grid m-t-2'>
             <div className='f-w-600 display '>
-                <div style={{ width: '50%' }} className='tb tb-top tb-left tb-bottom'>
+                <div style={{ width: '40%' }} className='tb tb-top tb-left tb-bottom'>
                     <span >Description</span>
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-top tb-right tb-left tb-bottom'>
@@ -95,7 +130,7 @@ function Table() {
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
                     <span >QTE</span>
                 </div>
-                <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
+                <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-top tb-right tb-bottom'>
                     <span >TOTAL</span>
                 </div>
             </div>
@@ -105,28 +140,33 @@ function Table() {
                     lign
                     .map(l=> {
 
-                        const { id ,name, price, qte, subTotal } = l
+                        const { id ,name, price, qte } = l
 
                         return (
                             <TableLign 
                                 lign={lign}
                                 id={id}
                                 name={name}
+                                price={price}
+                                qte={qte}
                                 setTotal={setTotal}
                             />
                         )
                     })
                 }
             </div>
-
-            <div className='display gap'>
-                <button className='blue w-2 h-2' onClick={addLign}>
-                    <span className='f-w-600'>+</span>
-                </button>
-                <button className='red w-2 h-2' onClick={removeLign}>
-                    <span className='f-w-600'>-</span>
-                </button>
-            </div>
+            
+            {
+                visible &&
+                <div className='display gap'>
+                    <button className='blue w-2 h-100p' onClick={addLign}>
+                        <span className='f-w-600'>+</span>
+                    </button>
+                    <button className='red w-2 h-100p' onClick={removeLign}>
+                        <span className='f-w-600'>-</span>
+                    </button>
+                </div>
+            }
 
 
             <div className='display tb-bottom p-t-2'>
@@ -141,11 +181,11 @@ function Table() {
     )
 }
 
-function TableLign({ name, setTotal }) {
+function TableLign({ name,price, qte, setTotal }) {
 
     const [subtotal, setSubtotal] = useState({
         price: 0,
-        qte: 0
+        qte  : 0
     })
     const getSum = subtotal.price * subtotal.qte
     
@@ -167,16 +207,16 @@ function TableLign({ name, setTotal }) {
 
     return (
         <div className='display ' >
-            <div style={{ width: '50%' }} className='tb tb-left tb-bottom'>
-                <span >{name}</span>
+            <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
+                <input className='border-0 w-100p h-100p' placeholder={name} />
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={subtotal.price} />
+                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={price} />
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <input className='border-0 w-100p h-1' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={subtotal.qte} />
+                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={qte} />
             </div>
-            <div style={{ width: '15%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
+            <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                 <span className='subtotal' id={getSum}>{formatCurrency(getSum)}</span>
             </div>
         </div>
@@ -186,13 +226,13 @@ function TableLign({ name, setTotal }) {
 function Project({projet}) {
     return (
         <div className='display'>
-            <span className='f-w-600'>Projet: </span>  <span>{projet}</span>
+            <span className='f-w-600'>Projet :</span><span>&nbsp;{projet}</span>
         </div>
     )
 }
 
 
-function Encode() {
+function Encode({ ID }) {
     return (
         <div>
             <div className='display gap'>
@@ -201,7 +241,7 @@ function Encode() {
             </div>
             <div className='display gap justify-e' >
                 <span>Numéro:</span>
-                <span className='f-w-600'>{UniqueID(4)}</span>
+                <span className='f-w-600'>{ID}</span>
             </div>
         </div>
     )
@@ -211,7 +251,7 @@ function Encode() {
 function Adress({ name, adress, additionalAdress, city, zipCode  }) {
 
     return (
-        <div className='grid w-100p m-t-1' >
+        <div className='grid w-100p'  >
             {
                 name &&
                 <span >{name}</span>
@@ -242,12 +282,12 @@ function Adress({ name, adress, additionalAdress, city, zipCode  }) {
 function BottomPage({  }) {
     return (
         <div className='display justify-c w-100p'>
-            <div className='grid f-s-14' style={{ textAlign: 'center' }}>
+            <div className='grid' style={{ textAlign: 'center', fontSize: '12px' }} >
                 <span>TVA non applicable, art. 293 B du CGI.</span>
                 <span>TJM - MR TURPIN PHILIPPE JASON</span>
                 <span>Numéro de SIRET : 8892147800014</span>
                 <span>Adresse : 34 b chemin des palmistes, Palmiste Rouge, CILAOS 97413</span>
-                <span>3 Téléphone : 06 92 35 80 12</span>
+                <span>Téléphone : 06 92 35 80 12</span>
             </div>
         </div>
     )

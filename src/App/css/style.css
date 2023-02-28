@@ -1,5 +1,5 @@
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: '', sans-serif;
     line-height: 150%;
 }
 
@@ -10,7 +10,7 @@
     --blue: var(--main-color);
     --blue-secondary: rgba(11, 115, 241, 0.1);
     --blue-dark: #0760d0;
-    --background: #fafafa;
+    --background: #ffffff;
     --black: black;
     --black-200 : rgb(49, 49, 49);
     --grey : #c5c5c5;
@@ -50,6 +50,7 @@ body {
 main {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 
