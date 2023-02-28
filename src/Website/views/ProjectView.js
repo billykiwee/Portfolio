@@ -33,7 +33,7 @@ export default function ProjectView() {
     return (
 
         <div className='display gap  p-2 h-100p' style={{ width: '540px', alignItems: 'baseline' }} ref={reportTemplateRef} >
-            <div className='grid m-2 m-t-2' >
+            <div className='grid m-2' >
                 <div className='display w-100p justify-s-b'>
                     <div className='grid w-100p'>
                         <span className='f-w-600'>
