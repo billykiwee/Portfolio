@@ -32,6 +32,17 @@ export default function ProjectView() {
 
 
 
+    function makeFriendly(number) {
+        let n =  new Intl.NumberFormat('en-EN', {notation: 'compact'})
+    
+        return n.format(number)
+    }
+    
+
+    console.log( makeFriendly(400000000000));
+
+
+
     return (
 
         <div className='display gap  p-2 h-100p' style={{ width: '540px', alignItems: 'baseline' }} ref={reportTemplateRef} >
