@@ -31,6 +31,7 @@ export default function ProjectView() {
 	}
 
 
+
     return (
 
         <div className='display gap  p-2 h-100p' style={{ width: '540px', alignItems: 'baseline' }} ref={reportTemplateRef} >
