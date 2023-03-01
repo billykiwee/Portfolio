@@ -37,9 +37,6 @@ export default function ProjectView() {
     
         return n.format(number)
     }
-    
-
-    console.log( makeFriendly(400000000000));
 
 
 
