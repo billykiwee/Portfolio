@@ -6,7 +6,7 @@ import '../Website/effect.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Bubbles } from './views/Background';
+import { Bubbles } from './Components/Background';
 
 export const ProfilImg = 'https://kiwee.site/wp-content/uploads/2023/02/portfolioPP.png'
 
@@ -46,7 +46,17 @@ export default function Home(): JSX.Element {
         }
     }
 
-    const projects = {
+
+    interface ProjectInfo {
+        img  : string
+        name : string
+        id   : string
+        link: string
+        logo : string
+        text ?: string
+    }
+      
+    const projects : Record<string, ProjectInfo> = {
         qleeme : {
             img : 'https://kiwee.site/wp-content/uploads/2023/02/Group-64.png',
             name: 'Qlee.me',
@@ -77,7 +87,15 @@ export default function Home(): JSX.Element {
         },
     }
 
-    const skills = {
+
+   
+    interface SkillInfo {
+        name: string;
+        logo: string;
+        type?: string;
+    }
+
+    const skills: Record<string, SkillInfo> = {
         React : {
             name: 'React.js',
             logo: '/images/react.svg',
@@ -355,12 +373,25 @@ export default function Home(): JSX.Element {
                                                                 style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', width: '3.8rem', height: '3.8rem'}}
                                                                 id={social.name} 
                                                                 onMouseEnter={e=> {
-                                                                    document.querySelector('#' + social.name).style.background = social.color
-                                                                    document.querySelector('.' + social.name).src = social.logo2
+                                                                    const divEl = document.querySelector<HTMLElement>('#' + social.name)
+                                                                    const divImg = document.querySelector<HTMLImageElement>('.' + social.name)
+
+                                                                    if (!divImg) return 
+                                                                    if (!divEl) return
+                                                                    
+                                                                    divEl.style.background = social.color
+                                                                    divImg.src = social.logo2
                                                                 }}
                                                                 onMouseLeave={e=> {
-                                                                    document.querySelector('#' + social.name).style.background = ''
-                                                                    document.querySelector('.' + social.name).src = social.logo1
+                                                                    const divEl = document.querySelector<HTMLElement>('#' + social.name)
+                                                                    const divImg = document.querySelector<HTMLImageElement>('.' + social.name)
+
+
+                                                                    if (!divEl) return 
+                                                                    if (!divImg) return
+
+                                                                    divEl.style.background = ''
+                                                                    divImg.src = social.logo1
                                                                 }}
                                                             >
                                                                 <span className='display justify-c'>
@@ -397,8 +428,8 @@ export default function Home(): JSX.Element {
                                                 <div 
                                                     className='zi-2 absolute border-r-2 w-100p h-100p transition' 
                                                     id={'project-' + project.id}
-                                                    onMouseMove={e=> hoverImage(project.id)}
-                                                    onMouseLeave={e=> unFocusImage(project.id)}
+                                                    onMouseMove={()=> hoverImage(project.id)}
+                                                    onMouseLeave={()=> unFocusImage(project.id)}
                                                 >
                                                     <div className='display h-100p align-end disable w-100p' id={'info-' + project.id}>
                                                         <div className='grid w-100p h-100p'>
@@ -449,7 +480,6 @@ export default function Home(): JSX.Element {
                                 <div className='display justify-c wrap gap-1rem w-100p'>
                                     {
                                         Object.values(skills)
-                                        .sort((a,b)=> b.name - a.name)
                                         .map((skill, i)=> {
 
                                             return (
@@ -479,7 +509,7 @@ export default function Home(): JSX.Element {
                                 <a href='https://kiwee.site/wp-content/uploads/2023/02/CV2023.pdf' download className='display gap'> 
                                     <button style={{ width: '18rem',  height: '18rem', borderRadius: '100%' }} className='blue shadow'>
                                         <span className='f-s-2rem'>CV</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
                                     </button>
                                 </a>
                             </div>
@@ -505,19 +535,19 @@ export default function Home(): JSX.Element {
                                                 <div className='display justify-c gap'>
                                                     <ul className='display'>
                                                         <li>
-                                                            <svg class="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
+                                                            <svg className="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
                                                         </li>
                                                         <li>
-                                                            <svg class="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
+                                                            <svg className="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
                                                         </li>
                                                         <li>
-                                                            <svg class="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
+                                                            <svg className="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
                                                         </li>
                                                         <li>
-                                                            <svg class="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
+                                                            <svg className="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
                                                         </li>
                                                         <li>
-                                                            <svg class="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
+                                                            <svg className="star-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51738 0.317102L10.8968 5.03115L15.4764 5.48484C15.7915 5.51103 16.0257 5.78767 15.9995 6.10274C15.9882 6.2386 15.9288 6.36597 15.832 6.46193L12.063 10.1975L13.4604 15.2735C13.5424 15.5821 13.3586 15.8987 13.05 15.9806C12.9134 16.0169 12.7682 16.0019 12.6419 15.9384L7.99897 13.6393L3.36244 15.9355C3.07717 16.079 2.72963 15.964 2.58619 15.6787C2.52268 15.5524 2.50765 15.4073 2.54393 15.2706L3.94129 10.1946L0.169485 6.45908C-0.0550713 6.23653 -0.0566948 5.87408 0.165859 5.64952C0.261822 5.55269 0.389191 5.49329 0.525048 5.482L5.10469 5.0283L7.48056 0.317103C7.62715 0.0307927 7.97809 -0.0824695 8.2644 0.0641246C8.37318 0.119821 8.46168 0.208323 8.51738 0.317102Z" fill="#FFC200"></path></svg>
                                                         </li>
                                                     </ul>
                                                     <span className='f-s-14 c-grey'>(1 avis)</span>
