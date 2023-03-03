@@ -128,24 +128,27 @@ export default function Netflix() {
         }
     }
 
-    function hoverImage(id) {
-        document.querySelector('#project-' + id).style.background= '#f0f8ff87'
-        document.querySelector('#info-' + id).style.display= 'flex'
+    function hoverImage(id : string) {
+        
 
-        document.querySelector('#project-' + id)
+        document.querySelector<HTMLElement>('#project-' + id)!.style.background= '#f0f8ff87'
+
+        document.querySelector<HTMLElement>('#info-' + id)!.style.display= 'flex'
+
+        document.querySelector<HTMLElement>('#project-' + id)!
         .onmousemove = w => {
 
-            let imgHeight =  document.querySelector('#' + id).clientHeight
-            let imgWidth =  document.querySelector('#' + id).clientWidth
-            let x = w.clientX / imgWidth
+            let imgHeight =  document.querySelector<HTMLElement>('#' + id)!.clientHeight
+            let imgWidth =  document.querySelector<HTMLElement>('#' + id)!.clientWidth
+            let x = w.clientX / imgWidth!
             let y = w.clientY / imgHeight
 
-            document.querySelector('#' + id).style = `transform : translate(${(x)}%, ${(y)}%)`
-            document.querySelector('#' + id).parentElement.style.transform= 'scale(1.06)'
+            document.querySelector<HTMLElement>('#' + id)!.style = `transform : translate(${(x)}%, ${(y)}%)`
+            document.querySelector<HTMLElement>('#' + id)!.parentElement.style.transform= 'scale(1.06)'
         }
     }
 
-    function unFocusImage(id) {
+    function unFocusImage(id : string) {
         document.querySelector('#project-' + id).style.background= 'unset'
         document.querySelector('#info-' + id).style.display= 'none'
 
@@ -157,32 +160,16 @@ export default function Netflix() {
     const [section, setSection] = useState('Home')
 
 
-    /* useEffect(e=> {
-
-
-        window.onscroll = () => {
-            if (window.scrollY === 0) {
-                setSection(sections[0])
-            }
-            if (window.scrollY > 900 && window.scrollY < 2176) {
-                setSection(sections[1])
-            }
-            if (window.scrollY >= 2000) {
-                setSection(sections[2])
-            }
-        }
-    }) */
-
     const [scrollDirection, setScrollDirection] = useState('')
-    const [NewPosition, setNewPosition] = useState([])
+    const [NewPosition, setNewPosition] = useState<number[]>([])
 
 
     const [updateDirection, setUpdateDirection] = useState('')
     
 
-    useEffect(e=> {
+    useEffect(()=> {
         
-        const scrollPosition = []
+        const scrollPosition : number[] = []
 
         window.onscroll = () => {
 
@@ -194,7 +181,7 @@ export default function Netflix() {
 
 
     const [stopScroll, setStopScroll]= useState(true)
-    useEffect(e=> {
+    useEffect(()=> {
 
      /*    if ((NewPosition[1] - NewPosition[0]) > 0) {
             setUpdateDirection('down')
