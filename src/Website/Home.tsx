@@ -6,12 +6,13 @@ import '../Website/effect.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Bubbles } from './views/Background';
 
 export const ProfilImg = 'https://kiwee.site/wp-content/uploads/2023/02/portfolioPP.png'
 
 
 
-export default function Netflix() {
+export default function Home(): JSX.Element {
 
 
     const socialMedia = {
@@ -288,8 +289,9 @@ export default function Netflix() {
             }}>
                 {
                     sections
-                    .map(s=> {
+                    .map((s, i)=> {
                         return <a 
+                            key={i}
                             href={'#'+s}
                             id={'section-' + s}
                             style={{ transform: section === s ? 'scale(1.3)' : '' }}
@@ -305,24 +307,8 @@ export default function Netflix() {
                 }
             </div>
 
-            <div className="bubbles">
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                <div className="bubble"></div>
-                
-            </div>    
+            <Bubbles />
+
             <Container>
                 <div className='grid gap-2rem ' id='sections'>  
 
@@ -361,9 +347,9 @@ export default function Netflix() {
                                         <div className='display justify-s-a gap'>
                                             {
                                                 Object.values(socialMedia)
-                                                .map(social=> {
+                                                .map((social, i)=> {
                                                     return (
-                                                        <a href={social.link}>
+                                                        <a href={social.link} key={i}>
                                                             <button 
                                                                 className='white border-r-100 transition' 
                                                                 style={{borderBottom: '6px solid rgba(0, 0, 0, 0.09)', width: '3.8rem', height: '3.8rem'}}
@@ -405,9 +391,9 @@ export default function Netflix() {
                             <div className='gap-1rem  display justify-c ' id='works'>
                                 {
                                     Object.values(projects)
-                                    .map(project=> {
+                                    .map((project, i)=> {
                                         return (
-                                            <div className='border-r-2 click overflow-hidden relative shadow' style={{height: '400px', width: '400px'}} >
+                                            <div className='border-r-2 click overflow-hidden relative shadow' style={{height: '400px', width: '400px'}} key={i}>
                                                 <div 
                                                     className='zi-2 absolute border-r-2 w-100p h-100p transition' 
                                                     id={'project-' + project.id}
@@ -464,11 +450,11 @@ export default function Netflix() {
                                     {
                                         Object.values(skills)
                                         .sort((a,b)=> b.name - a.name)
-                                        .map(skill=> {
+                                        .map((skill, i)=> {
 
                                             return (
                                                 
-                                                <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }}>  
+                                                <div className='grid justify-s-b white shadow p-2 border-r-1' style={{ width: '88px' }} key={i}>  
                                                     <div className='display justify-c margin-auto' style={{ width: '64px', height: '64px' }} >
                                                         <img src={skill.logo}  style={{ width: '64px', height: '64px' }} />
                                                     </div>
