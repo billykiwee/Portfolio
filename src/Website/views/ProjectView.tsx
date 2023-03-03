@@ -1,51 +1,95 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Component, useEffect, useRef, useState } from 'react'
 import formatCurrency from '../../App/components/formatCurrency'
 import UniqueID from '../../App/components/uniqueID'
 import jsPDF from 'jspdf';
 
 
-export default function ProjectView() {
+
+interface jsPDFOptions {
+    format          : string,
+    unit            : any,
+    orientation     : any,
+    putOnlyUsedFonts: boolean,
+    zoom            : number
+}
+
+
+export default function ProjectView(): JSX.Element {
 
     const ID = UniqueID(8)
 
-    const [visible, setvisible] = useState(true)
+    const [visible, setvisible] = useState<boolean>(true)
 
-    const reportTemplateRef = useRef(null)
+    const reportTemplateRef = useRef<HTMLDivElement>(null)
+
 	const handleGeneratePdf = () => {
+
+        const options : jsPDFOptions = {
+            format: 'a4',
+            unit  : 'pt',
+            orientation: 'p',
+            putOnlyUsedFonts:true,
+            zoom: 1.5
+        }
         
-            const doc = new jsPDF({
-                format: 'a4',
-                unit  : 'pt',
-                orientation: 'p',
-                putOnlyUsedFonts:true,
-                zoom: 1.5
-            })
+        const doc = new jsPDF(options)
         setvisible(false)
 
-        doc.html(reportTemplateRef.current, {
-            async callback(doc) {
-                await doc.save('Facture n° ' + ID)
-                setvisible(true)
-            }
-        })
+        if (reportTemplateRef.current) {
+            doc.html(reportTemplateRef.current, {
+                async callback(doc) {
+                    await doc.save('Facture n° ' + ID)
+                    setvisible(true)
+                }
+            })
+        }
 	}
 
 
-
-    function makeFriendly(number) {
-        let n = new Intl.NumberFormat('en-EN', {notation: 'compact'})
-    
-        return n.format(number)
+    interface Students {
+        frist: string,
+        last : string,
+        notes: number[]
     }
 
+    const students: Students[] = [
+        {
+            frist:'Amel',
+            last:'Bent',
+            notes: [1,12,18,12,11,12,13,14,18]
+        },
+        {
+            frist:'Lydie',
+            last:'Bal',
+            notes: [1,12,18,12,11,12]
+        },
+        {
+            frist:'Billy',
+            last:'Turpin',
+            notes: [12,18,19,14,12,13,13,18]
+        },
+    ]
 
-    const [count, setcount] = useState(0)
+    function getBestStudentName(): string {
 
+        const best = students
+        .map(student=> {
+            const avg = student.notes.reduce((a,b)=> a+b) / student.notes.length
+            return {
+                name: student.frist + ' ' + student.last,
+                avg: avg
+            }
+        })
+        return best.sort((a,b)=> b.avg - a.avg)[0].name
+    }
+
+    console.log(getBestStudentName() );
+    
 
 
     return (
 
-        <div className='display gap  p-2 h-100p' style={{ width: '540px', alignItems: 'baseline' }} ref={reportTemplateRef} >
+        <div className='display gap  p-2 h-100p' style={{ width: 'calc(100vh, 500px)', alignItems: 'baseline' }} ref={reportTemplateRef} >
             <div className='grid m-2' >
                 <div className='display w-100p justify-s-b'>
                     <div className='grid w-100p'>
@@ -57,7 +101,7 @@ export default function ProjectView() {
                             adress='34 chemin des palmistes'
                             additionalAdress='Palmiste rouge'
                             city='Cilaos'
-                            zipCode='97413'
+                            zipCode={97413}
                         />
                     </div>
 
@@ -67,7 +111,8 @@ export default function ProjectView() {
                             name='Mr Martial'
                             adress='34 chemin des palmistes'
                             city='Cilaos'
-                            zipCode='97413'
+                            additionalAdress=''
+                            zipCode={97413}
                         />
                     </div>
                 </div>
@@ -100,9 +145,23 @@ export default function ProjectView() {
 }
 
 
-function Table({ visible }) {
+interface TableProps {
+    visible : boolean
+} 
 
-    const lignInitial = [{
+
+interface LignItem {
+    name    : string;
+    price   : number;
+    qte     : number;
+    subTotal: number;
+    id      : string;
+}
+
+
+function Table({ visible }: TableProps): JSX.Element {
+
+    const lignInitial : LignItem[] = [{
         name    : 'Fabrication',
         price   : 200,
         qte     : 1,
@@ -110,10 +169,10 @@ function Table({ visible }) {
         id      : UniqueID(8)
     }]
 
-    const [lign, setLign] = useState([])
+    const [lign, setLign] = useState<LignItem[]>([])
 
 
-    useEffect(e=> {
+    useEffect(()=> {
         setLign(lignInitial)
     }, [])
 
@@ -127,7 +186,7 @@ function Table({ visible }) {
     }
 
 
-    const [Total, setTotal] = useState(0)
+    const [Total, setTotal] = useState<number>(0)
 
 
    
@@ -157,8 +216,6 @@ function Table({ visible }) {
 
                         return (
                             <TableLign 
-                                lign={lign}
-                                id={id}
                                 name={name}
                                 price={price}
                                 qte={qte}
@@ -194,20 +251,32 @@ function Table({ visible }) {
     )
 }
 
-function TableLign({ name, price, qte, setTotal }) {
 
-    const [subtotal, setSubtotal] = useState({
-        price: 0,
-        qte  : 0
+interface TableLignProps {
+    name: string,
+    price: number,
+    qte: number,
+    setTotal: any,
+}
+
+interface subTotalOptions {
+    price: any,
+    qte: any
+}
+function TableLign({ name, price, qte, setTotal }: TableLignProps) {
+
+    const [subtotal, setSubtotal] = useState<subTotalOptions>({
+        price: '',
+        qte  : ''
     })
     const getSum = subtotal.price * subtotal.qte
     
-    useEffect(e=> {
+    useEffect(()=> {
         const getTotal = document.querySelectorAll('.subtotal')
 
-        const subtotals = []
+        const subtotals : any[] = []
 
-        getTotal.forEach(sub=> {
+        getTotal.forEach(sub => {
             subtotals.push(sub.id)
         })
         
@@ -224,19 +293,24 @@ function TableLign({ name, price, qte, setTotal }) {
                 <input className='border-0 w-100p h-100p' placeholder={name} />
             </div>
             <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={price} />
+                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={price.toString()} />
             </div>
             <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={qte} />
+                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={qte.toString()} />
             </div>
             <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal' id={getSum}>{formatCurrency(getSum)}</span>
+                <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
             </div>
         </div>
     )
 }
 
-function Project({projet}) {
+
+interface projectProps {
+    projet : string
+}
+
+function Project({projet}: projectProps) {
     return (
         <div className='display'>
             <span className='f-w-600'>Projet :</span><span>&nbsp;{projet}</span>
@@ -244,8 +318,11 @@ function Project({projet}) {
     )
 }
 
+interface EnocdeProps {
+    ID: string
+}
 
-function Encode({ ID }) {
+function Encode({ ID }: EnocdeProps): JSX.Element {
     return (
         <div>
             <div className='display gap'>
@@ -261,7 +338,18 @@ function Encode({ ID }) {
 }
 
 
-function Adress({ name, adress, additionalAdress, city, zipCode  }) {
+
+
+interface AdressProps {
+    name: string, 
+    adress: string, 
+    additionalAdress: string, 
+    city: string, 
+    zipCode: number
+}
+
+
+function Adress({ name, adress, additionalAdress, city, zipCode }: AdressProps) : JSX.Element {
 
     return (
         <div className='grid w-100p'  >
@@ -292,7 +380,7 @@ function Adress({ name, adress, additionalAdress, city, zipCode  }) {
 }
 
 
-function BottomPage({  }) {
+function BottomPage() {
     return (
         <div className='display justify-c w-100p'>
             <div className='grid' style={{ textAlign: 'center', fontSize: '12px' }} >
@@ -308,7 +396,8 @@ function BottomPage({  }) {
 
 
 
-function Froms() {
+function Froms(): JSX.Element {
+    
     return (
         <div className='grid gap w-100p border p-1'>
 

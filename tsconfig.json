@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es5",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "files": [
+    "src/Website/views/ProjectView.tsx"
+  ],
+  "include": [
+    "src"
+  ]
+}
