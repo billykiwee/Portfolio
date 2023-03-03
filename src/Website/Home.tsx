@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../App/components/Container'
-
-import '../Website/portfolio.css'
-import '../Website/effect.css'
-import { Swiper, SwiperSlide } from 'swiper/react';
-// import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Bubbles } from './Components/Background';
-
-export const ProfilImg = 'https://kiwee.site/wp-content/uploads/2023/02/portfolioPP.png'
-
+import '../Website/css/portfolio.css'
+import '../Website/css/effect.css'
+import { Bubbles } from './components/Background';
 
 
 export default function Home(): JSX.Element {
@@ -221,80 +214,13 @@ export default function Home(): JSX.Element {
     const [stopScroll, setStopScroll]= useState(true)
     useEffect(()=> {
 
-     /*    if ((NewPosition[1] - NewPosition[0]) > 0) {
-            setUpdateDirection('down')
-            setStopScroll(false)
-        }
-        if ((NewPosition[1] - NewPosition[0]) < 0) {
-            setUpdateDirection('up')
-            setStopScroll(false)
-        }
-
-
-        if ((NewPosition[1] - NewPosition[0]) === 1 || (NewPosition[1] - NewPosition[0]) === -1 ) {
-            setStopScroll(true)
-        } */
-
-
         if ((NewPosition[1] - NewPosition[0]) > 0) {
             setUpdateDirection('down')
         }
         if ((NewPosition[1] - NewPosition[0]) < 0) {
             setUpdateDirection('up')
         }
-
-
-        
     }, [NewPosition])
-
- /*    const [scroll, setScroll] = useState(0)
-
-    useEffect(e=> {
-
-        window.onscroll = () => {
-            setScroll(window.scrollY)
-        }
-        
-    })
-
-    useEffect(e=> {
-
-        document.querySelector('#sections').style.top =  -scroll + 'px'
-        
-    }, [scroll]) */
-
-
-
-
-  /*   const [sectionPosition, setSectionPosition] = useState(0)
-
-    useEffect(e=> {
-
-        if (!stopScroll) {
-            if (updateDirection === 'down') {
-                if (sectionPosition > (sections.length * -1000)) {
-                    setSectionPosition(sectionPosition - 1000)
-                }
-
-            }
-            if (updateDirection === 'up') {
-                if (sectionPosition < 0) {
-                    setSectionPosition(sectionPosition + 1000)
-                }
-            }
-        }
-
-    }, [stopScroll, updateDirection]) */
-
-    
-   /*  useEffect(e=> {
-        
-        document.querySelector('#sections').style.top = sectionPosition + 'px'
-
-
-    }, [sectionPosition]) */
-
-
 
 
     return (
@@ -331,11 +257,7 @@ export default function Home(): JSX.Element {
                 <div className='grid gap-2rem ' id='sections'>  
 
                     <section className=' section  gap-1rem' id='Home' >
-                        <div className='block grid border-r-2 gap-2rem white shadow' 
-                            style={{
-                                flex: '1 0 55%', 
-                            }}
-                        >
+                        <div className='block grid border-r-2 gap-2rem white shadow' style={{ flex: '1 0 55%' }}>
                             <div 
                                 className='grid border-r-2 gap-2rem h-100p'  
                                 style={{
@@ -410,7 +332,7 @@ export default function Home(): JSX.Element {
                         </div>
 
                         <div className='display w-100p animation-1' style={{flex: '1 0 32%'}} id='profil-img'>
-                            <img className='w-100p' id='profil_img' src={ProfilImg} />
+                            <img className='w-100p' id='profil_img' src='https://kiwee.site/wp-content/uploads/2023/02/portfolioPP.png' />
                         </div>
                     </section>
 
@@ -524,7 +446,7 @@ export default function Home(): JSX.Element {
                             <div className='display justify-c m-t-1'>
                                 <div className='display white  justify-c wrap border-r-2 shadow p-2'>
                                     <span className='display justify-c'>
-                                        <img src={ProfilImg} style={{ width: '12rem'}} />
+                                        <img src='https://kiwee.site/wp-content/uploads/2023/02/portfolioPP.png' style={{ width: '12rem'}} />
                                     </span>
                                     <div className='grid'>
                                         <a href='https://www.malt.fr/profile/billyturpin'>

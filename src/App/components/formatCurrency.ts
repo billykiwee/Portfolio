@@ -1,5 +1,5 @@
 
-export default function formatCurrency(data :number, currency:string, digit :number) {
+export default function formatCurrency(data :number, currency?:string, digit ?:number) {
 
     const formatC = new Intl.NumberFormat( 
 

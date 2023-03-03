@@ -147,7 +147,10 @@ function Table({ visible }: TableProps): JSX.Element {
 
     function removeLign() {
         if (lign.length === 1) return 
-        return setLign(lign.filter(e=> e.id !== lign[lign.length-1].id))
+        return setLign(
+            lign
+            .filter(e=> e.id !== lign[lign.length-1].id)
+        )
     }
 
 
