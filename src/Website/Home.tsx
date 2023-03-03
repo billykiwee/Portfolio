@@ -324,7 +324,6 @@ export default function Netflix() {
                 
             </div>    
             <Container>
-
                 <div className='grid gap-2rem ' id='sections'>  
 
                     <section className=' section  gap-1rem' id='Home' >
