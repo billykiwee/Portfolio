@@ -6,11 +6,12 @@ interface ContainerProps {
     ref     : React.LegacyRef<HTMLDivElement> 
 }
 
-export default function Container({children, style, ref} : ContainerProps) : JSX.Element {
+const Container = React.forwardRef<HTMLDivElement, ContainerProps>(({ children, style }, ref) => {
     return (
         <div className={'container ' + style ?? '' } ref={ref}>
             <div className='grid'>{children}</div>
         </div>
     )
+})
 
-}
+export default Container
