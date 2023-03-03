@@ -46,45 +46,10 @@ export default function ProjectView(): JSX.Element {
 	}
 
 
-    interface Students {
-        frist: string,
-        last : string,
-        notes: number[]
-    }
 
-    const students: Students[] = [
-        {
-            frist:'Amel',
-            last:'Bent',
-            notes: [1,12,18,12,11,12,13,14,18]
-        },
-        {
-            frist:'Lydie',
-            last:'Bal',
-            notes: [1,12,18,12,11,12]
-        },
-        {
-            frist:'Billy',
-            last:'Turpin',
-            notes: [12,18,19,14,12,13,13,18]
-        },
-    ]
-
-    function getBestStudentName(): string {
-
-        const best = students
-        .map(student=> {
-            const avg = student.notes.reduce((a,b)=> a+b) / student.notes.length
-            return {
-                name: student.frist + ' ' + student.last,
-                avg: avg
-            }
-        })
-        return best.sort((a,b)=> b.avg - a.avg)[0].name
-    }
-
-    console.log(getBestStudentName() );
     
+
+
 
 
     return (
