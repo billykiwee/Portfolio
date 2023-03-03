@@ -128,32 +128,51 @@ export default function Netflix() {
         }
     }
 
-    function hoverImage(id : string) {
-        
+    function hoverImage(id: string) {
+        const projectEl = document.querySelector<HTMLElement>('#project-' + id);
+        if (projectEl) {
+            projectEl.style.background = '#f0f8ff87';
+            projectEl.onmousemove = w => {
+                const imgEl = document.querySelector<HTMLElement>('#' + id);
+                if (imgEl) {
+                    const imgHeight = imgEl.clientHeight;
+                    const imgWidth = imgEl.clientWidth;
+                    const x = w.clientX / imgWidth;
+                    const y = w.clientY / imgHeight;
+                    imgEl.style.transform = `translate(${x}%, ${y}%)`;
+                    const imgParent = imgEl.parentElement
 
-        document.querySelector<HTMLElement>('#project-' + id)!.style.background= '#f0f8ff87'
+                    if (imgParent) imgParent.style.transform = 'scale(1.06)';
+                }
+            }
+        }
+      
+        const infoEl = document.querySelector<HTMLElement>('#info-' + id);
 
-        document.querySelector<HTMLElement>('#info-' + id)!.style.display= 'flex'
-
-        document.querySelector<HTMLElement>('#project-' + id)!
-        .onmousemove = w => {
-
-            let imgHeight =  document.querySelector<HTMLElement>('#' + id)!.clientHeight
-            let imgWidth =  document.querySelector<HTMLElement>('#' + id)!.clientWidth
-            let x = w.clientX / imgWidth!
-            let y = w.clientY / imgHeight
-
-            document.querySelector<HTMLElement>('#' + id)!.style = `transform : translate(${(x)}%, ${(y)}%)`
-            document.querySelector<HTMLElement>('#' + id)!.parentElement.style.transform= 'scale(1.06)'
+        if (infoEl) {
+          infoEl.style.display = 'flex';
         }
     }
+      
 
     function unFocusImage(id : string) {
-        document.querySelector('#project-' + id).style.background= 'unset'
-        document.querySelector('#info-' + id).style.display= 'none'
 
-        document.querySelector('#' + id).style = `transform : translate(0)`
-        document.querySelector('#' + id).parentElement.style.transform= 'scale(1)'
+        const projectEl = document.querySelector<HTMLElement>('#project-' + id)
+        const projectInfoEl = document.querySelector<HTMLElement>('#info-' + id)
+
+        if (projectEl) {
+            projectEl.style.background= 'unset'
+        }
+        if (projectInfoEl) {
+            projectInfoEl.style.display= 'none'
+            projectInfoEl.style.transform = `translate(0)`
+        }    
+
+        const imgParentEl = document.querySelector<HTMLElement>('#' + id)?.parentElement
+
+        if (imgParentEl) {
+            imgParentEl.style.transform= 'scale(1)'
+        }
     }
     
     const sections = ['Home', 'Works', 'Skills', 'CV', 'Propose']
@@ -273,7 +292,7 @@ export default function Netflix() {
                         return <a 
                             href={'#'+s}
                             id={'section-' + s}
-                            style={{ transform: section === s && 'scale(1.3)' }}
+                            style={{ transform: section === s ? 'scale(1.3)' : '' }}
                             className={
                                 (section === s 
                                 ? ' w-1 h-1 blue ' 
@@ -286,27 +305,27 @@ export default function Netflix() {
                 }
             </div>
 
-            <div class="bubbles">
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
+            <div className="bubbles">
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
+                <div className="bubble"></div>
                 
             </div>    
             <Container>
 
-                <div class='grid gap-2rem ' id='sections'>  
+                <div className='grid gap-2rem ' id='sections'>  
 
                     <section className=' section  gap-1rem' id='Home' >
                         <div className='block grid border-r-2 gap-2rem white shadow' 
@@ -538,42 +557,3 @@ export default function Netflix() {
     )
 }
 
-
-
-function useInView(element, effect) {
-
-    const [view, setView] = useState(false)
-
-    
-    useEffect(e=> {
-
-        function Observer() {
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    setView(entry.isIntersecting)
-                })
-            });
-            
-            const getElement = document.querySelector(element)
-            
-            return observer.observe(getElement)
-        }
-        Observer()
-
-        
-        window.onscroll = () => Observer()
-
-        return () => view
-    })
-
-    useEffect(e=> {
-        if (view) {
-            document.querySelector(element).classList.add(effect)
-        }
-        /* else document.querySelector(element).classList.remove(effect) */
-    }, [view])
-
-
-    return view
-}

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 interface ContainerProps {
-    children: any,
+    children: ReactNode,
     style   : string,
     ref     : React.LegacyRef<HTMLDivElement> 
 }
