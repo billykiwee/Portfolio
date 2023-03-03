@@ -1,7 +1,7 @@
-export default function UniqueID(name, lenght) {
+export default function UniqueID(lenght: number, name?: string) : string {
 
-    var UID = ''
-    var char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    let UID = ''
+    const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
   
     const lenghtNum = lenght ?? 6
 

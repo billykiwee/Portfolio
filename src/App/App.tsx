@@ -6,15 +6,14 @@ import ProjectView from '../Website/views/ProjectView'
 
 
 
-export default function App() {
-
+export default function App(): JSX.Element {
 
     return (
         <BrowserRouter>
             <main>
                 <Routes>
-                    <Route path="/" exact element={<Home />} />
-                    <Route path="/ProjectView" exact element={<ProjectView />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/ProjectView" element={<ProjectView />} />
                 </Routes>
             </main>
         </BrowserRouter>
