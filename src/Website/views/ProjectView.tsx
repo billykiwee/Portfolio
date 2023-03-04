@@ -110,8 +110,8 @@ interface TableProps {
 
 interface LignItem {
     name    : string;
-    price   : number | string;
-    qte     : number | string;
+    price   : string;
+    qte     : string|number;
     subTotal: number;
     id      : string;
 }
@@ -121,7 +121,7 @@ function Table({ visible }: TableProps): JSX.Element {
 
     const lignInitial : LignItem[] = [{
         name    : 'Fabrication',
-        price   : 200,
+        price   : '200,00€',
         qte     : 1,
         subTotal: 200,
         id      : UniqueID(4)
@@ -217,14 +217,14 @@ interface TableLignProps {
     id: string
     name: string;
     price:  string,
-    qte:  string,
+    qte:  string|number,
     setTotal: (newTotal: number) => void;
 }
   
 interface TableLignState {
     name: string;
     price:  string,
-    qte:  string,
+    qte:  string|number,
 }
 
 class TableLign extends React.Component<TableLignProps, TableLignState> {
@@ -278,8 +278,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
     
     onBlur = () => {
 
-        const formattedPrice = formatCurrency( Number(String(this.state.price).replace(/\s/g, '').replace(/€/g, '').replace(/,/g, '.')))
-
+        const formattedPrice = formatCurrency(this.transformPriceStringToNumber(this.state.price))
     
         const input = document.querySelectorAll<HTMLInputElement>('#price-'+ this.props.id)
         if (input) {
@@ -289,15 +288,16 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }
     }
 
+    transformPriceStringToNumber(price: string): number {
+        return Number(String(price).replace(/\s/g, '').replace(/€/g, '').replace(/,/g, '.'))
+    }
 
 
     render() {
         
-        const getSumArray = [this.state.price, this.state.qte]
+        const getSumArray : any[] = [this.state.price, this.state.qte]
         
-        const getSum: number = Number(String(getSumArray[0]).replace(/\s/g, '').replace(/€/g, '').replace(/,/g, '.')) * Number(String(getSumArray[1]).replace(/\s/g, '').replace(/€/g, '').replace(/,/g, '.'))
-        
-
+        const getSum: number = this.transformPriceStringToNumber(getSumArray[0]) * getSumArray[1]
         
         return (
             <div className='display' onBlur={this.onBlur}>
@@ -311,7 +311,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
                     <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.state.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
+                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum).toString()}</span>
                 </div>
             </div>
         )
