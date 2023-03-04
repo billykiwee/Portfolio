@@ -249,8 +249,6 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }))
     }
 
-
-
     blockInputCharacter(event: KeyboardEvent) {
         const key = event.key;
         const regex = /[0-9]|\./;
@@ -276,7 +274,6 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
             this.props.setTotal(total)
         }
     }
-
     
     onBlur = () => {
 
@@ -300,6 +297,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         const getSumArray : Sum = [this.state.price, this.state.qte]
         
         const getSum: number = this.transformPriceStringToNumber(getSumArray[0]) * getSumArray[1]
+
         
         return (
             <div className='display' onBlur={this.onBlur}>
@@ -313,7 +311,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
                     <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.state.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum).toString()}</span>
+                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
                 </div>
             </div>
         )
