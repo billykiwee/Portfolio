@@ -214,15 +214,15 @@ function Table({ visible }: TableProps): JSX.Element {
 
 interface TableLignProps {
     name: string;
-    price: number | string,
-    qte: number | string,
+    price:  string,
+    qte:  string,
     setTotal: (newTotal: number) => void;
 }
   
 interface TableLignState {
     name: string;
-    price: number | string,
-    qte: number | string,
+    price:  string,
+    qte:  string,
 }
 
 class TableLign extends React.Component<TableLignProps, TableLignState> {
@@ -273,7 +273,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }
     }
 
-
+    
     onBlur = () => {
 
         const formattedPrice = formatCurrency(Number(this.props.price))
@@ -290,7 +290,15 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
 
 
     render() {
-        const getSum: number = Number(this.state.price) * Number(this.state.qte)   
+        
+        const getSumArray = [this.state.price, this.state.qte]
+        
+      /*   const getSum: string | number = this.state.price *  this.state.qte */
+
+
+        console.log(getSumArray[0].replace(/\s/g, '').replace(/€/g, ''));
+        
+        
         
         return (
             <div className='display' onBlur={this.onBlur}>
@@ -304,7 +312,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
                     <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.props.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
+                   {/*  <span className='subtotal' id={getSum.toString()}>{getSum}</span> */}
                 </div>
             </div>
         )
