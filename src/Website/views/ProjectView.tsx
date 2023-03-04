@@ -5,6 +5,9 @@ import jsPDF from 'jspdf';
 
 
 
+const ID = UniqueID(5)
+
+
 interface jsPDFOptions {
     format          : string,
     unit            : any,
@@ -15,8 +18,6 @@ interface jsPDFOptions {
 
 
 export default function ProjectView(): JSX.Element {
-
-    const ID = UniqueID(8)
 
     const [visible, setvisible] = useState<boolean>(true)
 
@@ -44,13 +45,6 @@ export default function ProjectView(): JSX.Element {
             })
         }
 	}
-
-
-
-    
-
-
-
 
     return (
 
@@ -85,7 +79,7 @@ export default function ProjectView(): JSX.Element {
 
                 <div className='m-t-4 display justify-s-b align-top'>
                     <Project projet='Fabrication' />
-                    <Encode ID={ID} />
+                    <Encode />
                 </div>
 
                 <Table visible={visible} />   
@@ -108,7 +102,6 @@ export default function ProjectView(): JSX.Element {
         </div>
     )
 }
-
 
 interface TableProps {
     visible : boolean
@@ -286,75 +279,76 @@ function Project({projet}: projectProps) {
     )
 }
 
-interface EnocdeProps {
-    ID: string
-}
 
-function Encode({ ID }: EnocdeProps): JSX.Element {
-    return (
-        <div>
-            <div className='display gap'>
-                <span>Facture en date du:</span>
-                <span >{new Date().toLocaleDateString().replaceAll('/', '-')}</span>
+class Encode extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <div className='display gap'>
+                    <span>Facture en date du:</span>
+                    <span >{new Date().toLocaleDateString().replaceAll('/', '-')}</span>
+                </div>
+                <div className='display gap justify-e' >
+                    <span>Numéro:</span>
+                    <span className='f-w-600'>{ID}</span>
+                </div>
             </div>
-            <div className='display gap justify-e' >
-                <span>Numéro:</span>
-                <span className='f-w-600'>{ID}</span>
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
+console.log(ID);
 
 
 
 
-interface AdressProps {
-    name: string, 
-    adress: string, 
-    additionalAdress?: string, 
-    city: string, 
-    zipCode: number
+interface AddressProps {
+    name: string;
+    adress: string;
+    additionalAdress?: string;
+    city: string;
+    zipCode: number;
 }
 
-type AddressState = AdressProps
+type AddressState = AddressProps
+  
+class Adress extends React.Component<AddressProps, AddressState> {
 
-class Adress extends React.Component<AdressProps, AddressState> {
-    
-    constructor(props: AdressProps) {
-        super(props)
-        this.state = {
-            name: props.name,
-            address: props.address,
-            additionalAddress: props.additionalAddress,
-            city: props.city,
-            zipCode: props.zipCode,
-          };
+    constructor(props: AddressProps) {
+      super(props);
+      this.state = {
+        name: props.name,
+        adress: props.adress,
+        additionalAdress: props.additionalAdress,
+        city: props.city,
+        zipCode: props.zipCode,
+      }
     }
 
     render() {
         return (
             <div className='grid w-100p'  >
             {
-                name &&
-                <span >{name}</span>
+                this.props.name &&
+                <span >{this.props.name}</span>
             }
             {
-                adress &&
-                <span >{adress}</span>   
+                this.props.adress &&
+                <span >{this.props.adress}</span>   
             }
             {
-                additionalAdress &&
-                <span >{additionalAdress}</span>
+                this.props.additionalAdress &&
+                <span >{this.props.additionalAdress}</span>
             }
             <div>
                 {
-                    city &&
-                    <span >{city.toUpperCase()}</span> 
+                    this.props.city &&
+                    <span >{this.props.city.toUpperCase()}</span> 
                 }
                 {
-                    zipCode &&
-                    <span  className='m-l-04'>{zipCode}</span>
+                    this.props.zipCode &&
+                    <span  className='m-l-04'>{this.props.zipCode}</span>
                 }
             </div>
         </div>
@@ -381,23 +375,23 @@ function BottomPage() {
 
 
 
-function Froms(): JSX.Element {
-    
-    return (
-        <div className='grid gap w-100p border p-1'>
-
-            <div className='grid gap-04'>
-                <label>Projet</label>
-                <input placeholder='bonjour' />
+class Froms extends React.Component {
+    render() {
+        return (
+            <div className='grid gap w-100p border p-1'>
+                <div className='grid gap-04'>
+                    <label>Projet</label>
+                    <input placeholder='bonjour' />
+                </div>
+                <div className='grid gap-04'>
+                    <label>Projet</label>
+                    <input placeholder='bonjour' />
+                </div>
+                <div className='grid gap-04'>
+                    <label>Projet</label>
+                    <input placeholder='bonjour' />
+                </div>
             </div>
-            <div className='grid gap-04'>
-                <label>Projet</label>
-                <input placeholder='bonjour' />
-            </div>
-            <div className='grid gap-04'>
-                <label>Projet</label>
-                <input placeholder='bonjour' />
-            </div>
-        </div>
-    )
+        )
+    }
 }
