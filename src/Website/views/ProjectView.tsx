@@ -238,11 +238,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
     }
 
 
-    changeLign(setter: string, value: (string)) {
-
-        if (value.match(/[^0-9]/g)) {
-            return;
-        }
+    changeLign(setter: string, value: (string | number)) {
 
         this.setState(prev => ({ 
             ...prev,
@@ -250,6 +246,17 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }))
     }
 
+
+
+
+    blockInputCharacter(event: KeyboardEvent) {
+        const key = event.key;
+        const regex = /[0-9]|\./;
+      
+        if (!regex.test(key)) {
+          event.preventDefault();
+        }
+    }
 
     componentDidUpdate(prevProps: TableLignProps) {
 
@@ -268,17 +275,23 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }
     }
 
+    onBlur() {
+        this.setState({
+            price : formatCurrency(this.props.price)
+        })
+    }
+
 
     render() {
         const getSum: number = this.state.price * this.state.qte      
     
         return (
-            <div className='display ' >
+            <div className='display' onBlur={this.onBlur}>
                 <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
                     <input className='border-0 w-100p h-100p'  onChange={e=> this.changeLign('name', e.target.value) } placeholder={this.props.name} />
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('price', e.target.value) } placeholder={this.props.price.toString()} />
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onKeyDown={this.blockInputCharacter} onChange={e=> this.changeLign('price', e.target.value) } placeholder={this.props.price.toString()} />
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                     <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.props.qte.toString()} />
