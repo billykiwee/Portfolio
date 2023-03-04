@@ -111,7 +111,7 @@ interface TableProps {
 interface LignItem {
     name    : string;
     price   : string;
-    qte     : string|number;
+    qte     : number;
     subTotal: number;
     id      : string;
 }
@@ -217,15 +217,17 @@ interface TableLignProps {
     id: string
     name: string;
     price:  string,
-    qte:  string|number,
+    qte:  number,
     setTotal: (newTotal: number) => void;
 }
   
 interface TableLignState {
     name: string;
     price:  string,
-    qte:  string|number,
+    qte:  number,
 }
+
+type Sum = [string, number]
 
 class TableLign extends React.Component<TableLignProps, TableLignState> {
 
@@ -295,7 +297,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
 
     render() {
         
-        const getSumArray : any[] = [this.state.price, this.state.qte]
+        const getSumArray : Sum = [this.state.price, this.state.qte]
         
         const getSum: number = this.transformPriceStringToNumber(getSumArray[0]) * getSumArray[1]
         
