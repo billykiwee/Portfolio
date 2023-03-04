@@ -110,8 +110,8 @@ interface TableProps {
 
 interface LignItem {
     name    : string;
-    price   : number;
-    qte     : number;
+    price   : number | string;
+    qte     : number | string;
     subTotal: number;
     id      : string;
 }
@@ -214,15 +214,15 @@ function Table({ visible }: TableProps): JSX.Element {
 
 interface TableLignProps {
     name: string;
-    price: number,
-    qte: number,
+    price: number | string,
+    qte: number | string,
     setTotal: (newTotal: number) => void;
 }
   
 interface TableLignState {
     name: string;
-    price: number,
-    qte: number,
+    price: number | string,
+    qte: number | string,
 }
 
 class TableLign extends React.Component<TableLignProps, TableLignState> {
@@ -237,7 +237,6 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }
     }
 
-
     changeLign(setter: string, value: (string | number)) {
 
         this.setState(prev => ({ 
@@ -245,7 +244,6 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
             [setter]: value 
         }))
     }
-
 
 
 
@@ -275,23 +273,32 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }
     }
 
-    onBlur() {
+
+    onBlur = () => {
+
+        const formattedPrice = formatCurrency(Number(this.props.price))
         this.setState({
-            price : formatCurrency(this.props.price)
+            price: formattedPrice
         })
+    
+        const input = document.querySelector<HTMLInputElement>('#price')
+        if (input) {
+            input.value = formattedPrice
+        }
     }
 
 
+
     render() {
-        const getSum: number = this.state.price * this.state.qte      
-    
+        const getSum: number = Number(this.state.price) * Number(this.state.qte)   
+        
         return (
             <div className='display' onBlur={this.onBlur}>
                 <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
                     <input className='border-0 w-100p h-100p'  onChange={e=> this.changeLign('name', e.target.value) } placeholder={this.props.name} />
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onKeyDown={this.blockInputCharacter} onChange={e=> this.changeLign('price', e.target.value) } placeholder={this.props.price.toString()} />
+                    <input className='border-0 w-100p h-100p' id='price' style={{ textAlign: 'end' }} onKeyDown={this.blockInputCharacter} onChange={e=> this.changeLign('price', e.target.value) } placeholder={this.props.price.toString()} />
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                     <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.props.qte.toString()} />
