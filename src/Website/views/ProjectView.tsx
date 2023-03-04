@@ -150,7 +150,6 @@ function Table({ visible }: TableProps): JSX.Element {
     const [Total, setTotal] = useState<number>(0)
 
 
-   
     return (
         <div className='grid m-t-2'>
             <div className='f-w-600 display '>
@@ -242,27 +241,30 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
     public qte   = this.props.qte
 
 
-    getTotal() {
-        const getTotal = document.querySelectorAll('.subtotal')
-    
-        const subtotals : any[] = []
-
-        getTotal.forEach(sub => {
-            subtotals.push(sub.id)
-        })
+    componentDidUpdate(prevProps: TableLignProps) {
+        if (prevProps.price !== this.price) {
+/* 
+            const getTotal = document.querySelectorAll('.subtotal')
         
-        if (subtotals.length > 0) {
-            this.props.setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
-        }
-    }
+        
+            const subtotals : any[] = []
     
+            getTotal.forEach(sub => {
+                subtotals.push(sub.id)
+            })
+            
+            if (subtotals.length > 0) {
+               console.log(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
+            } */
+    
+            console.log('getTotal')
+        }
+      }
+
 
     render() {
-
-        
-        const getSum: number = this.state.price * this.state.qte
-        
-
+        const getSum: number = this.state.price * this.state.qte      
+    
         return (
             <div className='display ' >
                 <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
