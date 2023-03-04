@@ -6,14 +6,11 @@ import './App/css/style.css'
 
 const element = document.getElementById('root')
 
-if (element) {
 
+if (element) {
     const root = ReactDOM.createRoot(element)
     
-    root.render(
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    )
-}    
+    root.render(<App />)
+}
+
 
