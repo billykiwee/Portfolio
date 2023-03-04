@@ -124,7 +124,7 @@ function Table({ visible }: TableProps): JSX.Element {
         price   : 200,
         qte     : 1,
         subTotal: 200,
-        id      : UniqueID(8)
+        id      : UniqueID(4)
     }]
 
     const [lign, setLign] = useState<LignItem[]>([])
@@ -176,6 +176,7 @@ function Table({ visible }: TableProps): JSX.Element {
 
                         return (
                             <TableLign 
+                                id={id}
                                 name={name}
                                 price={price}
                                 qte={qte}
@@ -213,6 +214,7 @@ function Table({ visible }: TableProps): JSX.Element {
 
 
 interface TableLignProps {
+    id: string
     name: string;
     price:  string,
     qte:  string,
@@ -276,14 +278,14 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
     
     onBlur = () => {
 
-        const formattedPrice = formatCurrency(Number(this.props.price))
-        this.setState({
-            price: formattedPrice
-        })
+        const formattedPrice = formatCurrency( Number(String(this.state.price).replace(/\s/g, '').replace(/€/g, '').replace(/,/g, '.')))
+
     
-        const input = document.querySelector<HTMLInputElement>('#price')
+        const input = document.querySelectorAll<HTMLInputElement>('#price-'+ this.props.id)
         if (input) {
-            input.value = formattedPrice
+            input.forEach(input=> {
+                input.value = formattedPrice
+            }) 
         }
     }
 
@@ -293,26 +295,23 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         
         const getSumArray = [this.state.price, this.state.qte]
         
-      /*   const getSum: string | number = this.state.price *  this.state.qte */
-
-
-        console.log(getSumArray[0].replace(/\s/g, '').replace(/€/g, ''));
+        const getSum: number = Number(String(getSumArray[0]).replace(/\s/g, '').replace(/€/g, '').replace(/,/g, '.')) * Number(String(getSumArray[1]).replace(/\s/g, '').replace(/€/g, '').replace(/,/g, '.'))
         
-        
+
         
         return (
             <div className='display' onBlur={this.onBlur}>
                 <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
-                    <input className='border-0 w-100p h-100p'  onChange={e=> this.changeLign('name', e.target.value) } placeholder={this.props.name} />
+                    <input className='border-0 w-100p h-100p'  onChange={e=> this.changeLign('name', e.target.value) } placeholder={this.state.name} />
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                    <input className='border-0 w-100p h-100p' id='price' style={{ textAlign: 'end' }} onKeyDown={this.blockInputCharacter} onChange={e=> this.changeLign('price', e.target.value) } placeholder={this.props.price.toString()} />
+                    <input className='border-0 w-100p h-100p' id={'price-' + this.props.id} style={{ textAlign: 'end' }} onChange={e=> this.changeLign('price', e.target.value) } placeholder={this.state.price.toString()} />
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.props.qte.toString()} />
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.state.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                   {/*  <span className='subtotal' id={getSum.toString()}>{getSum}</span> */}
+                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
                 </div>
             </div>
         )
