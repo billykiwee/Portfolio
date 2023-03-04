@@ -217,29 +217,30 @@ interface TableLignProps {
     name: string;
     price: number;
     qte: number;
-    setTotal: number
+    setTotal: (total: number) => void
   }
   
-  interface TableLignState {
-    price: number;
-    qte: number;
-    setTotal: number
-  }
+interface TableLignState {
+    setTotal: (total: number) => void
+}
+
 class TableLign extends React.Component<TableLignProps, TableLignState> {
 
     constructor(props: TableLignProps) {
         super(props)
 
         this.state = {
-            price: props.price,
-            qte: props.qte,
-            setTotal: props.setTotal
+            setTotal: props.setTotal,
         }
+    }
+
+    getSum() : number {
+        return this.props.price * this.props.qte
     }
 
     getTotal() {
         const getTotal = document.querySelectorAll('.subtotal')
-
+    
         const subtotals : any[] = []
 
         getTotal.forEach(sub => {
@@ -247,43 +248,22 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         })
         
         if (subtotals.length > 0) {
-            setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
+            this.props.setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
         }
     }
 
-   /*  const [subtotal, setSubtotal] = useState<subTotalOptions>({
-        price: '',
-        qte  : ''
-    })
-    const getSum = subtotal.price * subtotal.qte
-    
-    useEffect(()=> {
-        const getTotal = document.querySelectorAll('.subtotal')
-
-        const subtotals : any[] = []
-
-        getTotal.forEach(sub => {
-            subtotals.push(sub.id)
-        })
-        
-        if (subtotals.length > 0) {
-            setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
-        }
-    }) */
-
-       
-
     render() {
+
         return (
             <div className='display ' >
                 <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
-                    <input className='border-0 w-100p h-100p' placeholder={name} />
+                    <input className='border-0 w-100p h-100p' placeholder={this.props.name} />
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={price.toString()} />
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: Number(e.target.value) })} placeholder={this.props.price.toString()} />
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={qte.toString()} />
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: Number(e.target.value) })}placeholder={this.props.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                     <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
