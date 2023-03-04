@@ -189,10 +189,10 @@ function Table({ visible }: TableProps): JSX.Element {
             {
                 visible &&
                 <div className='display gap'>
-                    <button className='blue w-2 h-100p' onClick={addLign}>
+                    <button className='blue w-2 h-2 h-100p' onClick={addLign}>
                         <span className='f-w-600'>+</span>
                     </button>
-                    <button className='red w-2 h-100p' onClick={removeLign}>
+                    <button className='red w-2 h-2 h-100p' onClick={removeLign}>
                         <span className='f-w-600'>-</span>
                     </button>
                 </div>
@@ -220,6 +220,7 @@ interface TableLignProps {
 }
   
 interface TableLignState {
+    name: string;
     price: number,
     qte: number,
 }
@@ -230,36 +231,42 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         super(props)
 
         this.state = {
+            name: props.name,
             price: props.price,
             qte: props.qte
         }
     }
 
-    public price = this.props.price
-    public qte   = this.props.qte
+
+    changeLign(setter: string, value: (string)) {
+
+        if (value.match(/[^0-9]/g)) {
+            return;
+        }
+
+        this.setState(prev => ({ 
+            ...prev,
+            [setter]: value 
+        }))
+    }
+
 
     componentDidUpdate(prevProps: TableLignProps) {
-        if (prevProps.price === this.price) {
 
-            const getTotal = document.querySelectorAll('.subtotal')
+        const getTotal = document.querySelectorAll('.subtotal')
+        const subtotals : any[] = []
         
-            const subtotals : any[] = []
-    
-            getTotal.forEach(sub => {
-                subtotals.push(sub.id)
-            })
+        if (prevProps.price === this.props.price) {
+
+            getTotal.forEach(sub => subtotals.push(sub.id))
             
-            if (subtotals.length > 0) {
-                const total = subtotals.map(e=> e*1).reduce((a,b)=> a+b)
+            if (subtotals.length < 1) return 
 
-                this.props.setTotal(total)
-            } 
+            const total = subtotals.map(e=> e*1).reduce((a,b)=> a+b)
 
-
-            console.log(this.price);
-            
+            this.props.setTotal(total)
         }
-      }
+    }
 
 
     render() {
@@ -268,13 +275,13 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         return (
             <div className='display ' >
                 <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
-                    <input className='border-0 w-100p h-100p' placeholder={this.props.name} />
+                    <input className='border-0 w-100p h-100p'  onChange={e=> this.changeLign('name', e.target.value) } placeholder={this.props.name} />
                 </div>
                 <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> console.log(e.target.value.replace('1', 'o')) } placeholder={this.price.toString()} />
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('price', e.target.value) } placeholder={this.props.price.toString()} />
                 </div>
                 <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=>  this.setState({ qte: Number(e.target.value) }) } placeholder={this.qte.toString()} />
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.props.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
                     <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
