@@ -308,19 +308,33 @@ function Encode({ ID }: EnocdeProps): JSX.Element {
 
 
 
+
 interface AdressProps {
     name: string, 
     adress: string, 
-    additionalAdress: string, 
+    additionalAdress?: string, 
     city: string, 
     zipCode: number
 }
 
+type AddressState = AdressProps
 
-function Adress({ name, adress, additionalAdress, city, zipCode }: AdressProps) : JSX.Element {
+class Adress extends React.Component<AdressProps, AddressState> {
+    
+    constructor(props: AdressProps) {
+        super(props)
+        this.state = {
+            name: props.name,
+            address: props.address,
+            additionalAddress: props.additionalAddress,
+            city: props.city,
+            zipCode: props.zipCode,
+          };
+    }
 
-    return (
-        <div className='grid w-100p'  >
+    render() {
+        return (
+            <div className='grid w-100p'  >
             {
                 name &&
                 <span >{name}</span>
@@ -344,8 +358,11 @@ function Adress({ name, adress, additionalAdress, city, zipCode }: AdressProps) 
                 }
             </div>
         </div>
-    )
+        )
+    }
 }
+
+
 
 
 function BottomPage() {
