@@ -214,19 +214,44 @@ function Table({ visible }: TableProps): JSX.Element {
 
 
 interface TableLignProps {
-    name: string,
-    price: number,
-    qte: number,
-    setTotal: any,
-}
+    name: string;
+    price: number;
+    qte: number;
+    setTotal: number
+  }
+  
+  interface TableLignState {
+    price: number;
+    qte: number;
+    setTotal: number
+  }
+class TableLign extends React.Component<TableLignProps, TableLignState> {
 
-interface subTotalOptions {
-    price: any,
-    qte: any
-}
-function TableLign({ name, price, qte, setTotal }: TableLignProps) {
+    constructor(props: TableLignProps) {
+        super(props)
 
-    const [subtotal, setSubtotal] = useState<subTotalOptions>({
+        this.state = {
+            price: props.price,
+            qte: props.qte,
+            setTotal: props.setTotal
+        }
+    }
+
+    getTotal() {
+        const getTotal = document.querySelectorAll('.subtotal')
+
+        const subtotals : any[] = []
+
+        getTotal.forEach(sub => {
+            subtotals.push(sub.id)
+        })
+        
+        if (subtotals.length > 0) {
+            setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
+        }
+    }
+
+   /*  const [subtotal, setSubtotal] = useState<subTotalOptions>({
         price: '',
         qte  : ''
     })
@@ -244,39 +269,44 @@ function TableLign({ name, price, qte, setTotal }: TableLignProps) {
         if (subtotals.length > 0) {
             setTotal(subtotals.map(e=> e*1).reduce((a,b)=> a+b))
         }
-    })
+    }) */
 
        
 
-    return (
-        <div className='display ' >
-            <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
-                <input className='border-0 w-100p h-100p' placeholder={name} />
+    render() {
+        return (
+            <div className='display ' >
+                <div style={{ width: '40%' }} className='tb tb-left tb-bottom'>
+                    <input className='border-0 w-100p h-100p' placeholder={name} />
+                </div>
+                <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={price.toString()} />
+                </div>
+                <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
+                    <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={qte.toString()} />
+                </div>
+                <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
+                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
+                </div>
             </div>
-            <div style={{ width: '25%', textAlign: 'end' }} className='tb tb-right tb-left tb-bottom' >
-                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({ ...subtotal, price: e.target.value })} placeholder={price.toString()} />
-            </div>
-            <div style={{ width: '10%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> setSubtotal({  ...subtotal, qte: e.target.value })}placeholder={qte.toString()} />
-            </div>
-            <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 
-interface projectProps {
+interface ProjectProps {
     projet : string
 }
 
-function Project({projet}: projectProps) {
-    return (
-        <div className='display'>
-            <span className='f-w-600'>Projet :</span><span>&nbsp;{projet}</span>
-        </div>
-    )
+
+class Project extends React.Component<ProjectProps> {
+    render() {
+        return (
+            <div className='display'>
+                <span className='f-w-600'>Projet :</span><span>&nbsp;{this.props.projet}</span> 
+            </div>
+        )
+    } 
 }
 
 
@@ -298,7 +328,6 @@ class Encode extends React.Component {
     }
 }
 
-console.log(ID);
 
 
 
@@ -311,19 +340,11 @@ interface AddressProps {
     zipCode: number;
 }
 
-type AddressState = AddressProps
   
-class Adress extends React.Component<AddressProps, AddressState> {
+class Adress extends React.Component<AddressProps> {
 
     constructor(props: AddressProps) {
-      super(props);
-      this.state = {
-        name: props.name,
-        adress: props.adress,
-        additionalAdress: props.additionalAdress,
-        city: props.city,
-        zipCode: props.zipCode,
-      }
+        super(props);
     }
 
     render() {
@@ -358,20 +379,23 @@ class Adress extends React.Component<AddressProps, AddressState> {
 
 
 
+class BottomPage extends React.Component {
 
-function BottomPage() {
-    return (
-        <div className='display justify-c w-100p'>
-            <div className='grid' style={{ textAlign: 'center', fontSize: '12px' }} >
-                <span>TVA non applicable, art. 293 B du CGI.</span>
-                <span>TJM - MR TURPIN PHILIPPE JASON</span>
-                <span>Numéro de SIRET : 8892147800014</span>
-                <span>Adresse : 34 b chemin des palmistes, Palmiste Rouge, CILAOS 97413</span>
-                <span>Téléphone : 06 92 35 80 12</span>
+    render() {
+        return (
+            <div className='display justify-c w-100p'>
+                <div className='grid' style={{ textAlign: 'center', fontSize: '12px' }} >
+                    <span>TVA non applicable, art. 293 B du CGI.</span>
+                    <span>TJM - MR TURPIN PHILIPPE JASON</span>
+                    <span>Numéro de SIRET : 8892147800014</span>
+                    <span>Adresse : 34 b chemin des palmistes, Palmiste Rouge, CILAOS 97413</span>
+                    <span>Téléphone : 06 92 35 80 12</span>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
+
 
 
 
