@@ -2,8 +2,6 @@ export interface ProjectProps {
     ID : string
     projectName: string
     date: Date
-    adress: AddressProps
-    table : LignItem
 }
 
 

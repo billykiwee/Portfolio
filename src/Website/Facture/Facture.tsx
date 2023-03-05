@@ -1,8 +1,7 @@
-import React, { Component, CSSProperties, useEffect, useRef, useState } from 'react'
-import formatCurrency from '../../App/components/formatCurrency'
+import React from 'react'
 import UniqueID from '../../App/components/uniqueID'
 import jsPDF, { jsPDFOptions } from 'jspdf';
-import { AddressProps, FactureState, ProjectName, ProjectProps, Sum, TableLignProps, TableLignState } from './interface/interface';
+import { FactureState, ProjectProps } from './interface/interface';
 import { Table } from './components/table/Table';
 import { Project } from './components/project/Project';
 import { Adress } from './components/adress/Adress';
@@ -10,8 +9,11 @@ import { BottomPage } from './components/bottom/Bottom';
 
 
 
-export const ID = UniqueID(5)
-
+export const PROJECT_DATA : ProjectProps = {
+    ID : UniqueID(5),
+    projectName: 'Fabrication cheminée',
+    date: new Date()
+}
 
 export class Facture extends React.Component<ProjectProps, FactureState> {
 
@@ -28,20 +30,16 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
 
     handleGeneratePdf = async() => {
 
-        const options : jsPDFOptions = {
-            format: "a4",
-            unit: "px"
-        }
+        const options : jsPDFOptions = { format: "a4", unit: "pt" }
         
         const doc = new jsPDF(options)
-        doc.setFont("Poppins", "normal");
 
         this.setState({ editablesVisible: false })
 
         if (this.containerRef.current) {
             doc.html(this.containerRef.current, {
                 callback: () => {
-                    doc.save(`Facture n° ${ID}`)
+                    doc.save(`Facture n° ${PROJECT_DATA.ID}`)
                     this.setState({ editablesVisible: true })
                 }
             })

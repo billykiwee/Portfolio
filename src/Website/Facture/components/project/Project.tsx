@@ -1,9 +1,9 @@
 import React from "react";
-import { ID } from "../../Facture";
+import { PROJECT_DATA } from "../../Facture";
 import { ProjectName } from "../../interface/interface";
 
 export class Project extends React.Component<ProjectName> {
-    
+
     render() {
         return (
             <>
@@ -18,7 +18,7 @@ export class Project extends React.Component<ProjectName> {
                     </div>
                     <div className='display gap justify-e' >
                         <span>Numéro:</span>
-                        <span className='f-w-600'>{ID}</span>
+                        <span className='f-w-600'>{PROJECT_DATA.ID}</span>
                     </div>
                 </div>
             </>
