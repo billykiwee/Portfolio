@@ -1,7 +1,7 @@
 import React from "react"
 
 
-export default function Bubble() : JSX.Element {
+export default function Background() : JSX.Element {
    const bubble = Array(44).fill('bubble')
 
 
