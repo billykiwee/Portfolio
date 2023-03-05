@@ -18,26 +18,21 @@ interface jsPDFOptions {
     unit            : any,
 }
 
-interface ProjectViewState {
-    ref: HTMLDivElement | null
-    visible : (visible: boolean) => void 
+interface MonComposantState {
+    editablesVisible: boolean
 }
-type ProjectViewProps = ProjectViewState
 
-export class ProjectView extends React.Component<ProjectViewProps, ProjectViewState> {
+export class ProjectView extends React.Component<{}, MonComposantState> {
 
-    constructor(props: ProjectViewProps) {
-        super(props)
-
+    constructor(props: {}) {
+        super(props);
+    
         this.state = {
-            visible: this.props.visible,
-            ref    : null
+            editablesVisible: true
         }
-
-
-        this.ref = React.createRef<HTMLDivElement>();
     }
-
+    
+    containerRef = React.createRef<HTMLDivElement>()
 
 
     handleGeneratePdf() {
@@ -49,13 +44,15 @@ export class ProjectView extends React.Component<ProjectViewProps, ProjectViewSt
         
         const doc = new jsPDF(options)
         doc.setFont("Poppins", "normal");
-        setvisible(false)
 
-        if (reportTemplateRef.current) {
-            doc.html(reportTemplateRef.current, {
+        this.setState({ editablesVisible: false })
+
+        if (this.containerRef.current) {
+            doc.html(this.containerRef.current, {
                 async callback(doc) {
                     doc.save('Facture n° ' + ID)
-                    setvisible(true)
+
+                    //this.setState({ editablesVisible: true })
                 }
             })
         }
@@ -65,7 +62,7 @@ export class ProjectView extends React.Component<ProjectViewProps, ProjectViewSt
     render() {
         return (
 
-            <div className='display gap  p-2 h-100p' style={{ width: 'calc(500px)', alignItems: 'baseline' }} ref={reportTemplateRef} >
+            <div className='display gap  p-2 h-100p' style={{ width: 'calc(500px)', alignItems: 'baseline' }} ref={this.containerRef} >
                 <div className='grid m-2' >
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>
@@ -99,7 +96,7 @@ export class ProjectView extends React.Component<ProjectViewProps, ProjectViewSt
                         <Encode />
                     </div>
     
-                    <Table visible={visible} />   
+                    <Table visible={this.state.editablesVisible} />   
                 
     
                     <div className='display m-t-1' style={{ bottom: 0 }}>
@@ -107,10 +104,10 @@ export class ProjectView extends React.Component<ProjectViewProps, ProjectViewSt
                     </div>
                 </div>
                 {
-                    visible&&
+                    this.state.editablesVisible &&
                     <div className='display justify-c fixed p-1' style={{ bottom : 0 }}>
                         <div className='display'>
-                            <button className='blue p-1' onClick={handleGeneratePdf}>
+                            <button className='blue p-1' onClick={this.handleGeneratePdf}>
                                 <span className='f-s-20'>Télécharger en PDF</span>
                             </button>
                         </div>
