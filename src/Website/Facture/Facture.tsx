@@ -30,19 +30,29 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
 
 
     handleGeneratePdf = async() => {
-        const node = document.querySelector<HTMLDivElement>('#ref');
+
+        this.setState({
+            editablesVisible : false
+        })
+
+        const node = document.querySelector<HTMLDivElement>('#ref')
 
         if (node) {
           htmlToImage.toPng(node)
             .then((dataUrl) => {
-              const pdfWidth = node.offsetWidth;
-              const pdfHeight = node.offsetHeight;
-              const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight]);
-              pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
-              pdf.save('Facture n' + PROJECT_DATA.ID + '.pdf');
+                const pdfWidth = node.offsetWidth
+                const pdfHeight = node.offsetHeight
+                const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight])
+                pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+                pdf.save('Facture n°' + PROJECT_DATA.ID + '.pdf')
+
+
+                this.setState({
+                    editablesVisible : true
+                })
             })
             .catch((error) => {
-              console.error(error);
+              console.error(error)
             });
         }
 	}

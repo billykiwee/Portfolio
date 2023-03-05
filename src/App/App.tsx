@@ -13,7 +13,7 @@ export default function App(): JSX.Element {
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/ProjectView" element={<Facture />} />
+                    <Route path="/ProjectView" element={<Facture/>} />
                 </Routes>
             </main>
         </BrowserRouter>
