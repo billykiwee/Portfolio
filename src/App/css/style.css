@@ -126,22 +126,11 @@ img {
     object-fit: cover;
 }
 
-/* div {
-    animation: main 0.3s ease-out;
+span {
+    font-family: Anton, Anton-Regular;
+    font-size: 1rem;
+    text-align: center
 }
-
-@keyframes main {
-    from {
-        transform: translateY(-0.4rem);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0rem);
-        opacity: 1;
-    }
-}
-
- */
 
 table, tr, th {
     font-weight: normal;

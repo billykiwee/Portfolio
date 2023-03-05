@@ -11,11 +11,7 @@ const ID = UniqueID(5)
 interface jsPDFOptions {
     format          : string,
     unit            : any,
-    orientation     : any,
-    putOnlyUsedFonts: boolean,
-    zoom            : number
 }
-
 
 export default function ProjectView(): JSX.Element {
 
@@ -26,25 +22,24 @@ export default function ProjectView(): JSX.Element {
 	const handleGeneratePdf = () => {
 
         const options : jsPDFOptions = {
-            format: 'a4',
-            unit  : 'pt',
-            orientation: 'p',
-            putOnlyUsedFonts:true,
-            zoom: 1.5
+            format: "a4",
+            unit: "px"
         }
         
         const doc = new jsPDF(options)
+        doc.setFont('Poppins', 'normal');
         setvisible(false)
 
         if (reportTemplateRef.current) {
             doc.html(reportTemplateRef.current, {
                 async callback(doc) {
-                    await doc.save('Facture n° ' + ID)
+                    doc.save('Facture n° ' + ID)
                     setvisible(true)
                 }
             })
         }
 	}
+
 
     return (
 
