@@ -39,25 +39,20 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
         const node = document.querySelector<HTMLDivElement>('#ref')
 
         if (node) {
+
             htmlToImage.toPng(node)
-            .then((dataUrl) => {
-                const pdfWidth = node.offsetWidth
-                const pdfHeight = node.offsetHeight
-
-                const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight])
-                pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
-
+            .then(dataUrl => {
 
                 const clientName = document.querySelector('#client-name')?.innerHTML
 
-                pdf.save(`Facture n°${ PROJECT_DATA.ID } - ${clientName}.pdf`)
+                const link = document.createElement('a')
+                link.download = `Facture n°${ PROJECT_DATA.ID } - ${clientName}.jpg`
+                link.href = dataUrl
 
-                this.setState({
-                    editablesVisible : true
-                })
+                link.click()
             })
-            .catch((error) => {
-            console.error(error)
+            .catch(error=> {
+                console.error(error);
             })
         }
 	}
@@ -70,7 +65,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>
                             <span className='f-w-600'>
-                               <img src='./images/tjm.png' height={44} /> 
+                               <img src='./images/tjm.png' height={66} /> 
                             </span>
                             <Adress
                                 name='Turpin Jason'
