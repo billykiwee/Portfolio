@@ -7,7 +7,7 @@ import { Project } from './components/project/Project';
 import { Adress } from './components/adress/Adress';
 import { BottomPage } from './components/bottom/Bottom';
 import * as htmlToImage from 'html-to-image';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+
 
 
 export const PROJECT_DATA : ProjectProps = {
@@ -30,28 +30,21 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
 
 
     handleGeneratePdf = async() => {
-
-
-        const node = document.querySelector<HTMLDivElement>('#ref')
+        const node = document.querySelector<HTMLDivElement>('#ref');
 
         if (node) {
-
-            htmlToImage.toPng(node)
-            .then(dataUrl => {
-
-                console.log(dataUrl);
-
-                const link = document.createElement('a')
-                link.download = 'Facture n' + PROJECT_DATA.ID + '.pdf'
-                link.href = dataUrl
-
-                link.click()
+          htmlToImage.toPng(node)
+            .then((dataUrl) => {
+              const pdfWidth = node.offsetWidth;
+              const pdfHeight = node.offsetHeight;
+              const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight]);
+              pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
+              pdf.save('Facture n' + PROJECT_DATA.ID + '.pdf');
             })
-            .catch(error=> {
-                console.error(error);
-            })
+            .catch((error) => {
+              console.error(error);
+            });
         }
-      
 	}
 
     render() {
