@@ -80,8 +80,6 @@ export default function Home(): JSX.Element {
         },
     }
 
-
-   
     interface SkillInfo {
         name: string;
         logo: string;
