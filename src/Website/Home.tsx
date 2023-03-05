@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Container from '../App/components/Container'
 import '../Website/css/portfolio.css'
 import '../Website/css/effect.css'
-import Background from './components/Background'
 
 
 export default function Home(): JSX.Element {
@@ -220,6 +219,8 @@ export default function Home(): JSX.Element {
         }
     }, [NewPosition])
 
+    const bubble = Array(44).fill('bubble')
+
 
     return (
 
@@ -249,7 +250,16 @@ export default function Home(): JSX.Element {
                 }
             </div>
 
-            <Background />
+            <div className="background">
+            <div className="bubbles">
+                {
+                    bubble
+                    .map((bubble, i)=> {
+                        return <div className="bubble" key={i}></div>
+                    })
+                }
+            </div>  
+        </div>
 
             <Container>
                 <div className='grid gap-2rem ' id='sections'>  
