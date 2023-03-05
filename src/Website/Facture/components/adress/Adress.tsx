@@ -18,19 +18,7 @@ export class Adress extends React.Component<AddressProps, EditAdressState> {
     }
 
     render() {
-        
-        window.onclick = (e: Event) => {
 
-            if (this.state.editAdress) {
-
-               /*  const editAddressBlock = document.querySelector<HTMLDivElement>('#edit-adress-block');
-                if (editAddressBlock && !editAddressBlock.closest(e.target as Element)) {
-                    this.setState({ editAdress: !this.state.editAdress });
-                } */
-                console.log(e.target);
-                
-            }
-        }
         
         return (
             <div className='grid w-100p'  >
@@ -62,25 +50,25 @@ export class Adress extends React.Component<AddressProps, EditAdressState> {
                         </div>
                     </div>
                     : 
-                    <div className="grid gap-1rem absolute shadow white p-1 zi-2 w-100p" id='edit-adress-block'>
+                    <div className="grid gap-1rem absolute shadow white p-2 zi-2 w-100p border-r-1" id='edit-adress-block'>
                         <div className="grid gap">
                             {
                                 this.props.name &&
-                                <div>
+                                <div style={{ textAlign: 'start' }}>
                                     <label>Nom</label>
                                     <input className="w-100p" placeholder={this.props.name} />
                                 </div>
                             }
                             {
                                 this.props.adress &&
-                                <div>
+                                <div style={{ textAlign: 'start' }}>
                                     <label>Adress</label>
                                     <input className="w-100p" placeholder={this.props.adress} />
                                 </div>
                             }
                             {
                                 this.props.additionalAdress &&
-                                <div>
+                                <div style={{ textAlign: 'start' }}>
                                     <label>additionalAdress</label>
                                     <input className="w-100p" placeholder={this.props.additionalAdress} />
                                 </div>
@@ -88,16 +76,23 @@ export class Adress extends React.Component<AddressProps, EditAdressState> {
                             <div className="grid gap">
                                 {
                                     this.props.city &&
-                                    <input className="w-100p" placeholder={this.props.city} />
+                                    this.props.additionalAdress &&
+                                    <div style={{ textAlign: 'start' }}>
+                                        <label>Ville</label>
+                                        <input className="w-100p" placeholder={this.props.city} />
+                                    </div>
                                 }
                                 {
                                     this.props.zipCode &&
-                                    <input className="w-100p" placeholder={this.props.zipCode.toString()} />
+                                    <div style={{ textAlign: 'start' }}>
+                                        <label>Code Postal</label>
+                                        <input className="w-100p" placeholder={this.props.zipCode.toString()} />
+                                    </div>
                                 }
                             </div>
                         </div>
                         <button className="blue h-3">
-                            <span>Valider</span>
+                            <span className="f-s-18">Valider</span>
                         </button>
                     </div>
                 }
