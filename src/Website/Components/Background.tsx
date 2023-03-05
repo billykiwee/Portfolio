@@ -1,22 +1,21 @@
 import React from "react"
 
 
-export default class Bubbles extends React.Component  {
+export default function Bubble() : JSX.Element {
+   const bubble = Array(44).fill('bubble')
 
-    bubble = Array(44).fill('bubble')
 
-    render () {
-        return (
-            <div className="background">
-                <div className="bubbles">
-                    {
-                        this.bubble
-                        .map((bubble, i)=> {
-                            return <div className="bubble" key={i}></div>
-                        })
-                    }
-                </div>  
-            </div>
-        )
-    }
+    return (
+        <div className="background">
+            <div className="bubbles">
+                {
+                    bubble
+                    .map((bubble, i)=> {
+                        return <div className="bubble" key={i}></div>
+                    })
+                }
+            </div>  
+        </div>
+    )
+
 }

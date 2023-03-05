@@ -25,7 +25,7 @@ export class Adress extends React.Component<AddressProps, EditAdressState> {
                 <div className="grid">
                     {
                         this.props.name &&
-                        <span contentEditable>{this.props.name}</span>
+                        <span contentEditable id={this.props.clientAdress ? 'client-name': ''}>{this.props.name}</span>
                     }
                     {
                         this.props.adress &&

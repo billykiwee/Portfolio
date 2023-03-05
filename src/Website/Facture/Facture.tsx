@@ -13,6 +13,7 @@ import * as htmlToImage from 'html-to-image';
 export const PROJECT_DATA : ProjectProps = {
     ID : UniqueID(5),
     projectName: 'Fabrication cheminée',
+    projectType: 'Facture',
     date: new Date()
 }
  
@@ -45,7 +46,11 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
 
                 const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight])
                 pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
-                pdf.save('Facture n°' + PROJECT_DATA.ID + '.pdf')
+
+
+                const clientName = document.querySelector('#client-name')?.innerHTML
+
+                pdf.save(`Facture n°${ PROJECT_DATA.ID } - ${clientName}.pdf`)
 
                 this.setState({
                     editablesVisible : true
@@ -77,7 +82,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                         </div>
     
                         <div style={{ textAlign: 'end' }} className='w-100p'>
-                            <span className='f-w-600 f-s-20'>FACTURE</span>
+                            <span className='f-w-600 f-s-20' contentEditable>{PROJECT_DATA.projectType.toUpperCase()}</span>
                             <Adress 
                                 name='Mr Martial'
                                 adress='34 chemin des palmistes'
@@ -106,7 +111,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                     <div className='display justify-c fixed p-1' style={{ bottom : 0 }}>
                         <div className='display'>
                             <button className='blue p-1' onClick={this.handleGeneratePdf}>
-                                <span className='f-s-20'>Télécharger en PDF</span>
+                                <span className='f-s-20'>Télécharger {PROJECT_DATA.projectType.toUpperCase()} en PDF</span>
                             </button>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 export interface ProjectProps {
     ID : string
     projectName: string
+    projectType: string
     date: Date
 }
 
