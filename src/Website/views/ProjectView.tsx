@@ -48,7 +48,7 @@ export default function ProjectView(): JSX.Element {
 
     return (
 
-        <div className='display gap  p-2 h-100p' style={{ width: 'calc(100vh, 500px)', alignItems: 'baseline' }} ref={reportTemplateRef} >
+        <div className='display gap  p-2 h-100p' style={{ width: 'calc(500px)', alignItems: 'baseline' }} ref={reportTemplateRef} >
             <div className='grid m-2' >
                 <div className='display w-100p justify-s-b'>
                     <div className='grid w-100p'>
@@ -287,23 +287,6 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         const getSumArray : Sum = [this.state.price, this.state.qte]
         
         const getSum: number = this.transformPriceStringToNumber(getSumArray[0]) * getSumArray[1]
-
-        const decimal = getSum.toString().split('.')[1]
-        const add0 = decimal?.length < 2 ? '0' : '' 
-        const interger = getSum.toString().replace('.', ',').split('.') + add0 + ' €'
-
-        const addSpaceEvery3Digits = () => {
-            const separe = interger.split(',')[0]
-           
-            if (Number(separe) % 1000 === 0) {
-                console.log(separe);
-            }
-
-            
-
-        }
-        addSpaceEvery3Digits()
-        
         
         return (
             <div className='display' onBlur={this.onBlur}>
@@ -317,7 +300,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
                     <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.state.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span className='subtotal' id={getSum.toString()}>{interger}</span>
+                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
                 </div>
             </div>
         )

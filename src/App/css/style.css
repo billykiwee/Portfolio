@@ -1106,6 +1106,7 @@ input[type=number] {
 
 .tb {
     padding: 0.4rem;
+    height: 2rem;
 }
 .tb-left {
     border-left: 1px solid var(--grey);
