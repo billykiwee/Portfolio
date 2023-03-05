@@ -1,7 +1,7 @@
 import React from "react"
 
 
-export class Bubbles extends React.Component  {
+export default class Bubbles extends React.Component  {
 
     bubble = Array(44).fill('bubble')
 

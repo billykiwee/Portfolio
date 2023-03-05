@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Container from '../App/components/Container'
 import '../Website/css/portfolio.css'
 import '../Website/css/effect.css'
-import { Bubbles } from './components/Background'
+import Bubbles from './components/Background'
 
 
 export default function Home(): JSX.Element {
