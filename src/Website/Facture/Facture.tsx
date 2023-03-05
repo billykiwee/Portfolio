@@ -60,7 +60,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
     render() {
         return (
 
-            <div className='display gap  p-2 h-100p white' id='ref' style={{ width: '500px', alignItems: 'baseline' }} ref={this.containerRef} >
+            <div className='display gap  p-2 h-100p white' id='ref' style={{ width: '500px', minHeight: '800px', alignItems: 'baseline' }} ref={this.containerRef} >
                 <div className='grid m-2' >
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>
@@ -90,7 +90,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                     </div>
     
     
-                    <div className='m-t-4 display justify-s-b align-top'>
+                    <div className='m-t-4 grid align-top'>
                         <Project project='Fabrication' />
                     </div>
     

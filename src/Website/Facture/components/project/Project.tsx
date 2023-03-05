@@ -21,7 +21,11 @@ export class Project extends React.Component<ProjectName, ProjectNameState> {
                     <input className="border-0" onChange={e=> this.setState({ project: e.target.value })} placeholder={PROJECT_DATA.projectName} />
                 </div>
 
-                <div>
+                <div style={{
+                    display: 'grid',
+                    justifyContent: 'end',
+                    width: '100%',
+                }}>
                     <div className='display gap'>
                         <span>Facture en date du:</span>
                         <span >{new Date().toLocaleDateString().replaceAll('/', '-')}</span>
