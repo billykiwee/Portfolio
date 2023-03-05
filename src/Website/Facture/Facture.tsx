@@ -29,14 +29,19 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
 
 
     handleGeneratePdf = async() => {
-
-        const options : jsPDFOptions = { format: "a4", unit: "pt" }
-        
-        const doc = new jsPDF(options)
-
-        this.setState({ editablesVisible: false })
-
         if (this.containerRef.current) {
+
+            const options : jsPDFOptions = { 
+                format: [this.containerRef.current.clientWidth, 800],
+                orientation: "portrait", // Orientation du document (portrait ou paysage)
+                unit: "pt", // Unité de mesure utilisée
+                compress: true, // Compression du document (true ou false)
+            }
+            
+            const doc = new jsPDF(options)
+
+            this.setState({ editablesVisible: false })
+
             doc.html(this.containerRef.current, {
                 callback: () => {
                     doc.save(`Facture n° ${PROJECT_DATA.ID}`)
@@ -49,7 +54,7 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
     render() {
         return (
 
-            <div className='display gap  p-2 h-100p' style={{ width: 'calc(500px)', alignItems: 'baseline' }} ref={this.containerRef} >
+            <div className='display gap  p-2 h-100p' style={{ width: '600px', alignItems: 'baseline' }} ref={this.containerRef} >
                 <div className='grid m-2' >
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>

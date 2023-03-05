@@ -58,5 +58,6 @@ export type Sum = [string, number]
 
 
 export interface ProjectName {
-    projet : string
+    project : string
 }
+export type ProjectNameState = ProjectName
