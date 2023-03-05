@@ -32,10 +32,10 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
         if (this.containerRef.current) {
 
             const options : jsPDFOptions = { 
-                format: [this.containerRef.current.clientWidth, 800],
-                orientation: "portrait", // Orientation du document (portrait ou paysage)
-                unit: "pt", // Unité de mesure utilisée
-                compress: true, // Compression du document (true ou false)
+                format: [500, 800],
+                orientation: "portrait",
+                unit: "pt",
+                compress: true, 
             }
             
             const doc = new jsPDF(options)
@@ -51,10 +51,16 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
         }
 	}
 
+    width : any = this.containerRef.current?.clientWidth
+
     render() {
+
+        console.log(this.width);
+        
+        
         return (
 
-            <div className='display gap  p-2 h-100p' style={{ width: '600px', alignItems: 'baseline' }} ref={this.containerRef} >
+            <div className='display gap  p-2 h-100p' style={{ transform: `scale(0.${500/this.width})`, alignItems: 'baseline' }} ref={this.containerRef} >
                 <div className='grid m-2' >
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>
@@ -84,7 +90,7 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
     
     
                     <div className='m-t-4 display justify-s-b align-top'>
-                        <Project projet='Fabrication' />
+                        <Project project='Fabrication' />
                     </div>
     
                     <Table visible={this.state.editablesVisible} />   
