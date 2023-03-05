@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Home from '../Website/Home'
-import { Facture } from '../Website/views/Facture'
+import { Facture } from '../Website/Facture/Facture'
 
 
 

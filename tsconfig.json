@@ -22,7 +22,7 @@
     "noEmit": true
   },
   "files": [
-    "src/Website/views/ProjectView.tsx"
+    "src/Website/views/Facture.tsx"
   ],
   "include": [
     "src"
