@@ -6,7 +6,8 @@ import { Table } from './components/table/Table';
 import { Project } from './components/project/Project';
 import { Adress } from './components/adress/Adress';
 import { BottomPage } from './components/bottom/Bottom';
-
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 
 export const PROJECT_DATA : ProjectProps = {
@@ -29,38 +30,34 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
 
 
     handleGeneratePdf = async() => {
-        if (this.containerRef.current) {
 
-            const options : jsPDFOptions = { 
-                format: [500, 800],
-                orientation: "portrait",
-                unit: "pt",
-                compress: true, 
-            }
-            
-            const doc = new jsPDF(options)
 
-            this.setState({ editablesVisible: false })
+        const node = document.querySelector<HTMLDivElement>('#ref')
 
-            doc.html(this.containerRef.current, {
-                callback: () => {
-                    doc.save(`Facture n° ${PROJECT_DATA.ID}`)
-                    this.setState({ editablesVisible: true })
-                }
+        if (node) {
+
+            htmlToImage.toPng(node)
+            .then(dataUrl => {
+
+                console.log(dataUrl);
+
+                const link = document.createElement('a')
+                link.download = 'Facture n' + PROJECT_DATA.ID + '.pdf'
+                link.href = dataUrl
+
+                link.click()
+            })
+            .catch(error=> {
+                console.error(error);
             })
         }
+      
 	}
 
-    width : any = this.containerRef.current?.clientWidth
-
     render() {
-
-        console.log(this.width);
-        
-        
         return (
 
-            <div className='display gap  p-2 h-100p' style={{ transform: `scale(0.${500/this.width})`, alignItems: 'baseline' }} ref={this.containerRef} >
+            <div className='display gap  p-2 h-100p white' id='ref' style={{ width: '500px', alignItems: 'baseline' }} ref={this.containerRef} >
                 <div className='grid m-2' >
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>
