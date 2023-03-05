@@ -119,16 +119,15 @@ interface LignItem {
 
 function Table({ visible }: TableProps): JSX.Element {
 
+    const [lign, setLign] = useState<LignItem[]>([])
+
     const lignInitial : LignItem[] = [{
-        name    : 'Fabrication',
+        name    : 'Ligne ' + (lign.length+1),
         price   : '200,00€',
         qte     : 1,
         subTotal: 200,
         id      : UniqueID(4)
     }]
-
-    const [lign, setLign] = useState<LignItem[]>([])
-
 
     useEffect(()=> {
         setLign(lignInitial)
@@ -189,7 +188,7 @@ function Table({ visible }: TableProps): JSX.Element {
             
             {
                 visible &&
-                <div className='display gap'>
+                <div className='display'>
                     <button className='blue w-2 h-2 h-100p' onClick={addLign}>
                         <span className='f-w-600'>+</span>
                     </button>
@@ -249,15 +248,6 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         }))
     }
 
-    blockInputCharacter(event: KeyboardEvent) {
-        const key = event.key;
-        const regex = /[0-9]|\./;
-      
-        if (!regex.test(key)) {
-          event.preventDefault();
-        }
-    }
-
     componentDidUpdate(prevProps: TableLignProps) {
 
         const getTotal = document.querySelectorAll('.subtotal')
@@ -298,6 +288,22 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
         
         const getSum: number = this.transformPriceStringToNumber(getSumArray[0]) * getSumArray[1]
 
+        const decimal = getSum.toString().split('.')[1]
+        const add0 = decimal?.length < 2 ? '0' : '' 
+        const interger = getSum.toString().replace('.', ',').split('.') + add0 + ' €'
+
+        const addSpaceEvery3Digits = () => {
+            const separe = interger.split(',')[0]
+           
+            if (Number(separe) % 1000 === 0) {
+                console.log(separe);
+            }
+
+            
+
+        }
+        addSpaceEvery3Digits()
+        
         
         return (
             <div className='display' onBlur={this.onBlur}>
@@ -311,7 +317,7 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
                     <input className='border-0 w-100p h-100p' style={{ textAlign: 'end' }} onChange={e=> this.changeLign('qte', e.target.value) } placeholder={this.state.qte.toString()} />
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb tb-right tb-bottom'>
-                    <span className='subtotal' id={getSum.toString()}>{formatCurrency(getSum)}</span>
+                    <span className='subtotal' id={getSum.toString()}>{interger}</span>
                 </div>
             </div>
         )
