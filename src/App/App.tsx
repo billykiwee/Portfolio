@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Home from '../Website/Home'
-import { ProjectView } from '../Website/views/ProjectView'
+import { Facture } from '../Website/views/Facture'
 
 
 
@@ -13,7 +13,7 @@ export default function App(): JSX.Element {
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/ProjectView" element={<ProjectView />} />
+                    <Route path="/ProjectView" element={<Facture />} />
                 </Routes>
             </main>
         </BrowserRouter>

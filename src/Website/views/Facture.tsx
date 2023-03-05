@@ -7,35 +7,58 @@ import jsPDF from 'jspdf';
 
 const ID = UniqueID(5)
 
-const title = {
-    fontFamily: "Poppins, Anton-Regular",
-    fontSize: "1rem",
-    textAlign: "center"
-} as CSSProperties
-
 interface jsPDFOptions {
     format          : string,
     unit            : any,
 }
 
-interface MonComposantState {
+
+interface AddressProps {
+    name: string;
+    adress: string;
+    additionalAdress?: string;
+    city: string;
+    zipCode: number;
+}
+
+interface LignItem {
+    name    : string;
+    price   : string;
+    qte     : number;
+    subTotal: number;
+    id      : string;
+}
+
+interface ProjectProps {
+    ID : string
+    projectName: string
+    date: Date
+    adress: AddressProps
+    table : LignItem
+}
+
+interface FactureState {
     editablesVisible: boolean
 }
 
-export class ProjectView extends React.Component<{}, MonComposantState> {
 
-    constructor(props: {}) {
-        super(props);
+
+
+
+export class Facture extends React.Component<ProjectProps, FactureState> {
+
+    constructor(props: ProjectProps) {
+        super(props)
     
         this.state = {
             editablesVisible: true
         }
     }
-    
+
     containerRef = React.createRef<HTMLDivElement>()
 
 
-    handleGeneratePdf() {
+    handleGeneratePdf = async() => {
 
         const options : jsPDFOptions = {
             format: "a4",
@@ -49,15 +72,13 @@ export class ProjectView extends React.Component<{}, MonComposantState> {
 
         if (this.containerRef.current) {
             doc.html(this.containerRef.current, {
-                async callback(doc) {
-                    doc.save('Facture n° ' + ID)
-
-                    //this.setState({ editablesVisible: true })
+                callback: () => {
+                    doc.save(`Facture n° ${ID}`)
+                    this.setState({ editablesVisible: true })
                 }
             })
         }
 	}
-
 
     render() {
         return (
@@ -118,102 +139,11 @@ export class ProjectView extends React.Component<{}, MonComposantState> {
     }
 }
 
-/* export default function ProjectView(): JSX.Element {
 
-    const [visible, setvisible] = useState<boolean>(true)
-
-    const reportTemplateRef = useRef<HTMLDivElement>(null)
-
-	const handleGeneratePdf = () => {
-
-        const options : jsPDFOptions = {
-            format: "a4",
-            unit: "px"
-        }
-        
-        const doc = new jsPDF(options)
-        doc.setFont("Poppins", "normal");
-        setvisible(false)
-
-        if (reportTemplateRef.current) {
-            doc.html(reportTemplateRef.current, {
-                async callback(doc) {
-                    doc.save('Facture n° ' + ID)
-                    setvisible(true)
-                }
-            })
-        }
-	}
-
-    return (
-
-        <div className='display gap  p-2 h-100p' style={{ width: 'calc(500px)', alignItems: 'baseline' }} ref={reportTemplateRef} >
-            <div className='grid m-2' >
-                <div className='display w-100p justify-s-b'>
-                    <div className='grid w-100p'>
-                        <span className='f-w-600'>
-                           <img src='./images/tjm.png' height={44} /> 
-                        </span>
-                        <Adress 
-                            name='Turpin Jason'
-                            adress='34 chemin des palmistes'
-                            additionalAdress='Palmiste rouge'
-                            city='Cilaos'
-                            zipCode={97413}
-                        />
-                    </div>
-
-                    <div style={{ textAlign: 'end' }} className='w-100p'>
-                        <span className='f-w-600 f-s-20'>FACTURE</span>
-                        <Adress 
-                            name='Mr Martial'
-                            adress='34 chemin des palmistes'
-                            city='Cilaos'
-                            additionalAdress=''
-                            zipCode={97413}
-                        />
-                    </div>
-                </div>
-
-
-                <div className='m-t-4 display justify-s-b align-top'>
-                    <Project projet='Fabrication' />
-                    <Encode />
-                </div>
-
-                <Table visible={visible} />   
-            
-
-                <div className='display m-t-1' style={{ bottom: 0 }}>
-                    <BottomPage />
-                </div>
-            </div>
-            {
-                visible&&
-                <div className='display justify-c fixed p-1' style={{ bottom : 0 }}>
-                    <div className='display'>
-                        <button className='blue p-1' onClick={handleGeneratePdf}>
-                            <span className='f-s-20'>Télécharger en PDF</span>
-                        </button>
-                    </div>
-                </div>
-            }
-        </div>
-    )
-}
- */
 interface TableProps {
     visible : boolean
 } 
 
-
-interface LignItem {
-    name    : string;
-    price   : string;
-    qte     : number;
-    subTotal: number;
-    id      : string;
-}
 
 
 function Table({ visible }: TableProps): JSX.Element {
@@ -303,13 +233,12 @@ function Table({ visible }: TableProps): JSX.Element {
                     <span className='f-w-600 f-s-18'>TOTAL TTC :</span>
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18' style={title}>{formatCurrency(Total)}</span>
+                    <span className='f-w-600 f-s-18'>{formatCurrency(Total)}</span>
                 </div>
             </div>
         </div>
     )
 }
-
 
 interface TableLignProps {
     id: string
@@ -407,12 +336,12 @@ class TableLign extends React.Component<TableLignProps, TableLignState> {
 }
 
 
-interface ProjectProps {
+interface ProjectName {
     projet : string
 }
 
 
-class Project extends React.Component<ProjectProps> {
+class Project extends React.Component<ProjectName> {
     render() {
         return (
             <div className='display'>
@@ -441,17 +370,6 @@ class Encode extends React.Component {
     }
 }
 
-
-
-
-
-interface AddressProps {
-    name: string;
-    adress: string;
-    additionalAdress?: string;
-    city: string;
-    zipCode: number;
-}
 
   
 class Adress extends React.Component<AddressProps> {
