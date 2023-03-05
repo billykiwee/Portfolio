@@ -73,7 +73,6 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                                 additionalAdress='Palmiste rouge'
                                 city='Cilaos'
                                 zipCode={97413}
-                                clientAdress={false}
                             />
                         </div>
     
@@ -85,7 +84,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                                 city='Cilaos'
                                 additionalAdress=''
                                 zipCode={97413}
-                                clientAdress={true}
+                                clientAdress
                             />
                         </div>
                     </div>

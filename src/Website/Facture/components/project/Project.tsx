@@ -17,7 +17,8 @@ export class Project extends React.Component<ProjectName, ProjectNameState> {
         return (
             <>
                 <div className='display'>
-                    <span className='f-w-600'>Projet :</span>&nbsp;<input className="border-0" onChange={e=> this.setState({ project: e.target.value })} placeholder={PROJECT_DATA.projectName} />
+                    <span className='f-w-600'>Projet :</span>&nbsp;
+                    <input className="border-0" onChange={e=> this.setState({ project: e.target.value })} placeholder={PROJECT_DATA.projectName} />
                 </div>
 
                 <div>

@@ -7,33 +7,48 @@ export class Adress extends React.Component<AddressProps> {
 
     constructor(props: AddressProps) {
         super(props);
+
+        this.state = {
+            editAdress : false
+        }
     }
 
     render() {
+
         return (
             <div className='grid w-100p'  >
                 {
                     this.props.name &&
-                    <input className="border-0" style={{ textAlign: 'end', height: '24px' }} placeholder={this.props.name} />
+                    <span >{this.props.name}</span>
                 }
                 {
                     this.props.adress &&
-                    <input className="border-0" style={{ textAlign: 'end', height: '24px' }} placeholder={this.props.adress} />
+                    <span >{this.props.adress}</span>   
                 }
                 {
                     this.props.additionalAdress &&
-                    <input className="border-0" style={{ textAlign: 'end', height: '24px' }} placeholder={this.props.additionalAdress} />
+                    <span >{this.props.additionalAdress}</span>
                 }
                 <div>
                     {
                         this.props.city &&
-                        <input className="border-0" style={{ textAlign: 'end', height: '24px' }} placeholder={this.props.city.toUpperCase()} />
+                        <span >{this.props.city.toUpperCase()}</span> 
                     }
                     {
                         this.props.zipCode &&
-                        <input className="border-0" style={{ textAlign: 'end', height: '24px' }} placeholder={this.props.zipCode.toString()} />
+                        <span  className='m-l-04'>{this.props.zipCode}</span>
                     }
                 </div>
+                {
+                    this.props.clientAdress &&
+                    <div className="display justify-e">
+                        <div className="display">
+                            <button className="red">
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                    </div>
+                }
             </div>
         )
     }

@@ -4,6 +4,9 @@ import UniqueID from "../../../../App/components/uniqueID"
 import { LignItem, TableProps } from "../../interface/interface"
 import { TableLign } from "./Lign"
 
+
+
+
 export function Table({ visible }: TableProps): JSX.Element {
 
     const [lign, setLign] = useState<LignItem[]>([])

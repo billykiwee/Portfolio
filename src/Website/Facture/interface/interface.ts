@@ -18,7 +18,7 @@ export interface AddressProps {
     additionalAdress?: string;
     city: string;
     zipCode: number;
-    clientAdress: boolean
+    clientAdress?: boolean
 }
 
 export interface LignItem {
