@@ -126,12 +126,6 @@ img {
     object-fit: cover;
 }
 
-span {
-    font-family: Anton, Anton-Regular;
-    font-size: 1rem;
-    text-align: center
-}
-
 table, tr, th {
     font-weight: normal;
 }

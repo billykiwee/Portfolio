@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useRef, useState } from 'react'
+import React, { Component, CSSProperties, useEffect, useRef, useState } from 'react'
 import formatCurrency from '../../App/components/formatCurrency'
 import UniqueID from '../../App/components/uniqueID'
 import jsPDF from 'jspdf';
@@ -7,6 +7,11 @@ import jsPDF from 'jspdf';
 
 const ID = UniqueID(5)
 
+const title = {
+    fontFamily: "Poppins, Anton-Regular",
+    fontSize: "1rem",
+    textAlign: "center"
+} as CSSProperties
 
 interface jsPDFOptions {
     format          : string,
@@ -27,7 +32,7 @@ export default function ProjectView(): JSX.Element {
         }
         
         const doc = new jsPDF(options)
-        doc.setFont('Poppins', 'normal');
+        doc.setFont("Poppins", "normal");
         setvisible(false)
 
         if (reportTemplateRef.current) {
@@ -39,6 +44,7 @@ export default function ProjectView(): JSX.Element {
             })
         }
 	}
+
 
 
     return (
@@ -199,7 +205,7 @@ function Table({ visible }: TableProps): JSX.Element {
                     <span className='f-w-600 f-s-18'>TOTAL TTC :</span>
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18'>{formatCurrency(Total)}</span>
+                    <span className='f-w-600 f-s-18' style={title}>{formatCurrency(Total)}</span>
                 </div>
             </div>
         </div>
