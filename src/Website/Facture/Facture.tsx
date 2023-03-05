@@ -15,8 +15,8 @@ export const PROJECT_DATA : ProjectProps = {
     projectName: 'Fabrication cheminée',
     date: new Date()
 }
-
-export class Facture extends React.Component<ProjectProps, FactureState> {
+ 
+export default class Facture extends React.Component<ProjectProps, FactureState> {
 
     constructor(props: ProjectProps) {
         super(props)
@@ -38,22 +38,22 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
         const node = document.querySelector<HTMLDivElement>('#ref')
 
         if (node) {
-          htmlToImage.toPng(node)
+            htmlToImage.toPng(node)
             .then((dataUrl) => {
                 const pdfWidth = node.offsetWidth
                 const pdfHeight = node.offsetHeight
+
                 const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight])
                 pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
                 pdf.save('Facture n°' + PROJECT_DATA.ID + '.pdf')
-
 
                 this.setState({
                     editablesVisible : true
                 })
             })
             .catch((error) => {
-              console.error(error)
-            });
+            console.error(error)
+            })
         }
 	}
 
@@ -73,6 +73,7 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
                                 additionalAdress='Palmiste rouge'
                                 city='Cilaos'
                                 zipCode={97413}
+                                clientAdress={false}
                             />
                         </div>
     
@@ -84,6 +85,7 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
                                 city='Cilaos'
                                 additionalAdress=''
                                 zipCode={97413}
+                                clientAdress={true}
                             />
                         </div>
                     </div>
@@ -114,4 +116,3 @@ export class Facture extends React.Component<ProjectProps, FactureState> {
         )
     }
 }
-
