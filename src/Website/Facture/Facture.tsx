@@ -1,6 +1,5 @@
 import React from 'react'
 import UniqueID from '../../App/components/uniqueID'
-import jsPDF, { jsPDFOptions } from 'jspdf';
 import { FactureState, ProjectProps } from './interface/interface';
 import { Table } from './components/table/Table';
 import { Project } from './components/project/Project';
@@ -65,7 +64,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>
                             <span className='f-w-600'>
-                               <img src='./images/tjm.png' height={66} /> 
+                               <img src='./images/tjm.png' height={66} alt='' /> 
                             </span>
                             <Adress
                                 name='Turpin Jason'
