@@ -59,7 +59,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
     render() {
         return (
 
-            <div className='display gap  p-2 h-100p white' id='ref' style={{ width: '500px', minHeight: '800px', alignItems: 'baseline' }} ref={this.containerRef} >
+            <div className='display gap  p-2 h-100p white' id='ref' style={{ minHeight: '800px', alignItems: 'baseline' }} ref={this.containerRef} >
                 <div className='grid m-2' >
                     <div className='display w-100p justify-s-b'>
                         <div className='grid w-100p'>
@@ -76,7 +76,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                         </div>
     
                         <div style={{ textAlign: 'end' }} className='w-100p'>
-                            <span className='f-w-600 f-s-20' contentEditable>{PROJECT_DATA.projectType.toUpperCase()}</span>
+                            <span className='f-w-600' contentEditable>{PROJECT_DATA.projectType.toUpperCase()}</span>
                             <Adress 
                                 name='Mr Martial'
                                 adress='34 chemin des palmistes'
@@ -105,7 +105,7 @@ export default class Facture extends React.Component<ProjectProps, FactureState>
                     <div className='display justify-c fixed p-1' style={{ bottom : 0 }}>
                         <div className='display'>
                             <button className='blue p-1' onClick={this.handleGeneratePdf}>
-                                <span className='f-s-20'>Télécharger {PROJECT_DATA.projectType.toUpperCase()} en PDF</span>
+                                <span className=''>Télécharger {PROJECT_DATA.projectType.toUpperCase()} en PDF</span>
                             </button>
                         </div>
                     </div>

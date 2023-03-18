@@ -91,10 +91,10 @@ export function Table({ visible }: TableProps): JSX.Element {
 
             <div className='display tb-bottom p-t-2'>
                 <div style={{ width: '100%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18'>TOTAL TTC :</span>
+                    <span className='f-w-600 '>TOTAL TTC :</span>
                 </div>
                 <div style={{ width: '20%', textAlign: 'end' }} className='tb'>
-                    <span className='f-w-600 f-s-18'>{formatCurrency(Total)}</span>
+                    <span className='f-w-600 '>{formatCurrency(Total)}</span>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 * {
     font-family: '', sans-serif;
     line-height: 150%;
+    font-size: 95%;
 }
 
 :root {
@@ -45,7 +46,6 @@ body {
     background-color: var(--background);
     height: 100%;
     scroll-behavior: smooth;
-    width: 600px;
 }
 
 main {
@@ -84,7 +84,6 @@ a {
 }
 
 input {
-    font-size: 16px;
     font-weight: 300;
     height: 3rem;
     border: 0;
@@ -1087,7 +1086,7 @@ input[type=number] {
 
 .tb {
     padding: 0.4rem;
-    height: 2rem;
+   /*  height: 2rem; */
 }
 .tb-left {
     border-left: 1px solid var(--grey);
