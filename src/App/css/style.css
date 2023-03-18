@@ -1,7 +1,6 @@
 * {
     font-family: '', sans-serif;
     line-height: 150%;
-    font-size: 95%;
 }
 
 :root {
@@ -84,6 +83,7 @@ a {
 }
 
 input {
+    font-size: 16px;
     font-weight: 300;
     height: 3rem;
     border: 0;
@@ -1086,7 +1086,7 @@ input[type=number] {
 
 .tb {
     padding: 0.4rem;
-   /*  height: 2rem; */
+    height: 2rem;
 }
 .tb-left {
     border-left: 1px solid var(--grey);
