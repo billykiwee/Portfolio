@@ -1,65 +1,57 @@
 export interface ProjectProps {
-    ID : string
-    projectName: string
-    projectType: string
-    date: Date
+  ID: string;
+  projectName: string;
+  projectType: string;
+  date: Date;
 }
-
-
 
 export interface jsPDFOptions {
-    format          : string,
-    unit            : any,
+  format: string;
+  unit: any;
 }
 
-
 export interface AddressProps {
-    name: string;
-    adress: string;
-    additionalAdress?: string;
-    city: string;
-    zipCode: number;
-    clientAdress?: boolean
+  name: string;
+  adress: string;
+  additionalAdress?: string;
+  city: string;
+  zipCode: number;
+  clientAdress?: boolean;
 }
 
 export interface LignItem {
-    name    : string;
-    price   : string;
-    qte     : number;
-    subTotal: number;
-    id      : string;
+  name: string;
+  price: string;
+  qte: number;
+  subTotal: number;
+  id: string;
 }
 
 export interface FactureState {
-    editablesVisible: boolean
+  editablesVisible: boolean;
 }
-
-
 
 export interface TableProps {
-    visible : boolean
-} 
-
-
+  visible: boolean;
+}
 
 export interface TableLignProps {
-    id: string
-    name: string;
-    price:  string,
-    qte:  number,
-    setTotal: (newTotal: number) => void;
+  id: string;
+  name: string;
+  price: string;
+  qte: number;
+  setTotal: (newTotal: number) => void;
 }
-  
+
 export interface TableLignState {
-    name: string;
-    price:  string,
-    qte:  number,
+  name: string;
+  price: string;
+  qte: number;
 }
 
-export type Sum = [string, number]
-
+export type Sum = [string, number];
 
 export interface ProjectName {
-    project : string
+  project: string;
 }
-export type ProjectNameState = ProjectName
+export type ProjectNameState = ProjectName;
