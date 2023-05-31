@@ -1,0 +1,51 @@
+@import "./style.scss";
+
+.page {
+  color: var(--white-100);
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(200px);
+  height: 100%;
+  position: absolute;
+  z-index: 9;
+  width: 100%;
+}
+
+.background {
+  background-color: var(--black-000);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  align-items: center;
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+
+  .bubbles {
+    width: 100%;
+    .bubble {
+      display: flex;
+      width: 100%;
+      position: relative;
+      animation: bubble 10s infinite;
+    }
+  }
+
+  @keyframes bubble {
+    0% {
+      bottom: -100px;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+
+    50% {
+      -webkit-transform: translate(100px);
+      transform: translate(100px);
+    }
+
+    100% {
+      bottom: -100px;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+}

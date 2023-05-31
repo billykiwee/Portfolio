@@ -1,13 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { App } from './App/App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { App } from "./App/App";
+import "../src/App/css/app.scss";
 
-import './App/css/style.css'
-
-const element = document.getElementById('root')
+const element = document.getElementById("root");
 
 if (element) {
-    ReactDOM.createRoot(element).render(<App />)
+  ReactDOM.createRoot(element).render(<App />);
 }
-
-

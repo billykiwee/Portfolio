@@ -1,0 +1,42 @@
+.profile {
+  @include flex;
+  gap: 22px;
+
+  .left {
+    @include flex;
+    justify-content: flex-start;
+    gap: 22px;
+    flex: 0.6;
+
+    .avatar {
+      border-radius: 100%;
+      width: 100px;
+    }
+
+    .heading {
+      @include grid;
+      gap: 4px;
+
+      .name {
+        margin: 0;
+        font-weight: 700;
+        font-size: 40px;
+        letter-spacing: -0.08em;
+      }
+
+      .job {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .right {
+    @include flex;
+    gap: 22px;
+    flex: 1;
+
+    .icon {
+      width: 20px;
+    }
+  }
+}

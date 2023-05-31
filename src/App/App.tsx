@@ -1,23 +1,13 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Resume from "./view/Resume";
 
-import Home from '../Website/Home'
-import Facture, { PROJECT_DATA } from '../Website/Facture/Facture'
-
-
-
-export class App extends React.Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <main>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/Facture" element={<Facture { ...PROJECT_DATA } />} />
-                    </Routes>
-                </main>
-            </BrowserRouter>
-                    
-        )
-    }
+export function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Resume />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

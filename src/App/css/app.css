@@ -1,0 +1,30 @@
+.page {
+  color: var(--white-100);
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.background {
+  background-color: var(--black-000);
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+* {
+  font-family: "", sans-serif;
+}
+
+:root {
+  --white-100: #ffffff;
+  --black-000: #050b12;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+/*# sourceMappingURL=app.css.map */
